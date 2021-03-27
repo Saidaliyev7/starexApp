@@ -1,0 +1,20 @@
+{
+    "name": "server",
+    "productName": "Client dashboard server",
+    "version": "0.0.1",
+    "description": "Client Dashboard for Starex.az",
+    "scripts": {
+        "start": "npm prune && npm install && npm run start-server",
+        "serve": "ts-node -r tsconfig-paths/register --project ./tsconfig.json ./src/index.ts",
+        "serve:watch": "nodemon -e ts -w ./src -x ts-node -r tsconfig-paths/register --project ./tsconfig.json ./src/index.ts"
+    },
+    "dependencies": {
+        "express": "4.16.3",
+        "moment": "2.29.1"
+    },
+    "devDependencies": {
+        "body-parser": "1.18.2",
+        "ts-node": "8.3.0",
+        "tsconfig-paths": "3.8.0"
+    }
+}

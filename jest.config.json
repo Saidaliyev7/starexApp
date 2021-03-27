@@ -1,0 +1,25 @@
+{
+    "globals": {
+        "PLATFORM_VERSION": "",
+        "ts-jest": {
+            "diagnostics": {
+                "ignoreCodes": [151001]
+            }
+        }
+    },
+    "coverageDirectory": "build/sonar",
+    "moduleFileExtensions": ["ts", "tsx", "js"],
+    "moduleNameMapper": {
+        "\\.(css|less|scss)$": "identity-obj-proxy"
+    },
+    "modulePaths": ["<rootDir>/src"],
+    "setupFiles": ["jest-localstorage-mock"],
+    "testMatch": ["**/__tests__/**/*.spec.(ts|tsx|js)"],
+    "testResultsProcessor": "jest-sonar-reporter",
+    "testURL": "http://localhost",
+    "transform": {
+        "^.+\\.(ts|tsx)$": "ts-jest"
+    },
+    "verbose": true,
+    "testEnvironment": "jest-environment-jsdom-sixteen"
+}
