@@ -5,18 +5,60 @@ import { ReactComponent as DollarFilledIcon } from 'assets/images/icons/dollar_f
 import { ReactComponent as FinanceLetterIcon } from 'assets/images/icons/finance-letter_lg.svg';
 import { ReactComponent as InfoIcon } from 'assets/images/icons/info.svg';
 import { ReactComponent as LocationIcon } from 'assets/images/icons/location_lg.svg';
+import { ReactComponent as PlusFilledIcon } from 'assets/images/icons/plus_filled.svg';
 import { ReactComponent as SettingsIcon } from 'assets/images/icons/settings_lg.svg';
 import { ReactComponent as TRYFilledIcon } from 'assets/images/icons/try_filled.svg';
 import { ECurrency } from 'enums';
 import { useUserInfo } from 'hooks';
 import * as React from 'react';
 import { CircularProgressbar } from 'react-circular-progressbar';
+import { useHistory } from 'react-router-dom';
 import { Col, Row } from 'reactstrap';
 import { ROUTES } from 'routes/consts';
 import styled from 'styled-components';
 import { EColors } from 'styled/enums';
 
 import { DashboardLinkCard } from './LinkCard';
+
+const BalanceCardStyled = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: ${EColors.BLUE};
+    border-radius: 4px;
+    width: 100%;
+    height: 100%;
+    color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    pointer-events: none;
+    cursor: pointer;
+    > svg {
+        margin-left: 14px;
+    }
+`;
+
+const BalanceInfoHoverStyled = styled.div`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    border-radius: 4px;
+    font-size: 14px;
+    padding: 14px;
+    background-color: ${EColors.BLUE};
+    color: white;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+    min-height: 100%;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+`;
 
 const InfoCard = styled.div`
     display: flex;
@@ -26,6 +68,12 @@ const InfoCard = styled.div`
     padding: 20px;
     border-radius: 4px;
     min-height: 122px;
+    position: relative;
+
+    &:hover ${BalanceCardStyled}, &:hover ${BalanceInfoHoverStyled} {
+        opacity: 1;
+        pointer-events: all;
+    }
 
     & > .info-card__left-side {
         height: 100%;
@@ -48,9 +96,18 @@ const InfoCard = styled.div`
     }
 `;
 
+const BalanceCard: React.FC = React.memo(() => {
+    const { push } = useHistory();
+    return (
+        <BalanceCardStyled onClick={() => push(ROUTES.BALANCE)}>
+            <span>Balansı Artır</span>
+            <PlusFilledIcon />
+        </BalanceCardStyled>
+    );
+});
+
 export const Dashboard: React.FC = () => {
     const { user } = useUserInfo();
-
     return (
         <>
             <div
@@ -107,6 +164,7 @@ export const Dashboard: React.FC = () => {
                             </p>
                         </div>
                         <DollarFilledIcon />
+                        <BalanceCard />
                     </InfoCard>
                 </Col>
                 <Col xs="3">
@@ -122,6 +180,7 @@ export const Dashboard: React.FC = () => {
                             </p>
                         </div>
                         <TRYFilledIcon />
+                        <BalanceCard />
                     </InfoCard>
                 </Col>
                 <Col xs="3">
@@ -137,6 +196,12 @@ export const Dashboard: React.FC = () => {
                             </p>
                         </div>
                         <InfoIcon />
+                        <BalanceInfoHoverStyled>
+                            Əgər son 6 ay ərzində (bağlamaların xaricdən daşınması üçün) ödədiyiniz
+                            məbləğ $150-dən çoxdursa Siz Starexin Gold müştərisi olursunuz. Bununla
+                            sizin növbəti 3 ay ərzində xarici anbarda sistemə işlənən bütün
+                            bağlamalarınıza 15% endirim tətbiq olunur.
+                        </BalanceInfoHoverStyled>
                     </InfoCard>
                 </Col>
             </Row>

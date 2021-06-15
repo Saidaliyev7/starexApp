@@ -23,13 +23,13 @@ export const DashboardLinkCard = styled(Link)`
     }
     & > svg {
         fill: ${EColors.BLUE};
-        margin-bottom: 15px;
+        margin-bottom: 9px;
     }
 
     &:hover {
         color: white;
         background-color: ${EColors.BLUE};
-        & > svg {
+        & > svg > path {
             fill: white;
         }
     }

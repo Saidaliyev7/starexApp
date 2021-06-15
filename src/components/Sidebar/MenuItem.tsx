@@ -11,28 +11,32 @@ interface IProps {
 
 const LinkStyled = styled(NavLink)`
     display: flex;
+    color: white !important;
     text-decoration: none !important;
-    color: inherit;
     align-items: center;
     margin-top: 30px;
     transition: color 0.3s ease;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 400;
-    &:hover {
-        color: ${EColors.YELLOW};
-        & > svg {
-            fill: ${EColors.YELLOW} !important;
-        }
-    }
+    position: relative;
+    z-index: 1;
     & > svg {
         margin-right: 25px;
-        transition: all 0.3s ease;
     }
-    &.active {
-        color: ${EColors.YELLOW};
-        & > svg {
-            fill: ${EColors.YELLOW} !important;
-        }
+    &::after {
+        content: '';
+        position: absolute;
+        left: -11%;
+        background-color: white;
+        opacity: 0;
+        width: 336px;
+        height: 50px;
+        z-index: 0;
+        transition: opacity 0.2s ease-in;
+    }
+    &.active::after,
+    &:hover:after {
+        opacity: 0.2;
     }
 `;
 

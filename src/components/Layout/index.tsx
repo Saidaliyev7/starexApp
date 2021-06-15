@@ -11,7 +11,7 @@ import { EColors } from 'styled/enums';
 const LayoutStyled = styled.div`
     display: flex;
     .dashboard__content {
-        width: 100%;
+        width: calc(100% - 336px);
         height: 100vh;
         position: relative;
         background-color: #f8f8f8;
@@ -72,7 +72,7 @@ const NotificationStyled = styled.div<{ hasUnreadMessage: boolean; isMobile: boo
 `;
 
 const DashboardContent = styled.div`
-    padding: 0 30px;
+    padding: 0 60px;
 `;
 
 export const Layout: React.FC = ({ children }) => {
