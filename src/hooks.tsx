@@ -1,6 +1,7 @@
 import { IAPIData } from 'models';
 import { UserInfoContext } from 'providers/UserInfoProvider';
 import * as React from 'react';
+import { useMediaQuery } from 'react-responsive';
 
 export const useUserInfo = () => React.useContext(UserInfoContext);
 
@@ -39,3 +40,5 @@ export function useAPIData<T>(
 
     return [asyncData, makeRequest, reset, setAsyncData];
 }
+
+export const useIsTabletOrMobile = () => useMediaQuery({ query: `(max-width: 1024)` });

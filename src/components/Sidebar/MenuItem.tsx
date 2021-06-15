@@ -18,13 +18,18 @@ const LinkStyled = styled(NavLink)`
     transition: color 0.3s ease;
     font-size: 18px;
     font-weight: 400;
+    &:hover {
+        color: ${EColors.YELLOW};
+        & > svg {
+            fill: ${EColors.YELLOW} !important;
+        }
+    }
     & > svg {
         margin-right: 25px;
         transition: all 0.3s ease;
     }
     &.active {
         color: ${EColors.YELLOW};
-        & > svg,
         & > svg {
             fill: ${EColors.YELLOW} !important;
         }

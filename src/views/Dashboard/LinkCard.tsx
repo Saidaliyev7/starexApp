@@ -18,7 +18,6 @@ export const DashboardLinkCard = styled(Link)`
     font-size: 20px;
     transition: all 0.3s ease-in-out;
     & > p {
-        max-width: 135px;
         text-align: center;
         line-height: 25.3px;
     }

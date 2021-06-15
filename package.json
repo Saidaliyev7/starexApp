@@ -4,7 +4,7 @@
     "description": "Client Dashboard",
     "scripts": {
         "start:server": "cd ./server && npm run-script serve:watch",
-        "start": "concurrently --kill-others \" webpack-cli serve --mode development \" \" npm run start:server \"",
+        "start": "concurrently --kill-others \" webpack-cli serve --mode development --host 0.0.0.0 \" \" npm run start:server \"",
         "build": "webpack --mode production",
         "test": "jest --detectOpenHandles --forceExit --coverage --runInBand --config jest.config.json",
         "test:watch": "jest --watchAll --config jest.config.json",
@@ -27,6 +27,7 @@
         "react-context-devtool": "^2.0.3",
         "react-dom": "16.14.0",
         "react-loading": "^2.0.3",
+        "react-responsive": "^8.2.0",
         "react-router-dom": "5.2.0",
         "react-style-reset": "^1.3.2",
         "reactstrap": "^8.9.0",

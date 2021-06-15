@@ -14,6 +14,7 @@ import { useUserInfo } from 'hooks';
 import * as React from 'react';
 import { ROUTES } from 'routes/consts';
 import styled from 'styled-components';
+import { device } from 'styled/devices';
 import { EColors } from 'styled/enums';
 
 import { SidebarMenuItem } from './MenuItem';
@@ -21,10 +22,18 @@ import { SidebarMenuItem } from './MenuItem';
 const SidebarStyled = styled.nav`
     color: white;
     background-color: ${EColors.BLUE};
-    flex: 0 0 336px;
+    width: 336px;
     display: flex;
     flex-direction: column;
     padding: 20px 30px;
+    height: 100vh;
+    transition: 0.15s;
+    ${device.tablet} {
+        flex: 0 0 313px;
+        position: absolute;
+        left: -100%;
+        top: 0;
+    }
 `;
 
 const UserInfoStyled = styled.div`
@@ -49,7 +58,7 @@ const UserInfoStyled = styled.div`
     }
 `;
 
-export const Sidebar: React.FC = () => {
+export const Sidebar: React.FC<{ isOpen: boolean }> = ({ isOpen }) => {
     const { user } = useUserInfo();
 
     return (
@@ -61,7 +70,7 @@ export const Sidebar: React.FC = () => {
                     <span>#{user.customer_code}</span>
                 </div>
             </UserInfoStyled>
-            <ul>
+            <ul style={{ left: isOpen ? '0' : '-100%' }}>
                 <SidebarMenuItem path={ROUTES.MAIN}>
                     <UserIcon />
                     <span>Şəxsi kabinetim</span>

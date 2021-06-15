@@ -1,32 +1,56 @@
 import { ReactComponent as BoxIcon } from 'assets/images/icons/box_lg.svg';
 import { ReactComponent as CartIcon } from 'assets/images/icons/cart_lg.svg';
 import { ReactComponent as DeliveryIcon } from 'assets/images/icons/delivery_lg.svg';
+import { ReactComponent as DollarFilledIcon } from 'assets/images/icons/dollar_filled.svg';
 import { ReactComponent as FinanceLetterIcon } from 'assets/images/icons/finance-letter_lg.svg';
+import { ReactComponent as InfoIcon } from 'assets/images/icons/info.svg';
 import { ReactComponent as LocationIcon } from 'assets/images/icons/location_lg.svg';
 import { ReactComponent as SettingsIcon } from 'assets/images/icons/settings_lg.svg';
+import { ReactComponent as TRYFilledIcon } from 'assets/images/icons/try_filled.svg';
+import { ECurrency } from 'enums';
+import { useUserInfo } from 'hooks';
 import * as React from 'react';
-// import { CircularProgressbar } from 'react-circular-progressbar';
+import { CircularProgressbar } from 'react-circular-progressbar';
 import { Col, Row } from 'reactstrap';
 import { ROUTES } from 'routes/consts';
+import styled from 'styled-components';
+import { EColors } from 'styled/enums';
 
-// import { EColors } from 'styled/enums';
 import { DashboardLinkCard } from './LinkCard';
 
-{
-    /* <div style={{ width: 200, height: 200 }}>
-                <CircularProgressbar
-                    value={60}
-                    text={'60%'}
-                    styles={{
-                        text: { fill: EColors.BLUE },
-                        path: { stroke: EColors.YELLOW },
-                        trail: { stroke: '#FFAB0320' },
-                    }}
-                />
-            </div> */
-}
+const InfoCard = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    background-color: white;
+    padding: 20px;
+    border-radius: 4px;
+    min-height: 122px;
+
+    & > .info-card__left-side {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 80px;
+    }
+
+    & .info-card__heading {
+        color: ${EColors.GRAY};
+        font-size: 14px;
+        line-height: 17.71px;
+    }
+    & .info-card__amount {
+        font-weight: 500;
+        font-size: 22px;
+        line-height: 27.83px;
+        color: ${EColors.BLUE};
+    }
+`;
 
 export const Dashboard: React.FC = () => {
+    const { user } = useUserInfo();
+
     return (
         <>
             <div
@@ -43,6 +67,79 @@ export const Dashboard: React.FC = () => {
             >
                 BANNER
             </div>
+            <Row style={{ marginTop: 24 }}>
+                <Col xs="3">
+                    <InfoCard>
+                        <div className="info-card__left-side">
+                            <p className="info-card__heading">
+                                Cari Ay <br />
+                                Ərzində
+                            </p>
+                            <p className="info-card__amount">{user.current_month.amount} $</p>
+                        </div>
+                        <div style={{ width: 64, height: 64 }}>
+                            <CircularProgressbar
+                                value={60}
+                                text={'60%'}
+                                styles={{
+                                    text: {
+                                        fill: EColors.BLUE,
+                                        fontWeight: 400,
+                                        fontFamily: 'Roboto',
+                                    },
+                                    path: { stroke: EColors.YELLOW },
+                                    trail: { stroke: '#FFAB0320' },
+                                }}
+                            />
+                        </div>
+                    </InfoCard>
+                </Col>
+                <Col xs="3">
+                    <InfoCard>
+                        <div className="info-card__left-side">
+                            <p className="info-card__heading">
+                                BALANS
+                                <br />
+                                USD
+                            </p>
+                            <p className="info-card__amount">
+                                {user.balances.find((x) => x.currency === ECurrency.USD)?.amount}
+                            </p>
+                        </div>
+                        <DollarFilledIcon />
+                    </InfoCard>
+                </Col>
+                <Col xs="3">
+                    <InfoCard>
+                        <div className="info-card__left-side">
+                            <p className="info-card__heading">
+                                BALANS
+                                <br />
+                                TRY
+                            </p>
+                            <p className="info-card__amount">
+                                {user.balances.find((x) => x.currency === ECurrency.TRY)?.amount}
+                            </p>
+                        </div>
+                        <TRYFilledIcon />
+                    </InfoCard>
+                </Col>
+                <Col xs="3">
+                    <InfoCard>
+                        <div className="info-card__left-side">
+                            <p className="info-card__heading">
+                                Son 6 ay Çatdırılma
+                                <br />
+                                Ödənişi
+                            </p>
+                            <p className="info-card__amount">
+                                {user.last_180_days_declaration_payments} $
+                            </p>
+                        </div>
+                        <InfoIcon />
+                    </InfoCard>
+                </Col>
+            </Row>
             <Row style={{ marginTop: '24px' }}>
                 <Col xs="4" style={{ marginBottom: 20 }}>
                     <DashboardLinkCard to={ROUTES.MY_ORDERS}>
@@ -59,7 +156,9 @@ export const Dashboard: React.FC = () => {
                 <Col xs="4" style={{ marginBottom: 20 }}>
                     <DashboardLinkCard to={ROUTES.FOREIGN_ADDRESSES}>
                         <LocationIcon />
-                        <p>Xaricdəki ünvanlarım</p>
+                        <p>
+                            Xaricdəki <br /> ünvanlarım
+                        </p>
                     </DashboardLinkCard>
                 </Col>
                 <Col xs="4" style={{ marginBottom: 20 }}>
