@@ -2,6 +2,7 @@ import './table.scss';
 
 import * as React from 'react';
 
+import Pagination from './Pagination';
 import { ITableData } from './table.interface';
 import TableFilters from './TableFilters';
 import TableSearch from './TableSearch';
@@ -19,6 +20,7 @@ const Table: React.FC<{ tableData: ITableData; children,tableCheckedData? }> = (
                         {children}
                     </table>
                 </div>
+                <Pagination />
             </div>
         </>
     );
