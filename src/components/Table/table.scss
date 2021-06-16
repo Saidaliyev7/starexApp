@@ -1,0 +1,109 @@
+.table-component-holder {
+    filter: drop-shadow(4px 4px 20px rgba(0, 0, 0, 0.1));
+    background: #ffffff;
+    border-radius: 4px;
+    padding-bottom: 40px;
+    .table {
+        width: 100%;
+        table {
+            width: 100%;
+            thead{
+                th:last-child{
+                    text-align: right;
+                }
+            }
+            tbody {
+                td {
+                    vertical-align: middle;
+                    padding-left: 30px;
+                    border: none;
+                    .checked-td{
+                        display: none;
+                    }
+                    &:last-child{
+                        padding-left: 0px;
+                        padding-right: 30px;
+                        .buy-status{
+                            text-align: right;
+                        }
+                        .td-holder{
+                            display: flex;
+                                justify-content: flex-end;
+                                
+                        }
+                    }
+                }
+                tr.checked{
+                    background: #ECECEC;
+                   td{
+                       .image{
+                           svg{
+                               display: none;
+                           }
+                           .checked-td{
+                               display: block;
+                           }
+                       }
+                   } 
+                }
+                tr{
+                    transition: 0.3s ease;
+                    cursor: pointer;
+                }
+                .td-holder {
+                    display: flex;
+                    align-items: center;
+                    vertical-align: middle;
+
+                    .image {
+                        margin-right: 10px;
+                    }
+                    .text {
+                        font-size: 16px;
+                        line-height: 19px;
+
+                        color: #002444;
+                    }
+                    .detailed-view {
+                        font-weight: 500;
+                        font-size: 16px;
+                        line-height: 19px;
+                        color: #005aff;
+                        cursor: pointer;
+                    }
+                    .buy-status {
+                        .status {
+                            font-weight: 500;
+                            font-size: 16px;
+                            line-height: 19px;
+                            color: #7d7d7d;
+                            width: 70px;
+                            word-break:normal;
+                        }
+                        .status.paid {
+                            font-weight: 500;
+                            font-size: 16px;
+                            line-height: 19px;
+
+                            color: #00a237;
+                        }
+                        .status.pending {
+                            background: #00a237;
+                            border-radius: 4px;
+                            width: 60px;
+                            height: 34px;
+                            cursor: pointer;
+                            font-weight: 500;
+                            font-size: 14px;
+                            line-height: 16px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            color: #ffffff;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

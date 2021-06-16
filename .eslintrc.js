@@ -10,12 +10,9 @@ module.exports = {
     extends: [
         'plugin:@typescript-eslint/recommended',
         'plugin:react/recommended',
-        'plugin:prettier/recommended',
         'prettier/@typescript-eslint',
-        'prettier/react',
-        'prettier',
     ],
-    plugins: ['simple-import-sort', 'import', 'prettier'],
+    plugins: ['simple-import-sort', 'import',],
     rules: {
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/no-empty-interface': 'off',
