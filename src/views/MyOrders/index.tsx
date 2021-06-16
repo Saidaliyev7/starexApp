@@ -1,10 +1,9 @@
+import Table from 'components/Table';
 import { ITableData, tableStaticData } from 'components/Table/table.interface';
 import TableBody from 'components/Table/TBody';
 import TableTd from 'components/Table/TBody/Td';
 import TableTr from 'components/Table/TBody/Tr';
 import * as React from 'react';
-
-import Table from '../../components/Table';
 
 const MyOrders: React.FC = () => {
     const [tableData, changeTableData] = React.useState<ITableData>(tableStaticData);
@@ -15,15 +14,15 @@ const MyOrders: React.FC = () => {
 
     const onTdClick = (data) => {
         if (tableCheckData.length === 0) {
-            cahngeTableCheckData(data)
+            cahngeTableCheckData(data);
         } else {
-            if(tableCheckData[0].buyStatus===data.buyStatus){
-                cahngeTableCheckData(data)
+            if (tableCheckData[0].buyStatus === data.buyStatus) {
+                cahngeTableCheckData(data);
             }
         }
     };
 
-    const cahngeTableCheckData=(data)=>{
+    const cahngeTableCheckData = (data) => {
         changeTableData((oldState) => {
             const newStateData = oldState.tbodyData.map((el) => {
                 el.id === data.id ? (el.checked = !el.checked) : null;
@@ -36,7 +35,7 @@ const MyOrders: React.FC = () => {
             };
             return newState;
         });
-    }
+    };
 
     return (
         <>

@@ -18,10 +18,7 @@ import { ROUTES } from 'routes/consts';
 import styled from 'styled-components';
 import { EColors } from 'styled/enums';
 
-import MyOrders from '../MyOrders/index'
 import { DashboardLinkCard } from './LinkCard';
-
-
 
 const BalanceCardStyled = styled.div`
     display: flex;
@@ -113,7 +110,6 @@ export const Dashboard: React.FC = () => {
     const { user } = useUserInfo();
     return (
         <>
-            <MyOrders />
             <div
                 style={{
                     display: 'flex',
@@ -209,7 +205,7 @@ export const Dashboard: React.FC = () => {
                     </InfoCard>
                 </Col>
             </Row>
-        
+
             <Row style={{ marginTop: '24px' }}>
                 <Col xs="4" style={{ marginBottom: 20 }}>
                     <DashboardLinkCard to={ROUTES.MY_ORDERS}>
@@ -251,8 +247,6 @@ export const Dashboard: React.FC = () => {
                     </DashboardLinkCard>
                 </Col>
             </Row>
-
-           
         </>
     );
 };

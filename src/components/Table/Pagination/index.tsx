@@ -7,7 +7,7 @@ import * as React from 'react';
 import ReactPaginate from 'react-paginate';
 
 const Pagination: React.FC = () => {
-    const onPageChange = () => {};
+    const onPageChange = () => 0;
     return (
         <>
             <div className="pagination-holder">
