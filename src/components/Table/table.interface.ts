@@ -3,7 +3,7 @@ export interface ITableData {
     thead: string[];
     tbodyData?: any;
     checkComponent: boolean;
-    search: ITableSearch;
+    search?: ITableSearch;
 }
 
 export interface ITableSearch {
@@ -15,6 +15,11 @@ export interface ISelectbox {
     name: string;
     count: number;
     isActive: boolean;
+}
+
+export enum EApplicationStatus{
+    'Qəbul edildi'=1,
+    'Bağlandı'=2
 }
 
 export const tableStaticData: ITableData = {
@@ -512,3 +517,172 @@ export const tableStaticDataCourier: ITableData = {
     ],
 };
 
+export const tableStaticDataRebates: ITableData = {
+    checkComponent: false,
+    selectboxData: [
+        {
+            name: 'Bütün iadələr',
+            count: 10,
+            isActive: true,
+        },
+        {
+            name: 'İadə yaradıldı',
+            count: 3,
+            isActive: false,
+        },
+        {
+            name: 'Təyinat ölkəsinə göndərildi',
+            count: 0,
+            isActive: false,
+        },
+        {
+            name: 'Təyinat ölkəsinə çatdı',
+            count: 2,
+            isActive: false,
+        },
+        {
+            name: 'Təyinat ölkəsinə kuryerə təhvil verildi',
+            count: 5,
+            isActive: false,
+        },
+        {
+            name: 'Mağaza tərəfindən təhvil alındı',
+            count: 6,
+            isActive: false,
+        },
+        {
+            name: 'Mağaza tərəfindən geri göndərildi',
+            count: 8,
+            isActive: false,
+        },
+        {
+            name: 'Mağaza tərəfindən qəbul olundu',
+            count: 8,
+            isActive: false,
+        },
+    ],
+    thead: ['İzləmə kodu', 'Məhsulun tipi', 'Mağaza', 'Çəki', 'Çatdırılma qiyməti', 'İadənin statusu'],
+    tbodyData: [
+        {
+            id: 1,
+            code: '880158930',
+            weight: '0.48 kg',
+            where: 'Trendyol',
+            status:'Ölçünün kiçik olması',
+            priceAzn: '1.50',
+            comingPrice: '1.50',
+        },
+    ],
+};
+
+export const tableStaticDataApplications: ITableData = {
+    search: {
+        placeholder: 'Bəyannamə',
+        isNewAdd: true,
+        isNewAddText:'Onlayn müraciət et'
+    },
+    checkComponent: false,
+    selectboxData: [
+        {
+            name: 'Bütün müraciətlər',
+            count: 10,
+            isActive: true,
+        },
+        {
+            name: 'İadə yaradıldı',
+            count: 3,
+            isActive: false,
+        },
+        {
+            name: 'Təyinat ölkəsinə göndərildi',
+            count: 0,
+            isActive: false,
+        },
+        {
+            name: 'Təyinat ölkəsinə çatdı',
+            count: 2,
+            isActive: false,
+        },
+        {
+            name: 'Təyinat ölkəsinə kuryerə təhvil verildi',
+            count: 5,
+            isActive: false,
+        },
+        {
+            name: 'Mağaza tərəfindən təhvil alındı',
+            count: 6,
+            isActive: false,
+        },
+        {
+            name: 'Mağaza tərəfindən geri göndərildi',
+            count: 8,
+            isActive: false,
+        },
+        {
+            name: 'Mağaza tərəfindən qəbul olundu',
+            count: 8,
+            isActive: false,
+        },
+    ],
+    thead: ['Kateqoriya', 'Ölkə', 'Tarix', 'Status', 'Detallı bax'],
+    tbodyData: [
+        {
+            id: 1,
+            category: 'Hesabımda mənə məxsus olmayan bağlama',
+            country: 'Türkiyə',
+            time: '21.07.2020, 15:45',
+            status:'Qəbul edildi',
+        },
+        {
+            id: 1,
+            category: 'Hesabımda mənə məxsus olmayan bağlama',
+            country: 'Türkiyə',
+            time: '21.07.2020, 15:45',
+            status:'Bağlandı',
+        },
+    ],
+};
+
+export const tableStaticDataBalance: ITableData = {
+    checkComponent: false,
+    selectboxData: [
+        {
+            name: 'Bütün əməliyyatlar',
+            count: 10,
+            isActive: true,
+        },
+    ],
+    thead: ['İzləmə kodu', 'Məbləğ', 'Tarix'],
+    tbodyData: [
+        {
+            id: 1,
+            action: 'Sifariş ödənişi',
+            cost: '66.89 $',
+            date: '10.05.2020, 10:00',
+        },
+         {
+            id: 2,
+            action: 'Sifariş ödənişi',
+            cost: '66.89 $',
+            date: '10.05.2020, 10:00',
+        },
+        {
+            id: 3,
+            action: 'Sifariş ödənişi',
+            cost: '66.89 $',
+            date: '10.05.2020, 10:00',
+        },
+        {
+            id: 4,
+            action: 'Sifariş ödənişi',
+            cost: '66.89 $',
+            date: '10.05.2020, 10:00',
+        },
+        {
+            id: 5,
+            action: 'Sifariş ödənişi',
+            cost: '66.89 $',
+            date: '10.05.2020, 10:00',
+        },
+    ],
+};

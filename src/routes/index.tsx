@@ -8,7 +8,9 @@ import { ROUTES } from './consts';
 const MyOrders = React.lazy(() => import('views/MyOrders'));
 const Parcels = React.lazy(() => import('views/Parcels'));
 const Courier = React.lazy(() => import('views/Courier'));
-
+const Rebates = React.lazy(() => import('views/Rebates'));
+const Applications = React.lazy(() => import('views/Applications'));
+const Balance =React.lazy(() => import('views/Balance'));
 export const Routes: React.FC = () => (
     <Route
         render={() => (
@@ -21,6 +23,9 @@ export const Routes: React.FC = () => (
                     <Route path={ROUTES.MY_ORDERS} component={MyOrders} />
                     <Route path={ROUTES.BOXES} component={Parcels} />
                     <Route path={ROUTES.COURIER} component={Courier} />
+                    <Route path={ROUTES.REBATES} component={Rebates} />
+                    <Route path={ROUTES.APPLICATIONS} component={Applications} />
+                    <Route path={ROUTES.BALANCE} component={Balance} />
                 </React.Suspense>
                 
             </Switch>

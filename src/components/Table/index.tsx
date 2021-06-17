@@ -8,12 +8,20 @@ import TableFilters from './TableFilters';
 import TableSearch from './TableSearch';
 import TableHead from './THead';
 
-const Table: React.FC<{ tableData: ITableData; children,tableCheckedData? }> = ({ tableData, children,tableCheckedData }) => {
+const Table: React.FC<{ tableData: ITableData; children; tableCheckedData? }> = ({
+    tableData,
+    children,
+    tableCheckedData,
+}) => {
     return (
         <>
-            <TableSearch  tableSearch={tableData.search} />
+            <div className="table-with-all-components-holder">
+            {tableData.search && <TableSearch tableSearch={tableData.search} />}
             <div className="table-component-holder">
-                <TableFilters tableCheckData={tableCheckedData} selectData={tableData.selectboxData} />
+                <TableFilters
+                    tableCheckData={tableCheckedData}
+                    selectData={tableData.selectboxData}
+                />
                 <div className="table">
                     <table>
                         <TableHead heads={tableData.thead} />
@@ -22,6 +30,8 @@ const Table: React.FC<{ tableData: ITableData; children,tableCheckedData? }> = (
                 </div>
                 <Pagination />
             </div>
+            </div>
+           
         </>
     );
 };

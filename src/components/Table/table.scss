@@ -67,6 +67,9 @@
                         line-height: 19px;
 
                         color: #002444;
+                        &.status-active{
+                            color: #00A237;
+                        }
                     }
                     .all-texts{
                         display: flex;
@@ -120,4 +123,7 @@
             }
         }
     }
+}
+.table-with-all-components-holder{
+    margin-top: 60px;
 }

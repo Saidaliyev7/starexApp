@@ -20,7 +20,7 @@ import { EColors } from 'styled/enums';
 
 import { DashboardLinkCard } from './LinkCard';
 
-const BalanceCardStyled = styled.div`
+export const BalanceCardStyled = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -42,7 +42,7 @@ const BalanceCardStyled = styled.div`
     }
 `;
 
-const BalanceInfoHoverStyled = styled.div`
+export const BalanceInfoHoverStyled = styled.div`
     position: absolute;
     top: 0;
     left: 0;
@@ -60,7 +60,7 @@ const BalanceInfoHoverStyled = styled.div`
     transition: opacity 0.2s ease-in-out;
 `;
 
-const InfoCard = styled.div`
+export const InfoCard = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
@@ -96,7 +96,7 @@ const InfoCard = styled.div`
     }
 `;
 
-const BalanceCard: React.FC = React.memo(() => {
+export const BalanceCard: React.FC = React.memo(() => {
     const { push } = useHistory();
     return (
         <BalanceCardStyled onClick={() => push(ROUTES.BALANCE)}>
