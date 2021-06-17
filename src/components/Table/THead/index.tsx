@@ -1,4 +1,3 @@
-// import { ReactComponent as SearchIcon } from 'assets/images/icons/search.svg';
 import './tableHead.scss';
 
 import * as React from 'react';

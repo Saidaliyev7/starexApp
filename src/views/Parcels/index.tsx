@@ -1,15 +1,15 @@
 import Table from 'components/Table';
-import { ITableData, tableStaticData } from 'components/Table/table.interface';
+import { ITableData,tableStaticDataParcel } from 'components/Table/table.interface';
 import TableBody from 'components/Table/TBody';
 import TableTd from 'components/Table/TBody/Td';
 import TableTr from 'components/Table/TBody/Tr';
 import * as React from 'react';
 
-const MyOrders: React.FC = () => {
-    const [tableData, changeTableData] = React.useState<ITableData>(tableStaticData);
+const Parcels: React.FC = () => {
+    const [tableData, changeTableData] = React.useState<ITableData>(tableStaticDataParcel);
     const [tableCheckData, changeTableCheckData] = React.useState<any>([]);
     React.useEffect(() => {
-        changeTableData(tableStaticData);
+        changeTableData(tableStaticDataParcel);
     }, []);
 
     const onTdClick = (data) => {
@@ -142,7 +142,7 @@ const MyOrders: React.FC = () => {
                                     <div className="text">{data.weight}</div>
                                 </TableTd>
                                 <TableTd>
-                                    <div className="text">{data.status}</div>
+                                    <div className="text">{data.where}</div>
                                 </TableTd>
                                 <TableTd>
                                     <div className="detailed-view">Detallı Bax</div>
@@ -166,4 +166,4 @@ const MyOrders: React.FC = () => {
     );
 };
 
-export default MyOrders;
+export default Parcels;

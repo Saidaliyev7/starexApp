@@ -11,7 +11,7 @@ import TableHead from './THead';
 const Table: React.FC<{ tableData: ITableData; children,tableCheckedData? }> = ({ tableData, children,tableCheckedData }) => {
     return (
         <>
-            <TableSearch  placeholder={tableData.searchPlaceHolder} />
+            <TableSearch  tableSearch={tableData.search} />
             <div className="table-component-holder">
                 <TableFilters tableCheckData={tableCheckedData} selectData={tableData.selectboxData} />
                 <div className="table">

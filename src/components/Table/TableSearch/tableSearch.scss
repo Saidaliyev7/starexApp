@@ -1,8 +1,23 @@
 .table-search-holder {
-    position: relative;
     display: inline-block;
     margin-bottom: 20px;
     margin-top: 60px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    .left {
+        position: relative;
+        display: inline-block;
+        .icon {
+            position: absolute;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            right: 14px;
+            top: 0;
+            cursor: pointer;
+        }
+    }
     .input {
         input {
             width: 312px;
@@ -17,18 +32,33 @@
             font-size: 16px;
             line-height: 19px;
 
-            &::placeholder{
+            &::placeholder {
                 color: #a9a9a9;
             }
         }
     }
-    .icon {
-        position: absolute;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        right: 14px;
-        top: 0;
-        cursor: pointer;
+
+    .right {
+        button {
+            display: flex;
+            background: #ffffff;
+            box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            height: 40px;
+            width: 170px;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            border-color: transparent;
+            outline: none;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 16px;
+
+            color: #005aff;
+            .icon {
+                margin-right: 10px;
+            }
+        }
     }
 }

@@ -1,7 +1,8 @@
-// import { ReactComponent as SearchIcon } from 'assets/images/icons/search.svg';
 import './tableFilters.scss';
 
+import moment from 'moment';
 import * as React from 'react';
+import RangePicker from 'react-range-picker';
 
 import { ISelectbox } from '../table.interface';
 
@@ -12,7 +13,7 @@ const TableFilters: React.FC<{ selectData: ISelectbox[]; tableCheckData: any }> 
     const selectRef = React.useRef();
     const [checkedData, changeCheckedData] = React.useState(null);
     const [isAllPending, changeAllPending] = React.useState<boolean>(false);
-
+    const [defaultValueForPicker,changePickerValue] = React.useState(null);
     const [select, changeSelect] = React.useState<{
         activeSelectData: ISelectbox;
         dropdownData: ISelectbox[];
@@ -30,9 +31,8 @@ const TableFilters: React.FC<{ selectData: ISelectbox[]; tableCheckData: any }> 
         const allPendings = tableCheckData.filter(
             (checkedData) => checkedData.buyStatus == 'pending',
         );
-        allPendings.length === tableCheckData.length
-            ? changeAllPending(true)
-            : changeAllPending(false);
+        const pendingsCheck = allPendings.length === tableCheckData.length;
+        pendingsCheck ? changeAllPending(pendingsCheck) : changeAllPending(pendingsCheck);
     }, [tableCheckData]);
 
     const onSelectOpen = () => {
@@ -48,19 +48,69 @@ const TableFilters: React.FC<{ selectData: ISelectbox[]; tableCheckData: any }> 
         parentClasslist.contains('active')
             ? parentClasslist.remove('active')
             : parentClasslist.add('active');
-        selectData.isActive !== true
-            ? changeSelect((oldState) => {
-                  const newStateData = oldState.dropdownData.map((el) => {
-                      el.name === selectData.name ? (el.isActive = true) : (el.isActive = false);
-                      return el;
-                  });
-                  return {
-                      dropdownData: newStateData,
-                      activeSelectData: selectData,
-                  };
-              })
-            : null;
+        selectData.isActive !== true &&
+            changeSelect((oldState) => {
+                const newStateData = oldState.dropdownData.map((el) => {
+                    el.name === selectData.name ? (el.isActive = true) : (el.isActive = false);
+                    return el;
+                });
+                return {
+                    dropdownData: newStateData,
+                    activeSelectData: selectData,
+                };
+            });
     };
+
+    const placeholder = ({ startDate, endDate }) => {
+        if (!startDate) {
+            return (
+                <div className="placeholder">
+                    Tarix seçin
+                    <div className="icon">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            height="24px"
+                            viewBox="0 0 24 24"
+                            width="24px"
+                            fill="#000000"
+                        >
+                            <path d="M0 0h24v24H0V0z" fill="none" />
+                            <path d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V10h16v11zm0-13H4V5h16v3z" />
+                        </svg>
+                    </div>
+                </div>
+            );
+        }
+        return (
+            <div className="placeholderWrap">
+                <div className="placeholder">{ moment(startDate).format('DD/MM/yyyy') }</div>
+                <div className="separator">-</div>
+                {endDate && <div className="placeholder">{moment(endDate).format('DD/MM/yyyy')}</div>}
+                <div className="icon">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        height="24px"
+                        viewBox="0 0 24 24"
+                        width="24px"
+                        fill="#000000"
+                    >
+                        <path d="M0 0h24v24H0V0z" fill="none" />
+                        <path d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V10h16v11zm0-13H4V5h16v3z" />
+                    </svg>
+                </div>
+            </div>
+        );
+    };
+
+    const takeLastThirtyDays=()=>{
+        changePickerValue({startDate: Date(), endDate: Date()})
+    }
+
+    //TODO onChange date send to upper component
+    const onDateSelect=(...params)=>{
+       
+    }
+
     return (
         <>
             <div className="table-filters-holder">
@@ -130,9 +180,9 @@ const TableFilters: React.FC<{ selectData: ISelectbox[]; tableCheckData: any }> 
                         )}
                     </div>
                     <div className="datepicker-holder">
-                        <div className="last-days">Son 30 gün</div>
+                        <div className="last-days" onClick={takeLastThirtyDays}>Son 30 gün</div>
                         <div className="datepicker">
-                            <input type="date" />
+                            <RangePicker onDateSelected={onDateSelect} defaultBalue={defaultValueForPicker}  placeholder={placeholder} />
                         </div>
                     </div>
                 </div>

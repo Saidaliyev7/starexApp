@@ -2,11 +2,13 @@
     filter: drop-shadow(4px 4px 20px rgba(0, 0, 0, 0.1));
     background: #ffffff;
     border-radius: 4px;
-    padding-bottom: 40px;
+    margin-bottom: 30px;
     .table {
         width: 100%;
+        margin-bottom: 0px !important;
         table {
             width: 100%;
+            margin-bottom: 0px !important;
             thead{
                 th:last-child{
                     text-align: right;
@@ -14,6 +16,8 @@
             }
             tbody {
                 td {
+                    padding-top: 7px !important;
+                    padding-bottom: 7px;
                     vertical-align: middle;
                     padding-left: 30px;
                     border: none;
@@ -63,6 +67,16 @@
                         line-height: 19px;
 
                         color: #002444;
+                    }
+                    .all-texts{
+                        display: flex;
+                        flex-direction: column;
+                        .text{
+                            margin-bottom: 5px;
+                            &:last-child{
+                                margin-bottom:0px ;
+                            }
+                        }
                     }
                     .detailed-view {
                         font-weight: 500;

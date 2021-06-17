@@ -26,7 +26,7 @@ const SidebarStyled = styled.nav`
     display: flex;
     flex-direction: column;
     padding: 20px 30px;
-    height: 100vh;
+    min-height: 100vh;
     transition: 0.15s;
     ${device.tablet} {
         flex: 0 0 313px;
