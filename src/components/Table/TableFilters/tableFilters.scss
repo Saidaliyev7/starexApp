@@ -6,6 +6,37 @@
         justify-content: space-between;
         align-items: center;
         .selectbox-holder {
+            display: flex;
+            .is-balance-type {
+                margin-left: 10px;
+                display: flex;
+                align-items: center;
+                ul {
+                    display: flex;
+                    align-items: center;
+                    height: 100%;
+                    li {
+                        display: flex;
+                        align-items: center;
+                        margin-left: 40px;
+                        .icon {
+                            width: 8px;
+                            height: 8px;
+                            margin-right: 9px;
+                            border-radius: 50%;
+                            background: #d80027;
+                            &.active {
+                                background: #00a237;
+                            }
+                        }
+                        .text {
+                            font-size: 16px;
+                            line-height: 19px;
+                            color: #939393;
+                        }
+                    }
+                }
+            }
             .selectbox {
                 position: relative;
                 .selectbox-top {
@@ -91,11 +122,11 @@
                 .placeholder {
                     display: flex;
                     align-items: center;
-                    font-size: 16px ;
+                    font-size: 16px;
                     line-height: 19px;
                     color: #002445 !important;
                     border: 1px solid #ffffff;
-                    .spearator{
+                    .spearator {
                         margin: 0px 3px;
                     }
                 }

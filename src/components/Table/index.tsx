@@ -21,6 +21,7 @@ const Table: React.FC<{ tableData: ITableData; children; tableCheckedData? }> = 
                 <TableFilters
                     tableCheckData={tableCheckedData}
                     selectData={tableData.selectboxData}
+                    tableData={tableData}
                 />
                 <div className="table">
                     <table>

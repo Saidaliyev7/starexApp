@@ -4,6 +4,7 @@ export interface ITableData {
     tbodyData?: any;
     checkComponent: boolean;
     search?: ITableSearch;
+    isBalance:boolean
 }
 
 export interface ITableSearch {
@@ -23,6 +24,7 @@ export enum EApplicationStatus{
 }
 
 export const tableStaticData: ITableData = {
+    isBalance:false,
     search: {
         placeholder: 'Sifariş kodu',
         isNewAdd: false,
@@ -189,6 +191,8 @@ export const tableStaticData: ITableData = {
 };
 
 export const tableStaticDataParcel: ITableData = {
+    
+    isBalance:false,
     search: {
         placeholder: 'İzləmə nömrəsi',
         isNewAdd: false,
@@ -347,6 +351,8 @@ export const tableStaticDataParcel: ITableData = {
 };
 
 export const tableStaticDataCourier: ITableData = {
+    
+    isBalance:false,
     search: {
         placeholder: 'Bağlama',
         isNewAdd: true,
@@ -518,6 +524,8 @@ export const tableStaticDataCourier: ITableData = {
 };
 
 export const tableStaticDataRebates: ITableData = {
+    
+    isBalance:false,
     checkComponent: false,
     selectboxData: [
         {
@@ -576,6 +584,8 @@ export const tableStaticDataRebates: ITableData = {
 };
 
 export const tableStaticDataApplications: ITableData = {
+    
+    isBalance:false,
     search: {
         placeholder: 'Bəyannamə',
         isNewAdd: true,
@@ -644,6 +654,8 @@ export const tableStaticDataApplications: ITableData = {
 };
 
 export const tableStaticDataBalance: ITableData = {
+    
+    isBalance:true,
     checkComponent: false,
     selectboxData: [
         {
@@ -659,24 +671,28 @@ export const tableStaticDataBalance: ITableData = {
             action: 'Sifariş ödənişi',
             cost: '66.89 $',
             date: '10.05.2020, 10:00',
+            isComing:false
         },
          {
             id: 2,
             action: 'Sifariş ödənişi',
             cost: '66.89 $',
             date: '10.05.2020, 10:00',
+            isComing:false
         },
         {
             id: 3,
             action: 'Sifariş ödənişi',
             cost: '66.89 $',
             date: '10.05.2020, 10:00',
+            isComing:true
         },
         {
             id: 4,
             action: 'Sifariş ödənişi',
             cost: '66.89 $',
             date: '10.05.2020, 10:00',
+            isComing:false
         },
         {
             id: 5,

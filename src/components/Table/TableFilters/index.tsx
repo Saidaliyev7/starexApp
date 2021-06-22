@@ -4,16 +4,17 @@ import moment from 'moment';
 import * as React from 'react';
 import RangePicker from 'react-range-picker';
 
-import { ISelectbox } from '../table.interface';
+import { ISelectbox, ITableData } from '../table.interface';
 
-const TableFilters: React.FC<{ selectData: ISelectbox[]; tableCheckData: any }> = ({
-    selectData,
-    tableCheckData,
-}) => {
+const TableFilters: React.FC<{
+    selectData: ISelectbox[];
+    tableCheckData: any;
+    tableData: ITableData;
+}> = ({ selectData, tableCheckData, tableData }) => {
     const selectRef = React.useRef();
     const [checkedData, changeCheckedData] = React.useState(null);
     const [isAllPending, changeAllPending] = React.useState<boolean>(false);
-    const [defaultValueForPicker,changePickerValue] = React.useState(null);
+    const [defaultValueForPicker, changePickerValue] = React.useState(null);
     const [select, changeSelect] = React.useState<{
         activeSelectData: ISelectbox;
         dropdownData: ISelectbox[];
@@ -83,9 +84,11 @@ const TableFilters: React.FC<{ selectData: ISelectbox[]; tableCheckData: any }> 
         }
         return (
             <div className="placeholderWrap">
-                <div className="placeholder">{ moment(startDate).format('DD/MM/yyyy') }</div>
+                <div className="placeholder">{moment(startDate).format('DD/MM/yyyy')}</div>
                 <div className="separator">-</div>
-                {endDate && <div className="placeholder">{moment(endDate).format('DD/MM/yyyy')}</div>}
+                {endDate && (
+                    <div className="placeholder">{moment(endDate).format('DD/MM/yyyy')}</div>
+                )}
                 <div className="icon">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -102,14 +105,12 @@ const TableFilters: React.FC<{ selectData: ISelectbox[]; tableCheckData: any }> 
         );
     };
 
-    const takeLastThirtyDays=()=>{
-        changePickerValue({startDate: Date(), endDate: Date()})
-    }
+    const takeLastThirtyDays = () => {
+        changePickerValue({ startDate: Date(), endDate: Date() });
+    };
 
     //TODO onChange date send to upper component
-    const onDateSelect=(...params)=>{
-       
-    }
+    const onDateSelect = (...params) => {};
 
     return (
         <>
@@ -178,11 +179,32 @@ const TableFilters: React.FC<{ selectData: ISelectbox[]; tableCheckData: any }> 
                                 </div>
                             </div>
                         )}
+
+                        {tableData.isBalance && (
+                            <div className="is-balance-type">
+                                <ul>
+                                    <li>
+                                        <div className="icon active"></div>
+                                        <div className="text">Mədaxil</div>
+                                    </li>
+                                    <li>
+                                        <div className="icon"></div>
+                                        <div className="text">Məxaric</div>
+                                    </li>
+                                </ul>
+                            </div>
+                        )}
                     </div>
                     <div className="datepicker-holder">
-                        <div className="last-days" onClick={takeLastThirtyDays}>Son 30 gün</div>
+                        <div className="last-days" onClick={takeLastThirtyDays}>
+                            Son 30 gün
+                        </div>
                         <div className="datepicker">
-                            <RangePicker onDateSelected={onDateSelect} defaultBalue={defaultValueForPicker}  placeholder={placeholder} />
+                            <RangePicker
+                                onDateSelected={onDateSelect}
+                                defaultBalue={defaultValueForPicker}
+                                placeholder={placeholder}
+                            />
                         </div>
                     </div>
                 </div>
