@@ -1,110 +1,36 @@
 import './balance.scss';
 
 import { ReactComponent as CardIcon } from 'assets/images/icons/card.svg';
-import { ReactComponent as DollarFilledIcon } from 'assets/images/icons/dollar_filled.svg';
-import { ReactComponent as InfoIcon } from 'assets/images/icons/info.svg';
-import { ReactComponent as PlusFilledIcon } from 'assets/images/icons/plus_not_filled.svg';
 import { ReactComponent as ProfitCardIcon } from 'assets/images/icons/profit_card.svg';
 import { ReactComponent as TerminalIcon } from 'assets/images/icons/terminal.svg';
-import { ReactComponent as TRYFilledIcon } from 'assets/images/icons/try_filled.svg';
+import { APIDataRender } from 'components/APIDataRender';
 import Table from 'components/Table';
-import { ITableData, tableStaticDataBalance } from 'components/Table/table.interface';
+import Pagination from 'components/Table/Pagination';
 import TableBody from 'components/Table/TBody';
 import TableTd from 'components/Table/TBody/Td';
 import TableTr from 'components/Table/TBody/Tr';
+import { useAPIData } from 'hooks';
+import { IPagination, IPaymentTransaction } from 'models';
 import * as React from 'react';
-import { CircularProgressbar } from 'react-circular-progressbar';
 import { Col, Row } from 'reactstrap';
-import { EColors } from 'styled/enums';
+import { paymentService } from 'services/payment';
+import { getPaymentTransactionsTableData } from 'utils';
+import { BalanceInfo } from 'views/Dashboard/BalanceInfo';
 
-import { BalanceCard, InfoCard } from '../Dashboard/';
 import { BalanceLinkCard } from '../Dashboard/LinkCard';
 
 const Balance: React.FC = () => {
-    const [tableData, changeTableData] = React.useState<ITableData>(tableStaticDataBalance);
-    const [tableCheckData, changeTableCheckData] = React.useState<any>([]);
+    const [transactions, changeTransactions] = useAPIData<IPagination<IPaymentTransaction>>();
+    const [page, changePage] = React.useState<number>(1);
+
     React.useEffect(() => {
-        changeTableData(tableStaticDataBalance);
-    }, []);
+        changeTransactions(() => paymentService.getTransactions(page));
+    }, [page]);
 
     return (
         <>
             <div className="balance-holder">
-                <Row style={{ marginTop: 24 }}>
-                    <Col xs="3">
-                        <InfoCard>
-                            <div className="info-card__left-side">
-                                <p className="info-card__heading">
-                                    BALANS
-                                    <br />
-                                    USD
-                                </p>
-                                <p className="info-card__amount">50</p>
-                            </div>
-                            <div className="info-card-icon">
-                                <PlusFilledIcon />
-                            </div>
-                            <DollarFilledIcon />
-                            <BalanceCard />
-                        </InfoCard>
-                    </Col>
-                    <Col xs="3">
-                        <InfoCard>
-                            <div className="info-card__left-side">
-                                <p className="info-card__heading">
-                                    BALANS
-                                    <br />
-                                    TRY
-                                </p>
-                                <p className="info-card__amount">50</p>
-                            </div>
-                            <div className="info-card-icon">
-                                <PlusFilledIcon />
-                            </div>
-                            <TRYFilledIcon />
-                            <BalanceCard />
-                        </InfoCard>
-                    </Col>
-                    <Col xs="3">
-                        <InfoCard>
-                            <div className="info-card__left-side">
-                                <p className="info-card__heading">
-                                    Cari Ay <br />
-                                    Ərzində
-                                </p>
-                                <p className="info-card__amount">55 $</p>
-                            </div>
-                            <div style={{ width: 64, height: 64 }}>
-                                <CircularProgressbar
-                                    value={60}
-                                    text={'60%'}
-                                    styles={{
-                                        text: {
-                                            fill: EColors.BLUE,
-                                            fontWeight: 400,
-                                            fontFamily: 'Roboto',
-                                        },
-                                        path: { stroke: EColors.YELLOW },
-                                        trail: { stroke: '#FFAB0320' },
-                                    }}
-                                />
-                            </div>
-                        </InfoCard>
-                    </Col>
-                    <Col xs="3">
-                        <InfoCard>
-                            <div className="info-card__left-side">
-                                <p className="info-card__heading">
-                                    Son 6 ay Çatdırılma
-                                    <br />
-                                    Ödənişi
-                                </p>
-                                <p className="info-card__amount">50</p>
-                            </div>
-                            <InfoIcon />
-                        </InfoCard>
-                    </Col>
-                </Row>
+                <BalanceInfo />
                 <Row style={{ marginTop: 24 }}>
                     <Col xs="3">
                         <BalanceLinkCard className="balance-card">
@@ -153,8 +79,7 @@ const Balance: React.FC = () => {
                     <Col xs="3">
                         <BalanceLinkCard className="balance-card">
                             <div className="icon">
-                                    <CardIcon />
-
+                                <CardIcon />
                             </div>
                             <div className="text">
                                 Balansınızı Ofisimizə <br />
@@ -165,8 +90,7 @@ const Balance: React.FC = () => {
                     <Col xs="3">
                         <BalanceLinkCard className="balance-card">
                             <div className="icon">
-                                    <TerminalIcon />
-
+                                <TerminalIcon />
                             </div>
                             <div className="text">
                                 E-manat terminalları vasitəsilə <br />
@@ -177,7 +101,7 @@ const Balance: React.FC = () => {
                     <Col xs="3">
                         <BalanceLinkCard className="balance-card">
                             <div className="icon">
-                              <ProfitCardIcon />
+                                <ProfitCardIcon />
                             </div>
                             <div className="text">
                                 Balansınızı Hədiyyə Kartı <br />
@@ -186,27 +110,59 @@ const Balance: React.FC = () => {
                         </BalanceLinkCard>
                     </Col>
                 </Row>
-                <Table tableCheckedData={tableCheckData} tableData={tableData}>
-                    <TableBody>
-                        {tableData?.tbodyData &&
-                            tableData?.tbodyData.map((data) => (
-                                <TableTr isChecked={data.checked} key={data.id}>
-                                    <TableTd>
-                                        <div className="text">{data.action}</div>
-                                    </TableTd>
-                                    <TableTd>
-                                        <div className={data.isComing?'is-coming active':'is-coming'}>
-                                            
-                                        </div>
-                                        <div className="text">{data.cost}</div>
-                                    </TableTd>
-                                    <TableTd>
-                                        <div className="text">{data.date}</div>
-                                    </TableTd>
-                                </TableTr>
-                            ))}
-                    </TableBody>
-                </Table>
+                <APIDataRender
+                    branch={transactions}
+                    deps={[]}
+                    successRender={(data) => {
+                        const transactionsTableData = getPaymentTransactionsTableData(data.results);
+                        return (
+                            <Table
+                                tableCheckedData={[]}
+                                tableData={transactionsTableData}
+                                paginationComponent={
+                                    <Pagination
+                                        count={data.count}
+                                        pages={data.pages}
+                                        currentPage={page}
+                                        onChange={changePage}
+                                    />
+                                }
+                            >
+                                <TableBody>
+                                    {transactionsTableData?.tbodyData &&
+                                        transactionsTableData?.tbodyData.map(
+                                            (transaction: IPaymentTransaction) => (
+                                                <TableTr key={transaction.created_at}>
+                                                    <TableTd>
+                                                        <div className="text">
+                                                            {
+                                                                transaction.get_payment_purpose_display
+                                                            }
+                                                        </div>
+                                                    </TableTd>
+                                                    <TableTd>
+                                                        <div
+                                                            className={
+                                                                transaction.entry_type === 'debit'
+                                                                    ? 'is-coming active'
+                                                                    : 'is-coming'
+                                                            }
+                                                        ></div>
+                                                        <div className="text">{`${transaction.amount} $`}</div>
+                                                    </TableTd>
+                                                    <TableTd>
+                                                        <div className="text">
+                                                            {transaction.created_at}
+                                                        </div>
+                                                    </TableTd>
+                                                </TableTr>
+                                            ),
+                                        )}
+                                </TableBody>
+                            </Table>
+                        );
+                    }}
+                />
             </div>
         </>
     );

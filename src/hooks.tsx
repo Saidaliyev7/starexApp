@@ -1,3 +1,4 @@
+import { EAPIProcessStatus } from 'enums';
 import { IAPIData } from 'models';
 import { UserInfoContext } from 'providers/UserInfoProvider';
 import * as React from 'react';
@@ -8,7 +9,7 @@ export const useUserInfo = () => React.useContext(UserInfoContext);
 export const initialAPIData: IAPIData<any> = {
     data: null,
     error: null,
-    status: 'IDLE',
+    status: EAPIProcessStatus.IDLE,
 };
 
 export function useAPIData<T>(
@@ -22,14 +23,14 @@ export function useAPIData<T>(
     const [asyncData, setAsyncData] = React.useState<IAPIData<T>>(initAsyncData);
 
     function makeRequest(service: () => Promise<T>): Promise<T> {
-        setAsyncData((x) => ({ ...x, status: 'PENDING' }));
+        setAsyncData((x) => ({ ...x, status: EAPIProcessStatus.PENDING }));
         return service()
             .then((data) => {
-                setAsyncData((x) => ({ ...x, data, status: 'SUCCESS' }));
+                setAsyncData((x) => ({ ...x, data, status: EAPIProcessStatus.SUCCESS }));
                 return data;
             })
             .catch((error) => {
-                setAsyncData((x) => ({ ...x, error, status: 'ERROR' }));
+                setAsyncData((x) => ({ ...x, error, status: EAPIProcessStatus.ERROR }));
                 throw error;
             });
     }

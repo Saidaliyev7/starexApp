@@ -1,12 +1,12 @@
 import Table from 'components/Table';
-import { ITableData,tableStaticDataParcel } from 'components/Table/table.interface';
+import { ITableData, tableStaticDataParcel } from 'components/Table/models';
 import TableBody from 'components/Table/TBody';
 import TableTd from 'components/Table/TBody/Td';
 import TableTr from 'components/Table/TBody/Tr';
 import * as React from 'react';
 
 const Parcels: React.FC = () => {
-    const [tableData, changeTableData] = React.useState<ITableData>(tableStaticDataParcel);
+    const [tableData, changeTableData] = React.useState<ITableData<any>>(tableStaticDataParcel);
     const [tableCheckData, changeTableCheckData] = React.useState<any>([]);
     React.useEffect(() => {
         changeTableData(tableStaticDataParcel);
@@ -16,9 +16,8 @@ const Parcels: React.FC = () => {
         if (tableCheckData.length === 0) {
             cahngeTableCheckData(data);
         } else if (tableCheckData[0].buyStatus === data.buyStatus) {
-                cahngeTableCheckData(data);
-            }
-        
+            cahngeTableCheckData(data);
+        }
     };
 
     const cahngeTableCheckData = (data) => {

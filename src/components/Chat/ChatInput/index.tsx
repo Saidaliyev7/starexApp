@@ -8,7 +8,7 @@ import * as React from 'react';
 
 const ChatInput: React.FC = React.memo(() => {
     const fileInput = React.useRef();
-    const [inputFiles, changeFiles] = React.useState<FileList|File[]>(null);
+    const [inputFiles, changeFiles] = React.useState<FileList | File[]>(null);
     const [textAreaOptions, changeTextAreaOptions] = React.useState<{
         name: string;
         rows: number;
@@ -42,7 +42,7 @@ const ChatInput: React.FC = React.memo(() => {
 
         changeTextAreaOptions((oldstate) => ({
             ...oldstate,
-            rows: fileList.length>0?5:1,
+            rows: fileList.length > 0 ? 5 : 1,
             files: fileNames,
         }));
     };
@@ -57,8 +57,8 @@ const ChatInput: React.FC = React.memo(() => {
         input.click();
     };
 
-    const onFileRemove = (fileName, index) => {
-        const newFiles = Array.from(inputFiles).filter((file, i) => file.name!== fileName);
+    const onFileRemove = (fileName) => {
+        const newFiles = Array.from(inputFiles).filter((file) => file.name !== fileName);
         changeFiles(newFiles);
     };
     return (
@@ -105,7 +105,7 @@ const ChatInput: React.FC = React.memo(() => {
                             multiple
                             style={{ display: 'none' }}
                         />
-                        {textAreaOptions.files &&textAreaOptions.files.length>0&& (
+                        {textAreaOptions.files && textAreaOptions.files.length > 0 && (
                             <div className="files">
                                 <ul>
                                     {textAreaOptions.files.map((fileName, index) => (
@@ -113,7 +113,7 @@ const ChatInput: React.FC = React.memo(() => {
                                             {fileName}
                                             <div
                                                 className="remove-icon"
-                                                onClick={() => onFileRemove(fileName, index)}
+                                                onClick={() => onFileRemove(fileName)}
                                             >
                                                 <RemoveIcon />
                                             </div>

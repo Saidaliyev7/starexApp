@@ -1,10 +1,9 @@
-export interface ITableData {
-    selectboxData: ISelectbox[];
+export interface ITableData<T> {
+    selectboxData?: ISelectbox[];
     thead: string[];
-    tbodyData?: any;
+    tbodyData?: T | any;
     checkComponent: boolean;
     search?: ITableSearch;
-    isBalance:boolean
 }
 
 export interface ITableSearch {
@@ -18,13 +17,12 @@ export interface ISelectbox {
     isActive: boolean;
 }
 
-export enum EApplicationStatus{
-    'Qəbul edildi'=1,
-    'Bağlandı'=2
+export enum EApplicationStatus {
+    'Qəbul edildi' = 1,
+    'Bağlandı' = 2,
 }
 
-export const tableStaticData: ITableData = {
-    isBalance:false,
+export const tableStaticData: ITableData<any> = {
     search: {
         placeholder: 'Sifariş kodu',
         isNewAdd: false,
@@ -190,9 +188,7 @@ export const tableStaticData: ITableData = {
     ],
 };
 
-export const tableStaticDataParcel: ITableData = {
-    
-    isBalance:false,
+export const tableStaticDataParcel: ITableData<any> = {
     search: {
         placeholder: 'İzləmə nömrəsi',
         isNewAdd: false,
@@ -350,13 +346,11 @@ export const tableStaticDataParcel: ITableData = {
     ],
 };
 
-export const tableStaticDataCourier: ITableData = {
-    
-    isBalance:false,
+export const tableStaticDataCourier: ITableData<any> = {
     search: {
         placeholder: 'Bağlama',
         isNewAdd: true,
-        isNewAddText:'Kuryer sifariş et'
+        isNewAddText: 'Kuryer sifariş et',
     },
     checkComponent: true,
     selectboxData: [
@@ -400,132 +394,108 @@ export const tableStaticDataCourier: ITableData = {
     tbodyData: [
         {
             id: 1,
-            codes:[
-                '880158930',
-                '880158930'
-            ],
-            status:'Sifariş yaradıldı',
+            codes: ['880158930', '880158930'],
+            status: 'Sifariş yaradıldı',
             where: 'Səbail rayonu',
             buyStatus: 'pending',
             priceAzn: '(7.69 )',
-            name:'İsrafilbəyli Telli',
+            name: 'İsrafilbəyli Telli',
             checked: false,
         },
         {
             id: 2,
-            codes:[
-                '880158930',
-                '880158930'
-            ],
-            status:'Sifariş yaradıldı',
+            codes: ['880158930', '880158930'],
+            status: 'Sifariş yaradıldı',
             where: 'Səbail rayonu',
             buyStatus: 'pending',
             priceAzn: '(7.69 )',
-            name:'İsrafilbəyli Telli',
+            name: 'İsrafilbəyli Telli',
             checked: false,
         },
         {
             id: 3,
-            codes:[
-                '880158930',
-            ],
-            status:'Kuryerdə',
+            codes: ['880158930'],
+            status: 'Kuryerdə',
             where: 'Səbail rayonu',
             buyStatus: 'pending',
             priceAzn: '(7.69 )',
-            name:'İsrafilbəyli Telli',
+            name: 'İsrafilbəyli Telli',
             checked: false,
         },
         {
             id: 4,
-            codes:[
-                '880158930',
-            ],
-            status:'Təhvil verilib',
+            codes: ['880158930'],
+            status: 'Təhvil verilib',
             where: 'Səbail rayonu',
             buyStatus: 'pending',
             priceAzn: '(7.69 )',
-            name:'İsrafilbəyli Telli',
+            name: 'İsrafilbəyli Telli',
             checked: false,
         },
         {
             id: 5,
-            codes:[
-                '880158930',
-            ],
-            status:'Təhvil verilib',
+            codes: ['880158930'],
+            status: 'Təhvil verilib',
             where: 'Səbail rayonu',
             buyStatus: 'pending',
             priceAzn: '(7.69 )',
-            name:'İsrafilbəyli Telli',
-            checked: false
+            name: 'İsrafilbəyli Telli',
+            checked: false,
         },
         {
             id: 6,
-            codes:[
-                '880158930',
-            ],
-            status:'Təhvil verilib',
+            codes: ['880158930'],
+            status: 'Təhvil verilib',
             where: 'Səbail rayonu',
             buyStatus: 'pending',
             priceAzn: '(7.69 )',
-            name:'İsrafilbəyli Telli',
-            checked: false
+            name: 'İsrafilbəyli Telli',
+            checked: false,
         },
         {
             id: 7,
-            codes:[
-                '880158930',
-            ],
-            status:'Təhvil verilib',
+            codes: ['880158930'],
+            status: 'Təhvil verilib',
             where: 'Səbail rayonu',
             buyStatus: 'pending',
             priceAzn: '(7.69 )',
-            name:'İsrafilbəyli Telli',
-            checked: false
+            name: 'İsrafilbəyli Telli',
+            checked: false,
         },
         {
             id: 8,
-            codes:[
-                '880158930',
-            ],
-            status:'Təhvil verilib',
+            codes: ['880158930'],
+            status: 'Təhvil verilib',
             where: 'Səbail rayonu',
             buyStatus: 'pending',
             priceAzn: '(7.69 )',
-            name:'İsrafilbəyli Telli',
-            checked: false
+            name: 'İsrafilbəyli Telli',
+            checked: false,
         },
         {
             id: 9,
-            codes:[
-                '880158930',
-            ],
-            status:'Təhvil verilib',
+            codes: ['880158930'],
+            status: 'Təhvil verilib',
             where: 'Səbail rayonu',
             buyStatus: 'pending',
             priceAzn: '(7.69 )',
-            name:'İsrafilbəyli Telli',
-            checked: false
+            name: 'İsrafilbəyli Telli',
+            checked: false,
         },
         {
             id: 10,
-            codes:[
-                '880158930',
-            ],
-            status:'Təhvil verilib',
+            codes: ['880158930'],
+            status: 'Təhvil verilib',
             where: 'Səbail rayonu',
             buyStatus: 'pending',
             priceAzn: '(7.69 )',
-            name:'İsrafilbəyli Telli',
-            checked: false
+            name: 'İsrafilbəyli Telli',
+            checked: false,
         },
     ],
 };
 
-export const tableStaticDataRebates: ITableData = {
-    
-    isBalance:false,
+export const tableStaticDataRebates: ITableData<any> = {
     checkComponent: false,
     selectboxData: [
         {
@@ -569,27 +539,32 @@ export const tableStaticDataRebates: ITableData = {
             isActive: false,
         },
     ],
-    thead: ['İzləmə kodu', 'Məhsulun tipi', 'Mağaza', 'Çəki', 'Çatdırılma qiyməti', 'İadənin statusu'],
+    thead: [
+        'İzləmə kodu',
+        'Məhsulun tipi',
+        'Mağaza',
+        'Çəki',
+        'Çatdırılma qiyməti',
+        'İadənin statusu',
+    ],
     tbodyData: [
         {
             id: 1,
             code: '880158930',
             weight: '0.48 kg',
             where: 'Trendyol',
-            status:'Ölçünün kiçik olması',
+            status: 'Ölçünün kiçik olması',
             priceAzn: '1.50',
             comingPrice: '1.50',
         },
     ],
 };
 
-export const tableStaticDataApplications: ITableData = {
-    
-    isBalance:false,
+export const tableStaticDataApplications: ITableData<any> = {
     search: {
         placeholder: 'Bəyannamə',
         isNewAdd: true,
-        isNewAddText:'Onlayn müraciət et'
+        isNewAddText: 'Onlayn müraciət et',
     },
     checkComponent: false,
     selectboxData: [
@@ -641,21 +616,19 @@ export const tableStaticDataApplications: ITableData = {
             category: 'Hesabımda mənə məxsus olmayan bağlama',
             country: 'Türkiyə',
             time: '21.07.2020, 15:45',
-            status:'Qəbul edildi',
+            status: 'Qəbul edildi',
         },
         {
             id: 1,
             category: 'Hesabımda mənə məxsus olmayan bağlama',
             country: 'Türkiyə',
             time: '21.07.2020, 15:45',
-            status:'Bağlandı',
+            status: 'Bağlandı',
         },
     ],
 };
 
-export const tableStaticDataBalance: ITableData = {
-    
-    isBalance:true,
+export const tableStaticDataBalance: ITableData<any> = {
     checkComponent: false,
     selectboxData: [
         {
@@ -671,28 +644,28 @@ export const tableStaticDataBalance: ITableData = {
             action: 'Sifariş ödənişi',
             cost: '66.89 $',
             date: '10.05.2020, 10:00',
-            isComing:false
+            isComing: false,
         },
-         {
+        {
             id: 2,
             action: 'Sifariş ödənişi',
             cost: '66.89 $',
             date: '10.05.2020, 10:00',
-            isComing:false
+            isComing: false,
         },
         {
             id: 3,
             action: 'Sifariş ödənişi',
             cost: '66.89 $',
             date: '10.05.2020, 10:00',
-            isComing:true
+            isComing: true,
         },
         {
             id: 4,
             action: 'Sifariş ödənişi',
             cost: '66.89 $',
             date: '10.05.2020, 10:00',
-            isComing:false
+            isComing: false,
         },
         {
             id: 5,
