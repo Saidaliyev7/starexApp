@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import { EColors } from 'styled/enums';
 
 interface IProps {
     path: string;

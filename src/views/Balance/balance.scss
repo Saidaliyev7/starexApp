@@ -1,0 +1,51 @@
+.balance-holder {
+    .info-card-icon {
+        position: absolute;
+        top: 20px;
+        right: 23px;
+    }
+    .balance-card {
+        .icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 90, 255, 0.1);
+            border-radius: 50%;
+            transition: 0.3s ease;
+            margin-bottom: 12px;
+        }
+        .text {
+            font-size: 14px;
+            line-height: 16px;
+            text-align: center;
+            transition: 0.3s ease;
+            color: #212121;
+        }
+        &:hover {
+            .icon {
+                background: rgba(255, 255, 255, 0.24);
+            }
+            svg {
+                path {
+                    fill: white;
+                }
+            }
+            .text {
+                color: #ffffff;
+            }
+        }
+    }
+    .is-coming {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #d80027;
+        position: absolute;
+        left: -14px;
+        &.active{
+            background: #00A237;
+        }
+    }
+}

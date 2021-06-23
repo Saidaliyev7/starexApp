@@ -12,7 +12,7 @@ const LayoutStyled = styled.div`
     display: flex;
     .dashboard__content {
         width: calc(100% - 336px);
-        height: 100vh;
+        min-height: 100vh;
         position: relative;
         background-color: #f8f8f8;
     }

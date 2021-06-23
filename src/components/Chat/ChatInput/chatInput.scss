@@ -1,0 +1,163 @@
+.chat-input-holder {
+    width: 100%;
+    background: #ffffff;
+    box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    .top {
+        padding: 30px;
+        border-bottom: 1px solid #d9d9d9;
+        .name {
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 21px;
+
+            color: #000000;
+        }
+    }
+    .bottom {
+        padding: 30px;
+        background: #ffffff;
+        .chat-content {
+            ul {
+                display: flex;
+                flex-direction: column;
+                li {
+                    display: flex;
+                    flex-direction: column;
+                    .date {
+                        font-size: 16px;
+                        line-height: 19px;
+                        text-align: center;
+                        color: #585858;
+                        margin-bottom: 36px;
+                    }
+                    .message {
+                        display: flex;
+                        max-width: 50%;
+                        margin-bottom: 10px;
+                        padding: 10px 20px;
+                        padding-right: 50px;
+                        background: #ffffff;
+                        border: 1px solid #bebebe;
+                        box-sizing: border-box;
+                        border-radius: 4px;
+                        font-size: 16px;
+                        line-height: 19px;
+                        width: max-content;
+                        color: #000000;
+                        position: relative;
+                        &.income {
+                            align-self: flex-end;
+                        }
+                        .time {
+                            position: absolute;
+                            right: 6px;
+                            bottom: 6px;
+                            font-size: 12px;
+                            line-height: 14px;
+                            color: #959595;
+                        }
+                    }
+                }
+            }
+        }
+        .input-content {
+            margin-top: 60px;
+            position: relative;
+
+            textarea {
+                width: 100%;
+                resize: none;
+                min-height: 40px;
+                vertical-align: middle;
+                padding: 10px 20px;
+                font-size: 16px;
+                line-height: 19px;
+                color: #000000;
+                background: #ffffff;
+                border: 1px solid #bebebe;
+                box-sizing: border-box;
+                padding-right: 70px;
+                border-radius: 4px;
+                outline: none;
+                &::placeholder {
+                    vertical-align: middle;
+                    color: #959595;
+                }
+                &.file-added {
+                    padding-bottom: 80px;
+                }
+            }
+            .icons {
+                position: absolute;
+                display: flex;
+                align-items: center;
+                top: 11px;
+                right: 0;
+                ul {
+                    display: flex;
+                    li {
+                        margin-right: 16px;
+                        cursor: pointer;
+                        path {
+                            transition: 0.3s ease;
+                        }
+                        &.active-add {
+                            svg {
+                                path {
+                                    fill: #000000;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .files {
+                position: absolute;
+                bottom: 2px;
+                left: 2px;
+                display: flex;
+                align-items: flex-end;
+                width: calc(100% - 4px);
+                padding-top: 20px;
+                background: white;
+                z-index: 5;
+                ul {
+                    margin-bottom: 20px;
+                    margin-left: 20px;
+                    display: flex;
+                    flex-wrap: wrap;
+                    li {
+                        margin-right: 20px;
+                        position: relative;
+                        height: 40px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        padding: 0px 20px;
+                        background: #c4c4c4;
+                        border-radius: 4px;
+                        font-size: 16px;
+                        line-height: 19px;
+                        color: #ffffff;
+                        .remove-icon{
+                            background: #7D7D7D;
+                            width: 18px;
+                            height: 18px;
+                            border-radius: 50%;
+                            position: absolute;
+                            right: 0;
+                            top: 0;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            right: -6px;
+                            top: -6px;
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

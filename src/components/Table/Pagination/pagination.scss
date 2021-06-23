@@ -1,0 +1,40 @@
+.pagination-holder {
+    display: flex;
+    justify-content: flex-end;
+    flex-basis: 100%;
+    padding: 30px 0px;
+    padding-right: 30px;
+    ul {
+        display: flex;
+
+        li {
+            a {
+                outline: none;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 24px;
+                height: 24px;
+                margin: 4px;
+                background: transparent !important;
+                border-radius: 4px;
+                font-size: 14px;
+                line-height: 16px;
+                display: flex;
+                align-items: center;
+                color: #A9A9A9 !important;
+             
+            }
+
+            &.page-active {
+                a {
+                    width: 24px;
+                    height: 24px;
+                    color: #ffffff !important;
+                    background: #005aff !important;
+                    border-radius: 4px;
+                }
+            }
+        }
+    }
+}
