@@ -1,12 +1,12 @@
 import Table from 'components/Table';
-import { ITableData, tableStaticDataCourier } from 'components/Table/table.interface';
+import { ITableData, tableStaticDataCourier } from 'components/Table/models';
 import TableBody from 'components/Table/TBody';
 import TableTd from 'components/Table/TBody/Td';
 import TableTr from 'components/Table/TBody/Tr';
 import * as React from 'react';
 
 const Courier: React.FC = () => {
-    const [tableData, changeTableData] = React.useState<ITableData>(tableStaticDataCourier);
+    const [tableData, changeTableData] = React.useState<ITableData<any>>(tableStaticDataCourier);
     const [tableCheckData, changeTableCheckData] = React.useState<any>([]);
     React.useEffect(() => {
         changeTableData(tableStaticDataCourier);

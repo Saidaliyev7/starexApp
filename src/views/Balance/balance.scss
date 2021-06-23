@@ -1,3 +1,8 @@
+.table tbody > tr:hover {
+    background-color: #ececec;
+    cursor: auto !important;
+}
+
 .balance-holder {
     .info-card-icon {
         position: absolute;
@@ -44,8 +49,8 @@
         background: #d80027;
         position: absolute;
         left: -14px;
-        &.active{
-            background: #00A237;
+        &.active {
+            background: #00a237;
         }
     }
 }

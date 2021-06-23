@@ -1,4 +1,4 @@
-import { ECurrency } from 'enums';
+import { EAPIProcessStatus, ECurrency } from 'enums';
 
 export interface IUser {
     full_name: string;
@@ -45,6 +45,25 @@ export interface IUserProfile {
 
 export interface IAPIData<T> {
     error: any;
-    status: 'PENDING' | 'SUCCESS' | 'ERROR' | 'IDLE';
+    status: EAPIProcessStatus;
     data: T | null | undefined;
+}
+
+export interface IPaymentTransaction {
+    payment_purpose: string;
+    get_payment_purpose_display: string;
+    amount: string;
+    currency: string;
+    get_amount_preview: string;
+    entry_type: 'credit' | 'debit';
+    get_entry_type_display: 'Credit' | 'Debit';
+    created_at: string;
+}
+
+export interface IPagination<T> {
+    count: number;
+    pages: number;
+    next?: string;
+    previous?: string;
+    results: T[];
 }

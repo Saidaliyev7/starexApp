@@ -1,24 +1,21 @@
 import './tableFilters.scss';
 
-import moment from 'moment';
 import * as React from 'react';
-import RangePicker from 'react-range-picker';
 
-import { ISelectbox, ITableData } from '../table.interface';
+import { ISelectbox } from '../models';
 
 const TableFilters: React.FC<{
-    selectData: ISelectbox[];
     tableCheckData: any;
-    tableData: ITableData;
-}> = ({ selectData, tableCheckData, tableData }) => {
+    selectData?: ISelectbox[];
+}> = ({ selectData = [], tableCheckData }) => {
     const selectRef = React.useRef();
     const [checkedData, changeCheckedData] = React.useState(null);
     const [isAllPending, changeAllPending] = React.useState<boolean>(false);
-    const [defaultValueForPicker, changePickerValue] = React.useState(null);
     const [select, changeSelect] = React.useState<{
         activeSelectData: ISelectbox;
         dropdownData: ISelectbox[];
     }>(null);
+    debugger;
 
     React.useEffect(() => {
         changeSelect({
@@ -43,170 +40,95 @@ const TableFilters: React.FC<{
             ? parentClasslist.remove('active')
             : parentClasslist.add('active');
     };
-    const onSelectChange = (selectData: ISelectbox) => {
+    const onSelectChange = (selectedData: ISelectbox) => {
         const target = selectRef.current as HTMLElement;
         const parentClasslist = target.classList;
         parentClasslist.contains('active')
             ? parentClasslist.remove('active')
             : parentClasslist.add('active');
-        selectData.isActive !== true &&
+        selectedData.isActive !== true &&
             changeSelect((oldState) => {
-                const newStateData = oldState.dropdownData.map((el) => {
-                    el.name === selectData.name ? (el.isActive = true) : (el.isActive = false);
-                    return el;
-                });
+                const newStateData = oldState.dropdownData.map((el) => ({
+                    ...el,
+                    isActive: el.name === selectedData.name,
+                }));
                 return {
                     dropdownData: newStateData,
-                    activeSelectData: selectData,
+                    activeSelectData: selectedData,
                 };
             });
     };
-
-    const placeholder = ({ startDate, endDate }) => {
-        if (!startDate) {
-            return (
-                <div className="placeholder">
-                    Tarix seçin
-                    <div className="icon">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            height="24px"
-                            viewBox="0 0 24 24"
-                            width="24px"
-                            fill="#000000"
-                        >
-                            <path d="M0 0h24v24H0V0z" fill="none" />
-                            <path d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V10h16v11zm0-13H4V5h16v3z" />
-                        </svg>
-                    </div>
-                </div>
-            );
-        }
-        return (
-            <div className="placeholderWrap">
-                <div className="placeholder">{moment(startDate).format('DD/MM/yyyy')}</div>
-                <div className="separator">-</div>
-                {endDate && (
-                    <div className="placeholder">{moment(endDate).format('DD/MM/yyyy')}</div>
-                )}
-                <div className="icon">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        height="24px"
-                        viewBox="0 0 24 24"
-                        width="24px"
-                        fill="#000000"
-                    >
-                        <path d="M0 0h24v24H0V0z" fill="none" />
-                        <path d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V10h16v11zm0-13H4V5h16v3z" />
-                    </svg>
-                </div>
-            </div>
-        );
-    };
-
-    const takeLastThirtyDays = () => {
-        changePickerValue({ startDate: Date(), endDate: Date() });
-    };
-
-    //TODO onChange date send to upper component
-    const onDateSelect = (...params) => {};
 
     return (
         <>
             <div className="table-filters-holder">
                 <div className="upper">
-                    <div className="selectbox-holder">
-                        {select && (
-                            <div className="selectbox" ref={selectRef}>
-                                <div className="selectbox-top" onClick={onSelectOpen}>
-                                    {select.activeSelectData.name}
-                                    <div className="icon">
-                                        <svg
-                                            width="12"
-                                            height="13"
-                                            viewBox="0 0 12 13"
-                                            fill="none"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                            <g clipPath="url(#clip0)">
-                                                <path
-                                                    d="M6.23922 9.92184L11.9 4.29462C12.0333 4.16213 12.0333 3.94964 11.9 3.81714C11.7668 3.68465 11.553 3.68465 11.4197 3.81714L6.00031 9.20438L0.580918 3.81714C0.447634 3.68465 0.233876 3.68465 0.100592 3.81714C0.0352068 3.88214 3.02136e-09 3.96964 4.04098e-09 4.05463C5.06059e-09 4.13963 0.032692 4.22712 0.100592 4.29212L5.76141 9.91934C5.89218 10.0518 6.10845 10.0518 6.23922 9.92184Z"
-                                                    fill="#005AFF"
-                                                />
-                                            </g>
-                                            <defs>
-                                                <clipPath id="clip0">
-                                                    <rect
-                                                        width="11.9288"
-                                                        height="12"
-                                                        fill="white"
-                                                        transform="translate(12 0.904297) rotate(90)"
+                    {selectData.length > 0 && (
+                        <div className="selectbox-holder">
+                            {select && (
+                                <div className="selectbox" ref={selectRef}>
+                                    <div className="selectbox-top" onClick={onSelectOpen}>
+                                        {select.activeSelectData.name}
+                                        <div className="icon">
+                                            <svg
+                                                width="12"
+                                                height="13"
+                                                viewBox="0 0 12 13"
+                                                fill="none"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                                <g clipPath="url(#clip0)">
+                                                    <path
+                                                        d="M6.23922 9.92184L11.9 4.29462C12.0333 4.16213 12.0333 3.94964 11.9 3.81714C11.7668 3.68465 11.553 3.68465 11.4197 3.81714L6.00031 9.20438L0.580918 3.81714C0.447634 3.68465 0.233876 3.68465 0.100592 3.81714C0.0352068 3.88214 3.02136e-09 3.96964 4.04098e-09 4.05463C5.06059e-09 4.13963 0.032692 4.22712 0.100592 4.29212L5.76141 9.91934C5.89218 10.0518 6.10845 10.0518 6.23922 9.92184Z"
+                                                        fill="#005AFF"
                                                     />
-                                                </clipPath>
-                                            </defs>
-                                        </svg>
+                                                </g>
+                                                <defs>
+                                                    <clipPath id="clip0">
+                                                        <rect
+                                                            width="11.9288"
+                                                            height="12"
+                                                            fill="white"
+                                                            transform="translate(12 0.904297) rotate(90)"
+                                                        />
+                                                    </clipPath>
+                                                </defs>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div className="selectbox-bottom">
+                                        <ul>
+                                            {select.dropdownData.map((el, index) => (
+                                                <li
+                                                    key={index}
+                                                    onClick={() => onSelectChange(el)}
+                                                    className={el.isActive ? 'active' : ''}
+                                                >
+                                                    {el.name} ({el.count})
+                                                    {el.isActive && (
+                                                        <div className="icon">
+                                                            <svg
+                                                                width="12"
+                                                                height="9"
+                                                                viewBox="0 0 12 9"
+                                                                fill="none"
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                            >
+                                                                <path
+                                                                    d="M11.8243 0.254848C11.59 0.0205195 11.2101 0.0205195 10.9757 0.254848L3.78737 7.44329L1.02428 4.6802C0.789972 4.44587 0.410097 4.4459 0.175746 4.6802C-0.058582 4.91451 -0.058582 5.29438 0.175746 5.52871L3.3631 8.71602C3.59734 8.95033 3.97749 8.95016 4.21164 8.71602L11.8243 1.10338C12.0586 0.869074 12.0586 0.489176 11.8243 0.254848Z"
+                                                                    fill="#005AFF"
+                                                                />
+                                                            </svg>
+                                                        </div>
+                                                    )}
+                                                </li>
+                                            ))}
+                                        </ul>
                                     </div>
                                 </div>
-                                <div className="selectbox-bottom">
-                                    <ul>
-                                        {select.dropdownData.map((el, index) => (
-                                            <li
-                                                key={index}
-                                                onClick={() => onSelectChange(el)}
-                                                className={el.isActive ? 'active' : ''}
-                                            >
-                                                {el.name} ({el.count})
-                                                {el.isActive && (
-                                                    <div className="icon">
-                                                        <svg
-                                                            width="12"
-                                                            height="9"
-                                                            viewBox="0 0 12 9"
-                                                            fill="none"
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                        >
-                                                            <path
-                                                                d="M11.8243 0.254848C11.59 0.0205195 11.2101 0.0205195 10.9757 0.254848L3.78737 7.44329L1.02428 4.6802C0.789972 4.44587 0.410097 4.4459 0.175746 4.6802C-0.058582 4.91451 -0.058582 5.29438 0.175746 5.52871L3.3631 8.71602C3.59734 8.95033 3.97749 8.95016 4.21164 8.71602L11.8243 1.10338C12.0586 0.869074 12.0586 0.489176 11.8243 0.254848Z"
-                                                                fill="#005AFF"
-                                                            />
-                                                        </svg>
-                                                    </div>
-                                                )}
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            </div>
-                        )}
-
-                        {tableData.isBalance && (
-                            <div className="is-balance-type">
-                                <ul>
-                                    <li>
-                                        <div className="icon active"></div>
-                                        <div className="text">Mədaxil</div>
-                                    </li>
-                                    <li>
-                                        <div className="icon"></div>
-                                        <div className="text">Məxaric</div>
-                                    </li>
-                                </ul>
-                            </div>
-                        )}
-                    </div>
-                    <div className="datepicker-holder">
-                        <div className="last-days" onClick={takeLastThirtyDays}>
-                            Son 30 gün
+                            )}
                         </div>
-                        <div className="datepicker">
-                            <RangePicker
-                                onDateSelected={onDateSelect}
-                                defaultBalue={defaultValueForPicker}
-                                placeholder={placeholder}
-                            />
-                        </div>
-                    </div>
+                    )}
                 </div>
 
                 {checkedData && checkedData.length > 0 && (

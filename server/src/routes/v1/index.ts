@@ -1,6 +1,7 @@
 import { Router } from 'express';
 
 import { NotificationRouter } from './notification';
+import { PaymentRouter } from './payments';
 import { UserRouter } from './user';
 
 export const V1_ROUTER = Router();
@@ -13,6 +14,10 @@ export const V1_ROUTER = Router();
     {
         path: '/',
         router: NotificationRouter,
+    },
+    {
+        path: '/payment',
+        router: PaymentRouter,
     },
 ].forEach((x) => {
     V1_ROUTER.use(x.path, x.router);
