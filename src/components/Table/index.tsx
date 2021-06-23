@@ -8,15 +8,16 @@ import TableFilters from './TableFilters';
 import TableSearch from './TableSearch';
 import TableHead from './THead';
 
-const Table: React.FC<{ tableData: ITableData; children; tableCheckedData? }> = ({
+const Table: React.FC<{ tableData: ITableData; children; tableCheckedData?,onSearchAddClick? }> = ({
     tableData,
     children,
     tableCheckedData,
+    onSearchAddClick
 }) => {
     return (
         <>
             <div className="table-with-all-components-holder">
-            {tableData.search && <TableSearch tableSearch={tableData.search} />}
+            {tableData.search && <TableSearch tableSearch={tableData.search} onSearchAddClick={onSearchAddClick} />}
             <div className="table-component-holder">
                 <TableFilters
                     tableCheckData={tableCheckedData}

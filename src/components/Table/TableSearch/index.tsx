@@ -5,7 +5,7 @@ import * as React from 'react';
 
 import { ITableSearch } from '../table.interface';
 
-const TableSearch: React.FC<{ tableSearch: ITableSearch }> = React.memo(({ tableSearch }) => {
+const TableSearch: React.FC<{ tableSearch: ITableSearch,onSearchAddClick? }> = React.memo(({ tableSearch,onSearchAddClick }) => {
     return (
         <>
             <div className="table-search-holder">
@@ -31,7 +31,7 @@ const TableSearch: React.FC<{ tableSearch: ITableSearch }> = React.memo(({ table
                 {tableSearch.isNewAdd && (
                     <div className="right">
                         <div className="new-add">
-                            <button>
+                            <button onClick={onSearchAddClick}>
                                 <div className="icon">
                                     <svg
                                         width="16"

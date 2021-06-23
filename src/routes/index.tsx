@@ -11,6 +11,7 @@ const Courier = React.lazy(() => import('views/Courier'));
 const Rebates = React.lazy(() => import('views/Rebates'));
 const Applications = React.lazy(() => import('views/Applications'));
 const Balance =React.lazy(() => import('views/Balance'));
+const ForeignAdresses = React.lazy(()=>import('views/ForeignAdresses'))
 export const Routes: React.FC = () => (
     <Route
         render={() => (
@@ -26,6 +27,7 @@ export const Routes: React.FC = () => (
                     <Route path={ROUTES.REBATES} component={Rebates} />
                     <Route path={ROUTES.APPLICATIONS} component={Applications} />
                     <Route path={ROUTES.BALANCE} component={Balance} />
+                    <Route path={ROUTES.FOREIGN_ADDRESSES} component={ForeignAdresses} />
                 </React.Suspense>
                 
             </Switch>

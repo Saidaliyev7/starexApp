@@ -1,0 +1,14 @@
+.chat-holder{
+    margin-top: 60px; 
+    display: flex;
+    flex-wrap: nowrap;
+    .left{
+        flex-basis: 65%;
+        width: 65%;
+        margin-right: 24px;
+    }
+    .right{
+        flex-basis: 35%;
+        width: 35%;
+    }
+}

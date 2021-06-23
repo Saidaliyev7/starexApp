@@ -1,0 +1,15 @@
+.foreign-adresses-holder {
+    margin-top: 60px;
+    .top {
+        margin-bottom: 20px;
+        .forbidden {
+            display: flex;
+            justify-content: flex-end;
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 21px;
+            cursor: pointer;
+            color: #005aff;
+        }
+    }
+}
