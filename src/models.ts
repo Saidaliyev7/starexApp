@@ -60,6 +60,11 @@ export interface IPaymentTransaction {
     created_at: string;
 }
 
+export interface IPaymentPayTR {
+    paytr_url: string;
+    token: string;
+}
+
 export interface IPagination<T> {
     count: number;
     pages: number;

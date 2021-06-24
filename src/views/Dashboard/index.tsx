@@ -3,10 +3,8 @@ import { ReactComponent as CartIcon } from 'assets/images/icons/cart_lg.svg';
 import { ReactComponent as DeliveryIcon } from 'assets/images/icons/delivery_lg.svg';
 import { ReactComponent as FinanceLetterIcon } from 'assets/images/icons/finance-letter_lg.svg';
 import { ReactComponent as LocationIcon } from 'assets/images/icons/location_lg.svg';
-import { ReactComponent as PlusFilledIcon } from 'assets/images/icons/plus_filled.svg';
 import { ReactComponent as SettingsIcon } from 'assets/images/icons/settings_lg.svg';
 import * as React from 'react';
-import { useHistory } from 'react-router-dom';
 import { Col, Row } from 'reactstrap';
 import { ROUTES } from 'routes/consts';
 import styled from 'styled-components';
@@ -50,16 +48,6 @@ export const InfoCard = styled.div`
         color: ${EColors.BLUE};
     }
 `;
-
-export const BalanceCard: React.FC = React.memo(() => {
-    const { push } = useHistory();
-    return (
-        <BalanceCardStyled onClick={() => push(ROUTES.BALANCE)}>
-            <span>Balansı Artır</span>
-            <PlusFilledIcon />
-        </BalanceCardStyled>
-    );
-});
 
 export const Dashboard: React.FC = () => (
     <>

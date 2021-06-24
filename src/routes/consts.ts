@@ -6,6 +6,8 @@ export const ROUTES = {
     COURIER: '/courier',
     REBATES: '/rebates',
     BALANCE: '/balance',
+    BALANCE_INCREASE: '/balance-increase',
+    BALANCE_PAY_TR: '/balance-paytr',
     APPLICATIONS: '/applications',
     ONLINE_QUEUE: '/online-queue',
     SETTINGS: '/settings',

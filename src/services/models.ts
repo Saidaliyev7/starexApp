@@ -1,4 +1,4 @@
-import { IPagination, IPaymentTransaction, IUser } from 'models';
+import { IPagination, IPaymentPayTR, IPaymentTransaction, IUser } from 'models';
 
 export interface IAuthService {
     logout: () => void;
@@ -11,4 +11,5 @@ export interface INotificationService {
 
 export interface IPaymentService {
     getTransactions: (page?: number) => Promise<IPagination<IPaymentTransaction>>;
+    getPaymentPayTR: (amount: number, currency: 'TL' | 'USD') => Promise<IPaymentPayTR>;
 }
