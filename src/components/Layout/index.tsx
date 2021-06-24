@@ -1,7 +1,9 @@
+import { ReactComponent as HamburgerIcon } from 'assets/images/icons/hamburger.svg';
+import { ReactComponent as LogoIcon } from 'assets/images/icons/logo.svg';
 import { ReactComponent as NotificationIcon } from 'assets/images/icons/notification.svg';
 import Button, { EButtonSize, EButtonView } from 'components/Button';
 import { Sidebar } from 'components/Sidebar';
-import { useAPIData, useIsTabletOrMobile } from 'hooks';
+import { useAPIData, useIsTabletOrMobile,useIsTabletOrMobileV2 } from 'hooks';
 import * as React from 'react';
 import { notificationService } from 'services/notification';
 import styled, { css } from 'styled-components';
@@ -15,6 +17,11 @@ const LayoutStyled = styled.div`
         min-height: 100vh;
         position: relative;
         background-color: #f8f8f8;
+    }
+    @media (max-width: 1040px) {
+        .dashboard__content {
+            width: 100%;
+        }
     }
 `;
 
@@ -78,7 +85,7 @@ const DashboardContent = styled.div`
 export const Layout: React.FC = ({ children }) => {
     const [notificationCount, changeNotificationCount] = useAPIData<{ unread_count: number }>();
     const [sidebarVisible, changeSidebarVisible] = React.useState<boolean>(false);
-    const isTabletOrMobile = useIsTabletOrMobile();
+    const isTabletOrMobile = useIsTabletOrMobileV2();
     React.useEffect(() => {
         changeNotificationCount(notificationService.getNotificationsCount);
     }, []);
@@ -89,7 +96,7 @@ export const Layout: React.FC = ({ children }) => {
             <div className="dashboard__content">
                 <div className="dashboard__content__header">
                     <HeaderStyled>
-                        {!isTabletOrMobile && (
+                        {!isTabletOrMobile ? (
                             <>
                                 <Button
                                     style={{ width: 139, marginRight: 20 }}
@@ -104,6 +111,11 @@ export const Layout: React.FC = ({ children }) => {
                                 >
                                     Bəyan Et
                                 </Button>
+                            </>
+                        ):(
+                            <>
+                            <HamburgerIcon/>
+                            <LogoIcon />
                             </>
                         )}
                         <NotificationStyled

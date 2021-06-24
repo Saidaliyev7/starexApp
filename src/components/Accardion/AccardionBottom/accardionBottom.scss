@@ -1,0 +1,44 @@
+.accardion-bottom-holder {
+    padding: 50px;
+    ul {
+        display: flex;
+        flex-wrap: wrap;
+        li {
+            flex-basis: 50%;
+            max-width: 50%;
+            position: relative;
+            margin-bottom: 28px;
+            .title {
+                font-size: 16px;
+                line-height: 19px;
+                margin-bottom: 20px;
+                color: #959595;
+            }
+            .content {
+                font-size: 16px;
+                line-height: 19px;
+                color: #000000;
+            }
+            .clipboard {
+                position: absolute;
+                height: 100%;
+                right: 0px;
+                top: 0;
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+                path{
+                    transition: 0.3s ease;
+                }
+                &:hover{
+                    path{
+                        fill: #005AFF;
+                    }
+                }
+            }
+            &:nth-child(even) {
+                padding-left: 100px;
+            }
+        }
+    }
+}

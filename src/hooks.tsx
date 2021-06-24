@@ -43,3 +43,7 @@ export function useAPIData<T>(
 }
 
 export const useIsTabletOrMobile = () => useMediaQuery({ query: `(max-width: 1024)` });
+
+
+export const useIsTabletOrMobileV2 = () => window.outerWidth>1024?false:true;
+
