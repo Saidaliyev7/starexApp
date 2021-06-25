@@ -1,3 +1,5 @@
+import './app.scss'
+
 import { Layout } from 'components/Layout';
 import { UserInfoProvider } from 'providers/UserInfoProvider';
 import * as React from 'react';

@@ -31,8 +31,10 @@ const SidebarStyled = styled.nav`
     ${device.tablet} {
         flex: 0 0 313px;
         position: absolute;
-        left: -100%;
         top: 0;
+        z-index:5;
+        width:90%;
+        height:100%;
     }
 `;
 

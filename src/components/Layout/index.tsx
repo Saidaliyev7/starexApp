@@ -1,6 +1,8 @@
 import { ReactComponent as HamburgerIcon } from 'assets/images/icons/hamburger.svg';
 import { ReactComponent as LogoIcon } from 'assets/images/icons/logo.svg';
+import { ReactComponent as NewAddIcon } from 'assets/images/icons/new_add.svg';
 import { ReactComponent as NotificationIcon } from 'assets/images/icons/notification.svg';
+import { ReactComponent as WritingIcon } from 'assets/images/icons/writing.svg';
 import Button, { EButtonSize, EButtonView } from 'components/Button';
 import { Sidebar } from 'components/Sidebar';
 import { useAPIData, useIsTabletOrMobile,useIsTabletOrMobileV2 } from 'hooks';
@@ -34,6 +36,7 @@ const HeaderStyled = styled.div`
 
     ${device.tablet} {
         padding: 20px;
+        justify-content:space-between;
     }
 `;
 
@@ -90,6 +93,9 @@ export const Layout: React.FC = ({ children }) => {
         changeNotificationCount(notificationService.getNotificationsCount);
     }, []);
 
+    const onSideBarOpen =()=>{
+        changeSidebarVisible(true)
+    }
     return (
         <LayoutStyled>
             <Sidebar isOpen={sidebarVisible} />
@@ -114,8 +120,10 @@ export const Layout: React.FC = ({ children }) => {
                             </>
                         ):(
                             <>
-                            <HamburgerIcon/>
+                            <HamburgerIcon onClick={onSideBarOpen} />
                             <LogoIcon />
+                            <NewAddIcon />
+                            <WritingIcon />
                             </>
                         )}
                         <NotificationStyled
