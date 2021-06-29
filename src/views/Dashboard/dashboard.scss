@@ -1,0 +1,16 @@
+.row-styled-responsive {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+@media screen and (max-width: 1024px) {
+    .row-styled-responsive {
+        flex-direction: column-reverse;
+        .dash-links-row {
+            padding: 0px 8px;
+            .col-4 {
+                padding: 0px 7px;
+            }
+        }
+    }
+}

@@ -32,7 +32,7 @@ const Balance: React.FC = () => {
             <div className="balance-holder">
                 <BalanceInfo />
                 <Row style={{ marginTop: 24 }}>
-                    <Col xs="3">
+                    <Col lg="3" md='12'>
                         <BalanceLinkCard className="balance-card">
                             <div className="icon">
                                 <svg
@@ -76,7 +76,7 @@ const Balance: React.FC = () => {
                             </div>
                         </BalanceLinkCard>
                     </Col>
-                    <Col xs="3">
+                    <Col lg="3" md='12'>
                         <BalanceLinkCard className="balance-card">
                             <div className="icon">
                                 <CardIcon />
@@ -87,7 +87,7 @@ const Balance: React.FC = () => {
                             </div>
                         </BalanceLinkCard>
                     </Col>
-                    <Col xs="3">
+                    <Col lg="3" md='12'>
                         <BalanceLinkCard className="balance-card">
                             <div className="icon">
                                 <TerminalIcon />
@@ -98,7 +98,7 @@ const Balance: React.FC = () => {
                             </div>
                         </BalanceLinkCard>
                     </Col>
-                    <Col xs="3">
+                    <Col lg="3" md='12'>
                         <BalanceLinkCard className="balance-card">
                             <div className="icon">
                                 <ProfitCardIcon />

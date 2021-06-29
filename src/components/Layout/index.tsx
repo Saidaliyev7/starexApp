@@ -5,7 +5,7 @@ import { ReactComponent as NotificationIcon } from 'assets/images/icons/notifica
 import { ReactComponent as WritingIcon } from 'assets/images/icons/writing.svg';
 import Button, { EButtonSize, EButtonView } from 'components/Button';
 import { Sidebar } from 'components/Sidebar';
-import { useAPIData, useIsTabletOrMobile,useIsTabletOrMobileV2 } from 'hooks';
+import { useAPIData, useIsTabletOrMobile, useIsTabletOrMobileV2 } from 'hooks';
 import * as React from 'react';
 import { notificationService } from 'services/notification';
 import styled, { css } from 'styled-components';
@@ -36,7 +36,7 @@ const HeaderStyled = styled.div`
 
     ${device.tablet} {
         padding: 20px;
-        justify-content:space-between;
+        justify-content: space-between;
     }
 `;
 
@@ -83,6 +83,9 @@ const NotificationStyled = styled.div<{ hasUnreadMessage: boolean; isMobile: boo
 
 const DashboardContent = styled.div`
     padding: 0 60px;
+    ${device.tablet} {
+        padding: 0 20px;
+    }
 `;
 
 export const Layout: React.FC = ({ children }) => {
@@ -93,13 +96,24 @@ export const Layout: React.FC = ({ children }) => {
         changeNotificationCount(notificationService.getNotificationsCount);
     }, []);
 
-    const onSideBarOpen =()=>{
-        changeSidebarVisible(true)
-    }
+    const onSideBarOpen = () => {
+        changeSidebarVisible(true);
+        setTimeout(() => {
+            document.querySelector('nav').classList.add('active');
+            document.querySelector('body').classList.add('overflow-hidden');
+        }, 0);
+    };
+    const onCloseMobileMenu = () => {
+        if (isTabletOrMobile) {
+            changeSidebarVisible(false);
+            document.querySelector('nav').classList.remove('active');
+            document.querySelector('body').classList.remove('overflow-hidden');
+        }
+    };
     return (
         <LayoutStyled>
             <Sidebar isOpen={sidebarVisible} />
-            <div className="dashboard__content">
+            <div className="dashboard__content" onClick={onCloseMobileMenu}>
                 <div className="dashboard__content__header">
                     <HeaderStyled>
                         {!isTabletOrMobile ? (
@@ -118,12 +132,12 @@ export const Layout: React.FC = ({ children }) => {
                                     Bəyan Et
                                 </Button>
                             </>
-                        ):(
+                        ) : (
                             <>
-                            <HamburgerIcon onClick={onSideBarOpen} />
-                            <LogoIcon />
-                            <NewAddIcon />
-                            <WritingIcon />
+                                <HamburgerIcon onClick={onSideBarOpen} />
+                                <LogoIcon />
+                                <NewAddIcon />
+                                <WritingIcon />
                             </>
                         )}
                         <NotificationStyled
