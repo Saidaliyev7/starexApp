@@ -4,7 +4,6 @@ import { useIsTabletOrMobileV2 } from 'hooks';
 import * as React from 'react';
 
 import { ITableData } from './models';
-import TableCard from './TableCard';
 import TableFilters from './TableFilters';
 import TableSearch from './TableSearch';
 import TableHead from './THead';

@@ -13,3 +13,11 @@
         }
     }
 }
+
+@media screen and (max-width: 1024px) {
+    .foreign-adresses-holder {
+        .forbidden{
+            justify-content: flex-start;
+        }
+    }
+}

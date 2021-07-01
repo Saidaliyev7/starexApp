@@ -42,3 +42,25 @@
         }
     }
 }
+
+
+@media screen and (max-width:1024px){
+    .accardion-holder{
+        background-color: transparent;
+    }
+    .accardion-bottom-holder{
+        padding: 20px;
+        margin-top: 30px;
+        background-color: white;
+        ul{
+            li{
+                flex-basis: 100%;
+                max-width: 100%;
+                flex-wrap: wrap;
+                &:nth-child(even) {
+                    padding-left: 0px;
+                }
+            }
+        }
+    }
+}

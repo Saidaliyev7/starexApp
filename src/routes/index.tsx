@@ -12,6 +12,7 @@ const Rebates = React.lazy(() => import('views/Rebates'));
 const Applications = React.lazy(() => import('views/Applications'));
 const Balance =React.lazy(() => import('views/Balance'));
 const ForeignAdresses = React.lazy(()=>import('views/ForeignAdresses'))
+const Notifications = React.lazy(()=>import('views/Notifications'))
 export const Routes: React.FC = () => (
     <Route
         render={() => (
@@ -28,6 +29,7 @@ export const Routes: React.FC = () => (
                     <Route path={ROUTES.APPLICATIONS} component={Applications} />
                     <Route path={ROUTES.BALANCE} component={Balance} />
                     <Route path={ROUTES.FOREIGN_ADDRESSES} component={ForeignAdresses} />
+                    <Route path={ROUTES.NOTIFICATIONS} component={Notifications} />
                 </React.Suspense>
                 
             </Switch>

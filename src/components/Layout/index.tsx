@@ -7,6 +7,7 @@ import Button, { EButtonSize, EButtonView } from 'components/Button';
 import { Sidebar } from 'components/Sidebar';
 import { useAPIData, useIsTabletOrMobile, useIsTabletOrMobileV2 } from 'hooks';
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import { notificationService } from 'services/notification';
 import styled, { css } from 'styled-components';
 import { device } from 'styled/devices';
@@ -140,15 +141,17 @@ export const Layout: React.FC = ({ children }) => {
                                 <WritingIcon />
                             </>
                         )}
-                        <NotificationStyled
-                            hasUnreadMessage={notificationCount.data?.unread_count > 0}
-                            isMobile={isTabletOrMobile}
-                        >
-                            <div className="notification__divider" />
-                            <div className="notification__icon">
-                                <NotificationIcon />
-                            </div>
-                        </NotificationStyled>
+                        <Link to="/notifications">
+                            <NotificationStyled
+                                hasUnreadMessage={notificationCount.data?.unread_count > 0}
+                                isMobile={isTabletOrMobile}
+                            >
+                                <div className="notification__divider" />
+                                <div className="notification__icon">
+                                    <NotificationIcon />
+                                </div>
+                            </NotificationStyled>
+                        </Link>
                     </HeaderStyled>
                 </div>
                 <DashboardContent>{children}</DashboardContent>
