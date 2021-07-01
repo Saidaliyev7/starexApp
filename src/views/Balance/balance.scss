@@ -54,23 +54,3 @@
         }
     }
 }
-
-.balance-increase-container {
-    padding: 60px;
-}
-
-.balance-increase-form {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: white;
-    box-shadow: drop-shadow(4px 4px 20px rgba(0, 0, 0, 0.1));
-    padding: 40px 60px 60px 60px;
-
-    > h2 {
-        font-weight: 500;
-        color: black;
-        font-size: 22px;
-        margin-bottom: 20px;
-    }
-}

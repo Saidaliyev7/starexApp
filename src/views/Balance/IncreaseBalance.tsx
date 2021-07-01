@@ -1,5 +1,9 @@
 import './increase-balance.scss';
+import './balance.scss';
 
+import { ReactComponent as CardIcon } from 'assets/images/icons/card.svg';
+import { ReactComponent as ProfitCardIcon } from 'assets/images/icons/profit_card.svg';
+import { ReactComponent as TerminalIcon } from 'assets/images/icons/terminal.svg';
 import * as clsx from 'classnames';
 import { FormElement, FormInput, FormLabel } from 'components/Form';
 import { EErrorMessages } from 'enums';
@@ -9,6 +13,7 @@ import { useHistory } from 'react-router-dom';
 import { Col, Row } from 'reactstrap';
 import { ROUTES } from 'routes/consts';
 import { paymentService } from 'services/payment';
+import { BalanceLinkCard } from 'views/Dashboard/LinkCard';
 
 const IncreaseBalance: React.FC = () => {
     const [searchParams, changeSearchParams] = useSearchParams<{ currency: 'USD' | 'TL' }>({
@@ -80,6 +85,35 @@ const IncreaseBalance: React.FC = () => {
                         </button>
                     </form>
                 </div>
+            </Col>
+            <Col lg="6">
+                <BalanceLinkCard className="balance-card">
+                    <div className="icon">
+                        <CardIcon />
+                    </div>
+                    <div className="text">
+                        Balansınızı Ofisimizə <br />
+                        yaxınlaşaraq artıra bilərsiniz
+                    </div>
+                </BalanceLinkCard>
+                <BalanceLinkCard className="balance-card">
+                    <div className="icon">
+                        <TerminalIcon />
+                    </div>
+                    <div className="text">
+                        E-manat terminalları vasitəsilə <br />
+                        balansınızı artıra bilərsiniz
+                    </div>
+                </BalanceLinkCard>
+                <BalanceLinkCard className="balance-card">
+                    <div className="icon">
+                        <ProfitCardIcon />
+                    </div>
+                    <div className="text">
+                        Balansınızı Hədiyyə Kartı <br />
+                        vasitəsilə artıra bilərsiniz
+                    </div>
+                </BalanceLinkCard>
             </Col>
         </Row>
     );
