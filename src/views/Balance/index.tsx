@@ -6,10 +6,11 @@ import { ReactComponent as TerminalIcon } from 'assets/images/icons/terminal.svg
 import { APIDataRender } from 'components/APIDataRender';
 import Table from 'components/Table';
 import Pagination from 'components/Table/Pagination';
+import TableCard from 'components/Table/TableCard';
 import TableBody from 'components/Table/TBody';
 import TableTd from 'components/Table/TBody/Td';
 import TableTr from 'components/Table/TBody/Tr';
-import { useAPIData } from 'hooks';
+import { useAPIData, useIsTabletOrMobileV2 } from 'hooks';
 import { IPagination, IPaymentTransaction } from 'models';
 import * as React from 'react';
 import { Col, Row } from 'reactstrap';
@@ -22,7 +23,7 @@ import { BalanceLinkCard } from '../Dashboard/LinkCard';
 const Balance: React.FC = () => {
     const [transactions, changeTransactions] = useAPIData<IPagination<IPaymentTransaction>>();
     const [page, changePage] = React.useState<number>(1);
-
+    const isTabletOrMobile = useIsTabletOrMobileV2();
     React.useEffect(() => {
         changeTransactions(() => paymentService.getTransactions(page));
     }, [page]);
@@ -32,7 +33,7 @@ const Balance: React.FC = () => {
             <div className="balance-holder">
                 <BalanceInfo />
                 <Row style={{ marginTop: 24 }}>
-                    <Col xs="3">
+                    <Col lg="3" md="12">
                         <BalanceLinkCard className="balance-card">
                             <div className="icon">
                                 <svg
@@ -76,7 +77,7 @@ const Balance: React.FC = () => {
                             </div>
                         </BalanceLinkCard>
                     </Col>
-                    <Col xs="3">
+                    <Col lg="3" md="12">
                         <BalanceLinkCard className="balance-card">
                             <div className="icon">
                                 <CardIcon />
@@ -87,7 +88,7 @@ const Balance: React.FC = () => {
                             </div>
                         </BalanceLinkCard>
                     </Col>
-                    <Col xs="3">
+                    <Col lg="3" md="12">
                         <BalanceLinkCard className="balance-card">
                             <div className="icon">
                                 <TerminalIcon />
@@ -98,7 +99,7 @@ const Balance: React.FC = () => {
                             </div>
                         </BalanceLinkCard>
                     </Col>
-                    <Col xs="3">
+                    <Col lg="3" md="12">
                         <BalanceLinkCard className="balance-card">
                             <div className="icon">
                                 <ProfitCardIcon />
@@ -128,37 +129,79 @@ const Balance: React.FC = () => {
                                     />
                                 }
                             >
-                                <TableBody>
-                                    {transactionsTableData?.tbodyData &&
-                                        transactionsTableData?.tbodyData.map(
-                                            (transaction: IPaymentTransaction) => (
-                                                <TableTr key={transaction.created_at}>
-                                                    <TableTd>
-                                                        <div className="text">
-                                                            {
-                                                                transaction.get_payment_purpose_display
-                                                            }
+                                {!isTabletOrMobile ? (
+                                    <TableBody>
+                                        {transactionsTableData?.tbodyData &&
+                                            transactionsTableData?.tbodyData.map(
+                                                (transaction: IPaymentTransaction) => (
+                                                    <TableTr key={transaction.created_at}>
+                                                        <TableTd>
+                                                            <div className="text">
+                                                                {
+                                                                    transaction.get_payment_purpose_display
+                                                                }
+                                                            </div>
+                                                        </TableTd>
+                                                        <TableTd>
+                                                            <div
+                                                                className={
+                                                                    transaction.entry_type ===
+                                                                    'debit'
+                                                                        ? 'is-coming active'
+                                                                        : 'is-coming'
+                                                                }
+                                                            ></div>
+                                                            <div className="text">{`${transaction.amount} $`}</div>
+                                                        </TableTd>
+                                                        <TableTd>
+                                                            <div className="text">
+                                                                {transaction.created_at}
+                                                            </div>
+                                                        </TableTd>
+                                                    </TableTr>
+                                                ),
+                                            )}
+                                    </TableBody>
+                                ) : (
+                                    <>
+                                        {transactionsTableData?.tbodyData &&
+                                            transactionsTableData?.tbodyData.map(
+                                                (transaction: IPaymentTransaction) => (
+                                                    <TableCard key={transaction.created_at}>
+                                                        <div className="card-data-upper">
+                                                            <div className="card-data">
+                                                                <div className="text">
+                                                                    {
+                                                                        transaction.get_payment_purpose_display
+                                                                    }
+                                                                </div>
+                                                            </div>
+                                                            <div className="card-data">
+                                                                <div className="text">
+                                                                    {' '}
+                                                                    <div
+                                                                        className={
+                                                                            transaction.entry_type ===
+                                                                            'debit'
+                                                                                ? 'is-coming active'
+                                                                                : 'is-coming'
+                                                                        }
+                                                                    ></div>
+                                                                    <div className="text">{`${transaction.amount} $`}</div>
+                                                                </div>
+                                                            </div>
+                                                            <div className="card-data">
+                                                                <div className="text">
+                                                                    {transaction.created_at}
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    </TableTd>
-                                                    <TableTd>
-                                                        <div
-                                                            className={
-                                                                transaction.entry_type === 'debit'
-                                                                    ? 'is-coming active'
-                                                                    : 'is-coming'
-                                                            }
-                                                        ></div>
-                                                        <div className="text">{`${transaction.amount} $`}</div>
-                                                    </TableTd>
-                                                    <TableTd>
-                                                        <div className="text">
-                                                            {transaction.created_at}
-                                                        </div>
-                                                    </TableTd>
-                                                </TableTr>
-                                            ),
-                                        )}
-                                </TableBody>
+                                                    </TableCard>
+                                                ),
+                                            )}
+                                        <div className="pay-all"></div>
+                                    </>
+                                )}
                             </Table>
                         );
                     }}

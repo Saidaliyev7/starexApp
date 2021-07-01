@@ -1,8 +1,13 @@
+import { ReactComponent as HamburgerIcon } from 'assets/images/icons/hamburger.svg';
+import { ReactComponent as LogoIcon } from 'assets/images/icons/logo.svg';
+import { ReactComponent as NewAddIcon } from 'assets/images/icons/new_add.svg';
 import { ReactComponent as NotificationIcon } from 'assets/images/icons/notification.svg';
+import { ReactComponent as WritingIcon } from 'assets/images/icons/writing.svg';
 import Button, { EButtonSize, EButtonView } from 'components/Button';
 import { Sidebar } from 'components/Sidebar';
-import { useAPIData, useIsTabletOrMobile } from 'hooks';
+import { useAPIData, useIsTabletOrMobile, useIsTabletOrMobileV2 } from 'hooks';
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import { notificationService } from 'services/notification';
 import styled, { css } from 'styled-components';
 import { device } from 'styled/devices';
@@ -16,6 +21,11 @@ const LayoutStyled = styled.div`
         position: relative;
         background-color: #f8f8f8;
     }
+    @media (max-width: 1040px) {
+        .dashboard__content {
+            width: 100%;
+        }
+    }
 `;
 
 const HeaderStyled = styled.div`
@@ -27,6 +37,7 @@ const HeaderStyled = styled.div`
 
     ${device.tablet} {
         padding: 20px;
+        justify-content: space-between;
     }
 `;
 
@@ -73,23 +84,40 @@ const NotificationStyled = styled.div<{ hasUnreadMessage: boolean; isMobile: boo
 
 const DashboardContent = styled.div`
     padding: 0 60px;
+    ${device.tablet} {
+        padding: 0 20px;
+    }
 `;
 
 export const Layout: React.FC = ({ children }) => {
     const [notificationCount, changeNotificationCount] = useAPIData<{ unread_count: number }>();
     const [sidebarVisible, changeSidebarVisible] = React.useState<boolean>(false);
-    const isTabletOrMobile = useIsTabletOrMobile();
+    const isTabletOrMobile = useIsTabletOrMobileV2();
     React.useEffect(() => {
         changeNotificationCount(notificationService.getNotificationsCount);
     }, []);
 
+    const onSideBarOpen = () => {
+        changeSidebarVisible(true);
+        setTimeout(() => {
+            document.querySelector('nav').classList.add('active');
+            document.querySelector('body').classList.add('overflow-hidden');
+        }, 0);
+    };
+    const onCloseMobileMenu = () => {
+        if (isTabletOrMobile) {
+            changeSidebarVisible(false);
+            document.querySelector('nav').classList.remove('active');
+            document.querySelector('body').classList.remove('overflow-hidden');
+        }
+    };
     return (
         <LayoutStyled>
             <Sidebar isOpen={sidebarVisible} />
-            <div className="dashboard__content">
+            <div className="dashboard__content" onClick={onCloseMobileMenu}>
                 <div className="dashboard__content__header">
                     <HeaderStyled>
-                        {!isTabletOrMobile && (
+                        {!isTabletOrMobile ? (
                             <>
                                 <Button
                                     style={{ width: 139, marginRight: 20 }}
@@ -105,16 +133,25 @@ export const Layout: React.FC = ({ children }) => {
                                     Bəyan Et
                                 </Button>
                             </>
+                        ) : (
+                            <>
+                                <HamburgerIcon onClick={onSideBarOpen} />
+                                <LogoIcon />
+                                <NewAddIcon />
+                                <WritingIcon />
+                            </>
                         )}
-                        <NotificationStyled
-                            hasUnreadMessage={notificationCount.data?.unread_count > 0}
-                            isMobile={isTabletOrMobile}
-                        >
-                            <div className="notification__divider" />
-                            <div className="notification__icon">
-                                <NotificationIcon />
-                            </div>
-                        </NotificationStyled>
+                        <Link to="/notifications">
+                            <NotificationStyled
+                                hasUnreadMessage={notificationCount.data?.unread_count > 0}
+                                isMobile={isTabletOrMobile}
+                            >
+                                <div className="notification__divider" />
+                                <div className="notification__icon">
+                                    <NotificationIcon />
+                                </div>
+                            </NotificationStyled>
+                        </Link>
                     </HeaderStyled>
                 </div>
                 <DashboardContent>{children}</DashboardContent>

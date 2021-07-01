@@ -15,8 +15,6 @@ const TableFilters: React.FC<{
         activeSelectData: ISelectbox;
         dropdownData: ISelectbox[];
     }>(null);
-    debugger;
-
     React.useEffect(() => {
         changeSelect({
             activeSelectData: selectData.filter((el) => el.isActive === true)[0],

@@ -61,3 +61,27 @@
         }
     }
 }
+
+@media screen and (max-width: 1024px) {
+    .table-search-holder {
+        flex-direction: column;
+        .left {
+            width: 100%;
+            max-width: 312px;
+            .input {
+                position: relative;
+                input {
+              
+                    width: 100% ;
+                }
+            }
+        }
+        .new-add{
+            margin-top: 20px;
+            button{
+                max-width: 312px;
+                width: 100%;
+            }
+        }
+    }
+}
