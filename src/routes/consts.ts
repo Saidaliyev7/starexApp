@@ -10,5 +10,6 @@ export const ROUTES = {
     ONLINE_QUEUE: '/online-queue',
     SETTINGS: '/settings',
     LOGOUT: '/logout',
-    NOTIFICATIONS:'/notifications'
+    NOTIFICATIONS:'/notifications',
+    SATISFACTION:'/satisfaction'
 };
