@@ -10,7 +10,7 @@ export interface INotification {
     time:string,
 }
 
-const notifications: INotification[] = [
+export const notifications: INotification[] = [
     {
         id: 1,
         text: '#86753890 nömrəli bağlama mağazadan sifariş verildi.',
