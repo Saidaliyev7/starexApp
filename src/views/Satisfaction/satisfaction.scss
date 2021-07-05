@@ -1,0 +1,67 @@
+.satisfaction-holder {
+    margin-top: 60px;
+    display: flex;
+    justify-content: center;
+    .content {
+        background: #ffffff;
+        box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+        max-width: 696px;
+        width: 100%;
+        padding: 40px 24px;
+        .title {
+            font-size: 16px;
+            margin-bottom: 30px;
+            color: #484848;
+        }
+    }
+    .radio-holder.textarea {
+        textarea {
+            width: 100%;
+            border-color: transparent;
+            outline: none;
+            padding: 17px 20px;
+        }
+    }
+    .send-button {
+        display: flex;
+        justify-content: center;
+        button {
+            background: #005aff;
+            border-radius: 4px;
+            width: 126px;
+            cursor: pointer;
+            outline: none;
+            border: 1px solid #005aff;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 16px;
+            color: #ffffff;
+        }
+    }
+}
+
+
+@media screen and (max-width:1024px){
+    .satisfaction-holder {
+        margin-top: 30px;
+        .content{
+            padding: 25px 12px;
+            .title{
+                text-align: center;
+                margin-bottom: 25px;
+            }
+            .radio-holder{
+                margin-bottom: 20px;
+            }
+            textarea{
+                resize: none;
+            }
+            button{
+                width: 100%;
+            }
+        }
+    }
+}

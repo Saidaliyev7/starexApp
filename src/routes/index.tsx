@@ -11,8 +11,9 @@ const Courier = React.lazy(() => import('views/Courier'));
 const Rebates = React.lazy(() => import('views/Rebates'));
 const Applications = React.lazy(() => import('views/Applications'));
 const Balance =React.lazy(() => import('views/Balance'));
-const ForeignAdresses = React.lazy(()=>import('views/ForeignAdresses'))
-const Notifications = React.lazy(()=>import('views/Notifications'))
+const ForeignAdresses = React.lazy(()=>import('views/ForeignAdresses'));
+const Notifications = React.lazy(()=>import('views/Notifications'));
+const Satisfaction =React.lazy(()=>import('views/Satisfaction'));
 export const Routes: React.FC = () => (
     <Route
         render={() => (
@@ -30,6 +31,7 @@ export const Routes: React.FC = () => (
                     <Route path={ROUTES.BALANCE} component={Balance} />
                     <Route path={ROUTES.FOREIGN_ADDRESSES} component={ForeignAdresses} />
                     <Route path={ROUTES.NOTIFICATIONS} component={Notifications} />
+                    <Route path={ROUTES.SATISFACTION} component={Satisfaction} />
                 </React.Suspense>
                 
             </Switch>
