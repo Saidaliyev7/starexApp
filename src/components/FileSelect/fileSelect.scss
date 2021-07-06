@@ -1,0 +1,28 @@
+.file-select-holder {
+    margin-bottom: 24px;
+    .file-message {
+        margin-top: 12px;
+        font-size: 14px;
+        line-height: 16px;
+        color: #484848;
+        
+    }
+    .file-input {
+        padding: 12px 20px;
+        display: flex;
+        background: #ffffff;
+        border: 1px solid #d9d9d9;
+        box-sizing: border-box;
+        border-radius: 4px;
+    }
+    .check-files {
+        width: 127px;
+        padding: 5px 12px;
+        font-size: 14px;
+        line-height: 16px;
+        cursor: pointer;
+        color: #ffffff;
+        background: #a9a9a9;
+        border-radius: 4px;
+    }
+}

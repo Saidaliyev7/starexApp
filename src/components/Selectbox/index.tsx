@@ -23,7 +23,7 @@ const Selectbox: React.FC<{ selectData: any; onClick? }> = ({ selectData, onClic
 
     return (
         <>
-            <div className="selectbox-holder">
+            <div className="selectbox-holder select-component">
                 <div className="selectbox" ref={selectRef}>
                     <div className="selectbox-top" onClick={onSelectOpen}>
                         <div className="icon">

@@ -1,0 +1,118 @@
+.add-holder.application {
+    margin-top: 60px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 60px;
+    .content {
+        background: #ffffff;
+        box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+        max-width: 696px;
+        width: 100%;
+        padding: 40px 24px;
+        .title {
+            font-weight: 500;
+            font-size: 24px;
+            line-height: 28px;
+            text-align: center;
+            color: #000000;
+            margin-bottom: 40px;
+        }
+    }
+    .radio-holder.textarea {
+        textarea {
+            width: 100%;
+            border-color: transparent;
+            outline: none;
+            padding: 17px 20px;
+            border: 1px solid #d9d9d9;
+            border-radius: 4px;
+        }
+    }
+    .radio-holder {
+        .message {
+            font-size: 18px;
+            line-height: 21px;
+            margin-top: 24px;
+            color: #000000;
+            margin-bottom: 12px;
+        }
+    }
+    .radio-title {
+        font-size: 18px;
+        line-height: 21px;
+        margin-bottom: 12px;
+        color: #000000;
+    }
+    .send-button {
+        display: flex;
+        justify-content: center;
+        button {
+            margin-top: 30px;
+            background: #005aff;
+            border-radius: 4px;
+            width: 126px;
+            cursor: pointer;
+            outline: none;
+            border: 1px solid #005aff;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 16px;
+            color: #ffffff;
+        }
+    }
+    .inputs {
+        display: flex;
+        flex-wrap: wrap;
+        li {
+            margin-bottom: 24px;
+            flex-basis: 100%;
+            width: 100%;
+            .input {
+                input {
+                    background: #ffffff;
+                    border: 1px solid #d9d9d9;
+                    box-sizing: border-box;
+                    border-radius: 4px;
+                    height: 50px;
+                    padding: 10px;
+                    width: 100%;
+                }
+            }
+            &.flex-basis-50 {
+                flex-basis: 50%;
+                width: 50%;
+                &:nth-child(even) {
+                    padding-right: 24px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .add-holder.application {
+        margin-top: 30px;
+        .content {
+            padding: 25px 12px;
+            .flex-basis-50 {
+                flex-basis: 100% !important;
+                width: 100% !important;
+                &:nth-child(even) {
+                    padding-right: 0px !important;
+                }
+            }
+            .radio-holder {
+                margin-bottom: 20px;
+            }
+            textarea {
+                resize: none;
+            }
+            button {
+                width: 100%;
+            }
+        }
+    }
+}
