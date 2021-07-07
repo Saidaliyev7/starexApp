@@ -3,7 +3,7 @@ import './fileSelect.scss';
 import { ReactComponent as RemoveIcon } from 'assets/images/icons/remove.svg';
 import * as React from 'react';
 
-const FileSelect: React.FC<{ message?: string }> = ({ message }) => {
+const FileSelect: React.FC<{ message?: string ,type?:boolean}> = ({ message,type }) => {
     const fileInput = React.useRef();
     const [inputFiles, changeFiles] = React.useState<FileList | File[]>(null);
     const [files, changeFilenames] = React.useState(null);
@@ -43,12 +43,13 @@ const FileSelect: React.FC<{ message?: string }> = ({ message }) => {
                     ref={fileInput}
                     type="file"
                     onChange={onFileChange}
-                    multiple
+                    multiple={type??true}
                     style={{ display: 'none' }}
                 />
                 <div className="file-input">
                     <div className="check-files" onClick={openFileInput}>
-                        Faylları seçin
+                        {type===null?'Faylları seçin':type===false?'Faylı seçin':'Faylları seçin'}
+                        
                     </div>
                     <div className="files">
                         <ul>

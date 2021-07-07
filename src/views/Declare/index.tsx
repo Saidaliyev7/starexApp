@@ -5,13 +5,26 @@ import * as React from 'react';
 
 import DeclareTop from './DeclareTop';
 
+
+const inputData={
+    languageId:1,
+    inputs:[
+        {
+            placeHolder:'Mağazanın adı',
+            title:'Mağaza'
+        },
+
+    ]
+}
+
+
 const Declare: React.FC = () => {
     return (
         <>
             <div className="declare-holder">
                 <div className="content">
                         <DeclareTop />
-                        <DeclareBottom />
+                        <DeclareBottom inputsData={inputData} />
                 </div>
             </div>
         </>
