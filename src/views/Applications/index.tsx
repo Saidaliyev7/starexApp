@@ -8,6 +8,8 @@ import TableTr from 'components/Table/TBody/Tr';
 import { useIsTabletOrMobileV2 } from 'hooks';
 import * as React from 'react';
 
+import ApplicationForm from './ApplicationForm';
+
 const Applications: React.FC = () => {
     const [tableData, changeTableData] = React.useState<ITableData<any>>(
         tableStaticDataApplications,
@@ -186,7 +188,13 @@ const Applications: React.FC = () => {
                    
                 </Table>
             ) : (
-                <Chat></Chat>
+                <>
+                  <ApplicationForm />
+                    {
+                        false&&   <Chat></Chat>
+                    }
+                </>
+              
             )}
         </>
     );

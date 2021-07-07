@@ -1,7 +1,11 @@
+import './layout.scss';
+
+import { ReactComponent as CheckIcon } from 'assets/images/icons/check.svg';
 import { ReactComponent as HamburgerIcon } from 'assets/images/icons/hamburger.svg';
 import { ReactComponent as LogoIcon } from 'assets/images/icons/logo.svg';
 import { ReactComponent as NewAddIcon } from 'assets/images/icons/new_add.svg';
 import { ReactComponent as NotificationIcon } from 'assets/images/icons/notification.svg';
+import { ReactComponent as SettingIcon } from 'assets/images/icons/setting.svg';
 import { ReactComponent as WritingIcon } from 'assets/images/icons/writing.svg';
 import Button, { EButtonSize, EButtonView } from 'components/Button';
 import { Sidebar } from 'components/Sidebar';
@@ -12,6 +16,7 @@ import { notificationService } from 'services/notification';
 import styled, { css } from 'styled-components';
 import { device } from 'styled/devices';
 import { EColors } from 'styled/enums';
+import { INotification, notifications } from 'views/Notifications';
 
 const LayoutStyled = styled.div`
     display: flex;
@@ -92,7 +97,14 @@ const DashboardContent = styled.div`
 export const Layout: React.FC = ({ children }) => {
     const [notificationCount, changeNotificationCount] = useAPIData<{ unread_count: number }>();
     const [sidebarVisible, changeSidebarVisible] = React.useState<boolean>(false);
+    const [notificationBarVisible, changeNotificationBarVisibility] = React.useState<boolean>(
+        false,
+    );
+    const [notificationAllVisible, changeNotificationAllVisible] = React.useState<boolean>(
+        false,
+    );
     const isTabletOrMobile = useIsTabletOrMobileV2();
+    const [allNotifications, changeNotifications] = React.useState<INotification[]>(notifications);
     React.useEffect(() => {
         changeNotificationCount(notificationService.getNotificationsCount);
     }, []);
@@ -141,17 +153,81 @@ export const Layout: React.FC = ({ children }) => {
                                 <WritingIcon />
                             </>
                         )}
-                        <Link to="/notifications">
-                            <NotificationStyled
-                                hasUnreadMessage={notificationCount.data?.unread_count > 0}
-                                isMobile={isTabletOrMobile}
-                            >
-                                <div className="notification__divider" />
-                                <div className="notification__icon">
-                                    <NotificationIcon />
+                        <div className="notification-bar-holder">
+                            {!isTabletOrMobile ? (
+                                <NotificationStyled
+                                    onClick={() =>
+                                        changeNotificationBarVisibility(!notificationBarVisible)
+                                    }
+                                    hasUnreadMessage={notificationCount.data?.unread_count > 0}
+                                    isMobile={isTabletOrMobile}
+                                >
+                                    <div className="notification__divider" />
+                                    <div className="notification__icon">
+                                        <NotificationIcon />
+                                    </div>
+                                </NotificationStyled>
+                            ) : (
+                                <Link to="/notifications">
+                                    <NotificationStyled
+                                        hasUnreadMessage={notificationCount.data?.unread_count > 0}
+                                        isMobile={isTabletOrMobile}
+                                    >
+                                        <div className="notification__divider" />
+                                        <div className="notification__icon">
+                                            <NotificationIcon />
+                                        </div>
+                                    </NotificationStyled>
+                                </Link>
+                            )}
+
+                            {notificationBarVisible && (
+                                <div className="notification-list">
+                                    <div className="name-holder">
+                                        <div className="name">Bildirişlər</div>
+                                        <div className="icon">
+                                            <div className="img" onClick={()=>changeNotificationAllVisible(!notificationAllVisible)}>
+                                            <SettingIcon  />
+                                            </div>
+                                           
+                                            {
+                                                notificationAllVisible&& <div className="read-all">
+                                                <div className="check-icon">
+                                                    <CheckIcon />
+                                                </div>
+                                                <div className="text">
+                                                    Hamısını oxunmuş olaraq işarələ
+                                                </div>
+                                            </div>
+                                            }
+                                           
+                                        </div>
+                                    </div>
+                                    <div className="notifications">
+                                        <ul>
+                                            {allNotifications.map((not) => (
+                                                <li key={not.id}>
+                                                    <div
+                                                        className={
+                                                            not.isReaded ? 'readed icon' : 'icon'
+                                                        }
+                                                    ></div>
+                                                    <div className="text-holder">
+                                                        <div className="text">{not.text}</div>
+                                                        <div className="date">{not.time}</div>
+                                                    </div>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                    <div className="button">
+                                        <Link to="/notifications">
+                                            <button>Bütün Bildirişlər</button>
+                                        </Link>
+                                    </div>
                                 </div>
-                            </NotificationStyled>
-                        </Link>
+                            )}
+                        </div>
                     </HeaderStyled>
                 </div>
                 <DashboardContent>{children}</DashboardContent>
