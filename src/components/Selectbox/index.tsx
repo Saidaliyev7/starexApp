@@ -4,6 +4,7 @@ import * as React from 'react';
 
 const Selectbox: React.FC<{ selectData: any; onClick? }> = ({ selectData, onClick }) => {
     const selectRef = React.useRef();
+    const [selectTop,changeSelectTop]=React.useState<string>(null)
     const [select, changeSelect] = React.useState();
     const onSelectOpen = () => {
         const target = selectRef.current as HTMLElement;
@@ -19,6 +20,7 @@ const Selectbox: React.FC<{ selectData: any; onClick? }> = ({ selectData, onClic
         parentClasslist.contains('active')
             ? parentClasslist.remove('active')
             : parentClasslist.add('active');
+            changeSelectTop(el.name);
     };
 
     return (
@@ -26,6 +28,7 @@ const Selectbox: React.FC<{ selectData: any; onClick? }> = ({ selectData, onClic
             <div className="selectbox-holder select-component">
                 <div className="selectbox" ref={selectRef}>
                     <div className="selectbox-top" onClick={onSelectOpen}>
+                        {selectTop}
                         <div className="icon">
                             <svg
                                 width="12"
