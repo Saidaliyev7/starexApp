@@ -1,11 +1,15 @@
-import './selectbox.scss';
+import './multiSelectbox.scss';
 
 import * as React from 'react';
 
-const Selectbox: React.FC<{ selectData: any; onClick?,placeHolder?:string }> = ({ selectData, onClick,placeHolder }) => {
+const Selectbox: React.FC<{ selectData: any; onClick?; placeHolder?: string }> = ({
+    selectData,
+    onClick,
+    placeHolder,
+}) => {
     const selectRef = React.useRef();
-    const [selectTop, changeSelectTop] = React.useState<string>(null);
     const [select, changeSelect] = React.useState();
+    const [dropdownData, changeDropdownDatas] = React.useState([]);
     const onSelectOpen = () => {
         const target = selectRef.current as HTMLElement;
         const parentClasslist = target.classList;
@@ -17,23 +21,42 @@ const Selectbox: React.FC<{ selectData: any; onClick?,placeHolder?:string }> = (
     const onSelectChange = (el) => {
         const target = selectRef.current as HTMLElement;
         const parentClasslist = target.classList;
-        parentClasslist.contains('active')
-            ? parentClasslist.remove('active')
-            : parentClasslist.add('active');
-        changeSelectTop(el.name);
+        if(parentClasslist.contains('active')){
+            parentClasslist.remove('active')
+           
+        }else{
+           
+            parentClasslist.add('active');
+        }
+          
+        if(el.isActive){
+            changeDropdownDatas(oldState=>{
+                const newState=[...oldState].filter(element=>element.name!==el);
+                return newState
+            })
+        }else{
+            changeDropdownDatas(oldState=>{
+                const newState=[...oldState];
+                newState.push(el);
+                return newState
+             })
+        }
+       
+        
     };
 
     return (
         <>
-            <div className="selectbox-holder select-component">
+            <div className="selectbox-holder multi-select">
                 <div className="selectbox" ref={selectRef}>
                     <div className="selectbox-top" onClick={onSelectOpen}>
-                        {
-                        selectTop?selectTop:placeHolder&&<div className="placeholder">
-                            {placeHolder}
-                        </div>
-                        
-                        }
+                        <ul className='multi-select-list'>
+                            {dropdownData&&dropdownData.map((el) => (
+                                <li key={el.name}>
+                                    <div className="dropdown-top">{el.name}</div>
+                                </li>
+                            ))}
+                        </ul>
                         <div className="icon">
                             <svg
                                 width="12"

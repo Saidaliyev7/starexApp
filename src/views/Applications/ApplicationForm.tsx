@@ -18,6 +18,7 @@ const ApplicationForm: React.FC = () => {
                                 <div className="radio-title">Kateqoriya</div>
                                 <div className="input">
                                     <Selectbox
+                                        placeHolder='Kateqoriya seçin'
                                         selectData={{
                                             dropdownData: [
                                                 {
@@ -39,6 +40,7 @@ const ApplicationForm: React.FC = () => {
                                 <div className="radio-title">Ölkə</div>
                                 <div className="input">
                                     <Selectbox
+                                     placeHolder='Ölkə seçin'
                                         selectData={{
                                             dropdownData: [
                                                 {

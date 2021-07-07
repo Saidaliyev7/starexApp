@@ -11,5 +11,6 @@ export const ROUTES = {
     SETTINGS: '/settings',
     LOGOUT: '/logout',
     NOTIFICATIONS:'/notifications',
-    SATISFACTION:'/satisfaction'
+    SATISFACTION:'/satisfaction',
+    DECLARE:"/declare"
 };

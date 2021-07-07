@@ -1,0 +1,134 @@
+.declare-holder {
+    margin-top: 60px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 60px;
+    .content {
+        max-width: 696px;
+        width: 100%;
+    }
+
+    .declare-top-holder {
+        margin-bottom: 40px;
+        .title {
+            font-size: 20px;
+            line-height: 23px;
+            margin-bottom: 16px;
+            color: #000000;
+        }
+        .languages {
+            display: flex;
+            padding: 0px 50px;
+            justify-content: space-between;
+            background: #ffffff;
+            box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            li {
+                padding: 30px 0px;
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+                transition: 0.3s ease;
+                .icon {
+                    margin-right: 12px;
+                }
+                .text {
+                    font-weight: 500;
+                    font-size: 20px;
+
+                    color: #000000;
+                }
+                position: relative;
+                &::after {
+                    content: '';
+                    height: 3px;
+                    width: 100%;
+                    border-radius: 10px;
+                    background-color: #005aff;
+                    bottom: 0;
+                    left: 0;
+                    position: absolute;
+                    transition: 0.3s ease;
+                    opacity: 0;
+                }
+                &.active {
+                    &::after {
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+
+        .accardion-select {
+            position: relative;
+            .select-top {
+                background: #ffffff;
+                box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
+                border-radius: 4px;
+                display: flex;
+                position: relative;
+                height: 60px;
+                align-items: center;
+                padding-left: 26px;
+                .name {
+                    font-size: 18px;
+                    color: #000000;
+                    font-weight: 500;
+                    margin-left: 20px;
+                }
+                .down-icon {
+                    position: absolute;
+                    right: 20px;
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                    transition: 0.3s ease;
+                }
+            }
+
+            .select-bottom {
+                position: absolute;
+                filter: drop-shadow(0px 2px 6px rgba(0, 0, 0, 0.2));
+                background: #ffffff;
+                border-radius: 4px;
+                left: -2px;
+                top: 57px;
+                height: 0px;
+                overflow: hidden;
+                transition: 0.3s ease;
+                width: 101%;
+                z-index: 1;
+                ul {
+                    li {
+                        padding: 20px 24px;
+                        border-bottom: 1px solid #e2e2e2;
+                        width: 100%;
+                        max-height: 436px;
+                        overflow-y: auto;
+                        cursor: pointer;
+                        display: flex;
+                        justify-content: space-between;
+                        &.active {
+                            color: #005aff;
+                        }
+                        .name-holder {
+                            display: flex;
+                            align-items: center;
+                            .icon {
+                                margin-right: 10px;
+                            }
+                        }
+                    }
+                }
+            }
+            &.active {
+                .down-icon {
+                    transform: rotate(180deg);
+                }
+                .select-bottom {
+                    height: max-content;
+                }
+            }
+        }
+    }
+}

@@ -137,6 +137,7 @@ export const Layout: React.FC = ({ children }) => {
                                 >
                                     Sifariş Et
                                 </Button>
+                                <Link to={'/declare'} >
                                 <Button
                                     style={{ width: 139 }}
                                     view={EButtonView.SECONDARY}
@@ -144,6 +145,8 @@ export const Layout: React.FC = ({ children }) => {
                                 >
                                     Bəyan Et
                                 </Button>
+                                </Link>
+                               
                             </>
                         ) : (
                             <>

@@ -3,7 +3,7 @@ import './fileSelect.scss';
 import { ReactComponent as RemoveIcon } from 'assets/images/icons/remove.svg';
 import * as React from 'react';
 
-const FileSelect: React.FC<{ message: string }> = ({ message }) => {
+const FileSelect: React.FC<{ message?: string }> = ({ message }) => {
     const fileInput = React.useRef();
     const [inputFiles, changeFiles] = React.useState<FileList | File[]>(null);
     const [files, changeFilenames] = React.useState(null);
@@ -69,7 +69,10 @@ const FileSelect: React.FC<{ message: string }> = ({ message }) => {
                         </ul>
                     </div>
                 </div>
-                <div className="file-message">{message}</div>
+                {
+                    message&& <div className="file-message">{message}</div>
+                }
+               
             </div>
         </>
     );
