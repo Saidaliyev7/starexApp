@@ -72,3 +72,8 @@ export interface IPagination<T> {
     previous?: string;
     results: T[];
 }
+
+export interface IInfoResponse {
+    success: boolean;
+    message: string;
+}

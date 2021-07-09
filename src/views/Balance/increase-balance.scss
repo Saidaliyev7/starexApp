@@ -1,5 +1,5 @@
 .balance-increase-container {
-    padding: 60px;
+    padding-top: 60px;
 }
 
 .balance-increase-holder {
@@ -64,6 +64,68 @@
             border-radius: 4px;
             color: white;
             margin-top: 40px;
+        }
+    }
+}
+
+.increase-balance-options--item {
+    display: flex;
+    padding: 22px 17px;
+    background-color: white;
+    margin-bottom: 24px;
+    border-radius: 4px;
+    align-items: center;
+    transition: background 0.3s ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #005aff;
+        color: white;
+        > .icon {
+            background-color: rgba(255, 255, 255, 0.24);
+            svg path {
+                fill: white !important;
+            }
+        }
+    }
+
+    > .icon {
+        background: #005aff10;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 20px;
+    }
+
+    > .text {
+        font-size: 15px;
+    }
+}
+
+.increase-balance-modal {
+    max-width: 572px;
+
+    &__content {
+        padding: 30px 39px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        &--heading {
+            font-weight: 500;
+            font-size: 22px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        &--descrption {
+            line-height: 21px;
+            font-size: 18px;
+            color: #484848;
+            text-align: center;
         }
     }
 }

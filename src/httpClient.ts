@@ -5,7 +5,7 @@ class HttpClient {
     baseUrl = '/api';
 
     constructor() {
-        const token = Cookie.get('api_token');
+        const token = Cookie.get('sessionId');
         if (token) {
             axios.defaults.headers['Authorization'] = `Bearer ${token}`;
         }

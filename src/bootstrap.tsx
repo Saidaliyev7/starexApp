@@ -1,6 +1,7 @@
 import 'assets/fonts/fonts.scss';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'react-circular-progressbar/dist/styles.css';
+import 'react-responsive-modal/styles.css';
 
 import React from 'react';
 import { debugContextDevtool } from 'react-context-devtool';
