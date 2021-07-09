@@ -7,14 +7,14 @@ import { ReactComponent as UsaIcon } from 'assets/images/countries/usa.svg';
 import { useIsTabletOrMobileV2 } from 'hooks';
 import * as React from 'react';
 
-interface ICountry {
+export interface ICountry {
     id: number;
     name: string;
     icon: any;
     isActive: boolean;
 }
 
-const countries: ICountry[] = [
+export const countries: ICountry[] = [
     {
         id: 1,
         name: 'TÜRKİYƏ',

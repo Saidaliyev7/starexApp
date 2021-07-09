@@ -1,0 +1,31 @@
+.checkbox-holder {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    cursor: pointer;
+    &.active{
+        .check {
+            background-color:  #005AFF;
+            border-color:  #005AFF;
+        }
+    }
+    .check {
+        width: 24px;
+        height: 24px;
+        background: #ffffff;
+        border: 1px solid #d3d3d3;
+        box-sizing: border-box;
+        border-radius: 4px;
+        transition: 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+    }
+    .message-box {
+        font-size: 14px;
+        line-height: 136.5%;
+        color: #888888;
+        margin-left: 16px;
+    }
+}

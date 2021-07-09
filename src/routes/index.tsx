@@ -14,6 +14,7 @@ const Balance =React.lazy(() => import('views/Balance'));
 const ForeignAdresses = React.lazy(()=>import('views/ForeignAdresses'));
 const Notifications = React.lazy(()=>import('views/Notifications'));
 const Satisfaction =React.lazy(()=>import('views/Satisfaction'));
+const Declare =React.lazy(()=>import('views/Declare'));
 export const Routes: React.FC = () => (
     <Route
         render={() => (
@@ -32,6 +33,7 @@ export const Routes: React.FC = () => (
                     <Route path={ROUTES.FOREIGN_ADDRESSES} component={ForeignAdresses} />
                     <Route path={ROUTES.NOTIFICATIONS} component={Notifications} />
                     <Route path={ROUTES.SATISFACTION} component={Satisfaction} />
+                    <Route path={ROUTES.DECLARE} component={Declare} />
                 </React.Suspense>
                 
             </Switch>
