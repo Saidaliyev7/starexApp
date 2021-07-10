@@ -69,7 +69,7 @@ export const BalanceInfo: React.FC = () => {
 
     return (
         <Row style={{ marginTop: 24 }}>
-            <Col xs="3">
+            <Col lg="3" md='12'>
                 <InfoCard>
                     <div className="info-card__left-side">
                         <p className="info-card__heading">
@@ -95,7 +95,7 @@ export const BalanceInfo: React.FC = () => {
                     </div>
                 </InfoCard>
             </Col>
-            <Col xs="3">
+            <Col lg="3" md='12'>
                 <InfoCard>
                     <div className="info-card__left-side">
                         <p className="info-card__heading">
@@ -111,7 +111,7 @@ export const BalanceInfo: React.FC = () => {
                     <BalanceCard />
                 </InfoCard>
             </Col>
-            <Col xs="3">
+            <Col lg="3" md='12'>
                 <InfoCard>
                     <div className="info-card__left-side">
                         <p className="info-card__heading">
@@ -127,7 +127,7 @@ export const BalanceInfo: React.FC = () => {
                     <BalanceCard />
                 </InfoCard>
             </Col>
-            <Col xs="3">
+            <Col lg="3" md='12'>
                 <InfoCard>
                     <div className="info-card__left-side">
                         <p className="info-card__heading">

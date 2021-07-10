@@ -54,3 +54,17 @@
         }
     }
 }
+
+@media screen and (max-width:1024px){
+    .balance-holder{
+        .is-coming{
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #d80027;
+            position: absolute;
+            left: -13px;
+            top: 2px;
+        }
+    }
+}

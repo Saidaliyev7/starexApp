@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
+import { device } from 'styled/devices';
 
 interface IProps {
     path: string;
@@ -32,6 +33,11 @@ const LinkStyled = styled(NavLink)`
         height: 50px;
         z-index: 0;
         transition: opacity 0.2s ease-in;
+    }
+    ${device.tablet} {
+        &::after{
+            left:-13%;
+        }
     }
     &.active::after,
     &:hover:after {

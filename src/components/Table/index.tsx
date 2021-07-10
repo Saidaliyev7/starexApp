@@ -1,5 +1,6 @@
 import './table.scss';
 
+import { useIsTabletOrMobileV2 } from 'hooks';
 import * as React from 'react';
 
 import { ITableData } from './models';
@@ -21,29 +22,33 @@ const Table: React.FC<IProps> = ({
     onSearchAddClick,
     paginationComponent,
 }) => {
+    const isTabletOrMobile = useIsTabletOrMobileV2();
     return (
         <>
             <div className="table-with-all-components-holder">
-                {tableData.search && (
-                    <TableSearch
-                        tableSearch={tableData.search}
-                        onSearchAddClick={onSearchAddClick}
-                    />
-                )}
+                {onSearchAddClick && <TableSearch onSearchAddClick={onSearchAddClick} />}
                 <div className="table-component-holder">
                     {tableData?.selectboxData && (
                         <TableFilters
                             tableCheckData={tableCheckedData}
                             selectData={tableData?.selectboxData}
+                            handleSelectChange={tableData?.handleSelectChange}
                         />
                     )}
-                    <div className="table">
-                        <table>
-                            <TableHead heads={tableData.thead} />
-                            {children}
-                        </table>
-                    </div>
-                    {paginationComponent}
+
+                    {!isTabletOrMobile ? (
+                        <>
+                            <div className="table">
+                                <table>
+                                    <TableHead heads={tableData.thead} />
+                                    {children}
+                                </table>
+                            </div>
+                            {paginationComponent}
+                        </>
+                    ) : (
+                        <>{children}</>
+                    )}
                 </div>
             </div>
         </>

@@ -4,6 +4,7 @@ export interface ITableData<T> {
     tbodyData?: T | any;
     checkComponent: boolean;
     search?: ITableSearch;
+    handleSelectChange?: (id: number) => void;
 }
 
 export interface ITableSearch {
@@ -15,6 +16,7 @@ export interface ISelectbox {
     name: string;
     count: number;
     isActive: boolean;
+    id?: number;
 }
 
 export enum EApplicationStatus {

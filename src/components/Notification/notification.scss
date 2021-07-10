@@ -1,0 +1,29 @@
+.notification-holder {
+    position: relative;
+    padding-left: 16px;
+    .text {
+        font-size: 14px;
+
+        color: #4a4a4a;
+    }
+    .time {
+        font-size: 12px;
+        margin-top: 6px;
+        color: #959595;
+    }
+    .icon {
+        position: absolute;
+
+        background: #ffffff;
+        border: 1px solid #d2d2d2;
+        box-sizing: border-box;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        left: 0px;
+        &.is-readed{
+            background: #FFA000;
+            border-color:#FFA000;
+        }
+    }
+}

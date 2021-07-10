@@ -1,5 +1,6 @@
 import './tableFilters.scss';
 
+import { useOnClickOutside } from 'hooks';
 import * as React from 'react';
 
 import { ISelectbox } from '../models';
@@ -7,7 +8,8 @@ import { ISelectbox } from '../models';
 const TableFilters: React.FC<{
     tableCheckData: any;
     selectData?: ISelectbox[];
-}> = ({ selectData = [], tableCheckData }) => {
+    handleSelectChange?: (id: number) => void;
+}> = ({ selectData = [], tableCheckData, handleSelectChange }) => {
     const selectRef = React.useRef();
     const [checkedData, changeCheckedData] = React.useState(null);
     const [isAllPending, changeAllPending] = React.useState<boolean>(false);
@@ -15,8 +17,6 @@ const TableFilters: React.FC<{
         activeSelectData: ISelectbox;
         dropdownData: ISelectbox[];
     }>(null);
-    debugger;
-
     React.useEffect(() => {
         changeSelect({
             activeSelectData: selectData.filter((el) => el.isActive === true)[0],
@@ -32,6 +32,12 @@ const TableFilters: React.FC<{
         const pendingsCheck = allPendings.length === tableCheckData.length;
         pendingsCheck ? changeAllPending(pendingsCheck) : changeAllPending(pendingsCheck);
     }, [tableCheckData]);
+
+    useOnClickOutside(selectRef, () => {
+        const target = selectRef.current as HTMLElement;
+        const parentClasslist = target.classList;
+        parentClasslist.remove('active');
+    });
 
     const onSelectOpen = () => {
         const target = selectRef.current as HTMLElement;
@@ -57,6 +63,7 @@ const TableFilters: React.FC<{
                     activeSelectData: selectedData,
                 };
             });
+        handleSelectChange?.(selectedData.id);
     };
 
     return (

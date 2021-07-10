@@ -1,14 +1,43 @@
-.chat-holder{
-    margin-top: 60px; 
+.chat-holder {
+    margin-top: 60px;
     display: flex;
     flex-wrap: nowrap;
-    .left{
+    .left {
         flex-basis: 65%;
         width: 65%;
         margin-right: 24px;
     }
-    .right{
+    .right {
         flex-basis: 35%;
         width: 35%;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .chat-holder {
+        flex-direction: column-reverse;
+        margin-bottom: 22px;
+        .left,
+        .right {
+            flex-basis: 100%;
+            width: 100%;
+            margin: 0px;
+        }
+        .right {
+            margin-bottom: 20px;
+        }
+        .left {
+            .top {
+                justify-content: center;
+                text-align: center;
+                font-size: 18px;
+            }
+            .bottom {
+                padding: 20px 12px;
+            }
+            .input-content .files ul li {
+                margin-bottom: 5px;
+            }
+        }
     }
 }

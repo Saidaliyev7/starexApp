@@ -1,5 +1,5 @@
 export const ROUTES = {
-    MAIN: '/dashboard',
+    MAIN: '/',
     FOREIGN_ADDRESSES: '/foreign-addresses',
     MY_ORDERS: '/my-orders',
     BOXES: '/boxes',
@@ -9,7 +9,12 @@ export const ROUTES = {
     BALANCE_INCREASE: '/balance-increase',
     BALANCE_PAY_TR: '/balance-paytr',
     APPLICATIONS: '/applications',
+    APPLICATION_CHAT: '/application/:id',
+    APPLICATION_FORM: '/new-application',
     ONLINE_QUEUE: '/online-queue',
     SETTINGS: '/settings',
     LOGOUT: '/logout',
+    NOTIFICATIONS: '/notifications',
+    SATISFACTION: '/satisfaction/:id',
+    DECLARE: '/declare',
 };

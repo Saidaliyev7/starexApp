@@ -127,3 +127,14 @@
 .table-with-all-components-holder{
     margin-top: 60px;
 }
+
+@media screen and (max-width:1024px){
+    .table-component-holder{
+        background: transparent;
+
+    }
+    .table-filters-holder{
+        background: white;
+        margin-bottom: 20px;
+    }
+}

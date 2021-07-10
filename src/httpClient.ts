@@ -1,13 +1,20 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import Cookie from 'js-cookie';
+import { envService } from 'services/env';
 
 class HttpClient {
-    baseUrl = '/api';
+    baseUrl = 'http://localhost:8050/api';
 
     constructor() {
-        const token = Cookie.get('sessionId');
+        const token = Cookie.get('sessionid');
         if (token) {
-            axios.defaults.headers['Authorization'] = `Bearer ${token}`;
+            axios.defaults.headers['Authorization'] = `Token ${token}`;
+        }
+
+        if (envService.profile === 'dev') {
+            this.baseUrl = 'https://dev.starex.az/api';
+        } else if (envService.profile === 'prod') {
+            this.baseUrl = 'https://starex.az/api';
         }
     }
 

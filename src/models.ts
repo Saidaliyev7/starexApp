@@ -1,4 +1,4 @@
-import { EAPIProcessStatus, ECurrency } from 'enums';
+import { EAPIProcessStatus, ECountry, ECurrency } from 'enums';
 
 export interface IUser {
     full_name: string;
@@ -76,4 +76,125 @@ export interface IPagination<T> {
 export interface IInfoResponse {
     success: boolean;
     message: string;
+}
+
+export interface IApplication {
+    id: number;
+    creator: string;
+    no: string;
+    created_at: string;
+    country: ECountry;
+    problem_country: ECountry;
+    problem_category: number;
+    status: string;
+    updated_at: string;
+    is_deletable: boolean;
+    can_answer: boolean;
+    messages: IApplicationMessage[];
+}
+
+export interface IApplicationMessage {
+    id: number;
+    author: string;
+    is_from_admin: boolean;
+    body: string;
+    created_at: string;
+    attachments: IApplicationMessageAttachment[];
+    updated_at: string;
+}
+
+export interface IApplicationMessageAttachment {
+    file: string;
+    name: string;
+}
+
+export interface IApplicationCategory {
+    id: number;
+    title: string;
+}
+
+export interface IApplicationCountry {
+    [x: string]: string;
+}
+
+export interface IApplicationCategories {
+    categories: IApplicationCategory[];
+    countries: IApplicationCountry[];
+}
+
+export interface IApplicationStatus {
+    id: number;
+    status: string;
+    count: number;
+}
+
+export interface ICountryInfo {
+    code: ECountry;
+    flag: string;
+    display_name: string;
+    address_display_name: string;
+    user_addresses: IUserAddress[];
+}
+
+export interface IUserAddress {
+    language: string;
+    data: { title: string; value: string }[];
+}
+
+export interface IRebate {
+    tracking_code: string;
+    product_type: string;
+    seller: string;
+    weight: string;
+    delivery_cost_in_azn: string;
+    status: string;
+}
+
+export interface IRebateList {
+    total: number;
+    data: IRebate[];
+    pages: number;
+}
+
+export interface ICourier {
+    id: number;
+    declaration: ICourierDeclaration;
+    tariff: number;
+    address: number;
+    cobox: string;
+    region: number;
+    tel: string;
+    recipient: string;
+    note: string;
+    courier_cost: string;
+    courier_cost_preview: string;
+    courier_cost_currency: string;
+    courier_cost_in_azn: string;
+    discounted_cost: string;
+    discounted_cost_currency: string;
+    discounted_cost_in_azn: string;
+    discount_price_preview: string;
+    discount_enabled: boolean;
+    status: number;
+    status_name: string;
+    is_paid: boolean;
+    is_deletable: boolean;
+    is_editable: boolean;
+    is_payable: boolean;
+    tariff_name: string;
+    region_name: string;
+    discounts: Array<any>;
+    azerpost_tracking_number: string;
+}
+
+export interface ICourierDeclaration {
+    id: number;
+    tracking_code: string;
+    shop: string;
+}
+
+export interface ICourierList {
+    total: number;
+    data: ICourier[];
+    pages: number;
 }

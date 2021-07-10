@@ -203,3 +203,16 @@
         }
     }
 }
+
+@media screen and(max-width:1024px){
+    .table-component-holder{
+        .selectbox-bottom{
+            left: -37px !important;
+            ul{
+                li{
+                    width: 300px !important;
+                }
+            }
+        }
+    }
+}
