@@ -4,61 +4,50 @@ import { ReactComponent as ChinaIcon } from 'assets/images/countries/china.svg';
 import { ReactComponent as GermanyIcon } from 'assets/images/countries/germany.svg';
 import { ReactComponent as TurkeyIcon } from 'assets/images/countries/turkey.svg';
 import { ReactComponent as UsaIcon } from 'assets/images/countries/usa.svg';
-import { useIsTabletOrMobileV2 } from 'hooks';
+import { useCountries, useIsTabletOrMobileV2, useSearchParams } from 'hooks';
 import * as React from 'react';
 
 export interface ICountry {
-    id: number;
+    id: string;
     name: string;
     icon: any;
     isActive: boolean;
 }
 
-export const countries: ICountry[] = [
-    {
-        id: 1,
-        name: 'TÜRKİYƏ',
-        icon: TurkeyIcon,
-        isActive: true,
-    },
-    {
-        id: 2,
-        name: 'ABŞ',
-        icon: UsaIcon,
-        isActive: false,
-    },
-    {
-        id: 3,
-        name: 'ÇİN',
-        icon: ChinaIcon,
-        isActive: false,
-    },
-    {
-        id: 4,
-        name: 'ALMANİYA',
-        icon: GermanyIcon,
-        isActive: false,
-    },
-];
+const getIcon = (code: string) =>
+    ({
+        TR: TurkeyIcon,
+        US: UsaIcon,
+        CN: ChinaIcon,
+        DE: GermanyIcon,
+    }[code]);
 
 const AccardionTop: React.FC = React.memo(() => {
-    const [allCountries, changeCountries] = React.useState<ICountry[]>(countries);
+    const { countries } = useCountries();
+    const [searchParams, changeSearchParams] = useSearchParams<{ ctry: string }>({ ctry: 'TR' });
+    const [allCountries, changeCountries] = React.useState<ICountry[]>(
+        countries.map((x) => ({
+            isActive: x.code === searchParams.ctry,
+            name: x.display_name,
+            icon: getIcon(x.code),
+            id: x.code,
+        })),
+    );
     const isTabletOrMobile = useIsTabletOrMobileV2();
     const [selectActive, changeSelectActive] = React.useState<ICountry>({
-        id: 1,
+        id: 'TR',
         name: 'TÜRKİYƏ',
         icon: TurkeyIcon,
         isActive: true,
     });
 
-    const selectTop=React.useRef();
+    const selectTop = React.useRef();
     const onAccardionSelect = (country: ICountry) => {
-        !country.isActive &&
-        changeCountryState(country)
+        !country.isActive && changeCountryState(country);
     };
 
-
-    const changeCountryState=(country: ICountry)=>{
+    const changeCountryState = (country: ICountry) => {
+        changeSearchParams({ ctry: country.id });
         changeCountries((oldState) => {
             const newState = [...oldState].map((cntry) => {
                 cntry.name == country.name ? (cntry.isActive = true) : (cntry.isActive = false);
@@ -66,22 +55,24 @@ const AccardionTop: React.FC = React.memo(() => {
             });
             return newState;
         });
-    }
-    const openSelect=()=>{
-        const element= selectTop.current as HTMLDivElement;
-        const classListElement=element.classList;
-        classListElement.contains("active")?classListElement.remove('active'):classListElement.add("active")
-    }
-    const selectItem=(country:ICountry)=>{
-        const element= selectTop.current as HTMLDivElement;
-        const classListElement=element.classList;
+    };
+    const openSelect = () => {
+        const element = selectTop.current as HTMLDivElement;
+        const classListElement = element.classList;
+        classListElement.contains('active')
+            ? classListElement.remove('active')
+            : classListElement.add('active');
+    };
+    const selectItem = (country: ICountry) => {
+        const element = selectTop.current as HTMLDivElement;
+        const classListElement = element.classList;
         setTimeout(() => {
-            classListElement.remove("active");
+            classListElement.remove('active');
         }, 0);
- 
+
         changeSelectActive(country);
-        !country.isActive&& changeCountryState(country);
-    }
+        !country.isActive && changeCountryState(country);
+    };
     return (
         <>
             {!isTabletOrMobile ? (
@@ -92,7 +83,7 @@ const AccardionTop: React.FC = React.memo(() => {
                                 <li
                                     key={index}
                                     onClick={() => onAccardionSelect(country)}
-                                    className={country.isActive? 'active':''}
+                                    className={country.isActive ? 'active' : ''}
                                 >
                                     <div className="icon">
                                         <country.icon />
@@ -105,7 +96,7 @@ const AccardionTop: React.FC = React.memo(() => {
                 </div>
             ) : (
                 <>
-                    <div className="accardion-select" ref={selectTop} onClick={openSelect} >
+                    <div className="accardion-select" ref={selectTop} onClick={openSelect}>
                         <div className="select-top">
                             <div className="icon">
                                 <selectActive.icon />
@@ -132,15 +123,16 @@ const AccardionTop: React.FC = React.memo(() => {
                         <div className="select-bottom">
                             <ul>
                                 {allCountries.map((country) => (
-                                    <li key={country.id} onClick={()=>selectItem(country)} className={country.isActive ?'active':''}>
+                                    <li
+                                        key={country.id}
+                                        onClick={() => selectItem(country)}
+                                        className={country.isActive ? 'active' : ''}
+                                    >
                                         <div className="name-holder">
-                                            <div className="icon" >
+                                            <div className="icon">
                                                 <country.icon />
                                             </div>
-                                            <div className="name">
-                                            {country.name}
-                                            </div>
-
+                                            <div className="name">{country.name}</div>
                                         </div>
                                         {country.isActive && (
                                             <div className="active-icon">

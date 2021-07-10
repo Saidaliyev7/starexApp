@@ -7,7 +7,7 @@ import * as React from 'react';
 const CourierAdd: React.FC = () => {
     return (
         <>
-            <Status />
+            {/* <Status /> */}
             <div className="add-holder">
                 <div className="content">
                     <div className="title">Kuryer sifarişi</div>

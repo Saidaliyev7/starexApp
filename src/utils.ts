@@ -1,6 +1,6 @@
 import { ITableData } from 'components/Table/models';
 import { EAPIProcessStatus } from 'enums';
-import { IAPIData, IPaymentTransaction } from 'models';
+import { IAPIData, IApplication, IPaymentTransaction, IRebate } from 'models';
 
 export const getPaymentTransactionsTableData = (
     paymentTransactions: IPaymentTransaction[],
@@ -9,6 +9,33 @@ export const getPaymentTransactionsTableData = (
     selectboxData: null,
     thead: ['İzləmə kodu', 'Məbləğ', 'Tarix'],
     tbodyData: paymentTransactions,
+});
+
+export const getApplicationsTableData = (
+    applications: IApplication[],
+    selectBoxData: { name: string; count: number; isActive: boolean; id: number }[],
+): ITableData<IApplication> => ({
+    checkComponent: false,
+    selectboxData: selectBoxData,
+    thead: ['Kateqoriya', 'Ölkə', 'Tarix', 'Status', 'Detallı bax'],
+    tbodyData: applications,
+});
+
+export const getRebatesTableData = (
+    rebates: IRebate[],
+    selectBoxData: { name: string; count: number; isActive: boolean; id: number }[],
+): ITableData<IRebate> => ({
+    checkComponent: false,
+    selectboxData: selectBoxData,
+    thead: [
+        'İzləmə kodu',
+        'Məhsulun tipi',
+        'Mağaza',
+        'Çəki',
+        'Çatdırılma qiyməti',
+        'İadənin statusu',
+    ],
+    tbodyData: rebates,
 });
 
 export const isInitial = (data: IAPIData<any>) => data.status === EAPIProcessStatus.IDLE;

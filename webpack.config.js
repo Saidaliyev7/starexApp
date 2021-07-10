@@ -12,6 +12,8 @@ const GitRevisionPlugin = require('git-revision-webpack-plugin');
 
 const git = new GitRevisionPlugin({ branch: true });
 
+const BRANCH = git.branch();
+
 
 
 const SRC_DIR = path.resolve(__dirname, 'src');
@@ -131,6 +133,10 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: './public/index.html',
             title: 'Client Dashboard',
+        }),
+        new webpack.DefinePlugin({
+            "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV || mode),
+            "process.env.INFRA_ENV": JSON.stringify((BRANCH === 'master' || BRANCH === 'stagging') ? BRANCH : 'local')
         }),
         new MiniCssExtractPlugin(),
         new CleanWebpackPlugin(),

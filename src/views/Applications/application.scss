@@ -116,3 +116,36 @@
         }
     }
 }
+
+.new-add-placeholder {
+    button {
+        display: flex;
+        background: #ffffff;
+        box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+        height: 40px;
+        width: 170px;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        border-color: transparent;
+        outline: none;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 16px;
+
+        color: #005aff;
+        .icon {
+            margin-right: 10px;
+        }
+    }
+    @media screen and (max-width: 1024px) {
+        .new-add {
+            margin-top: 20px;
+            button {
+                max-width: 312px;
+                width: 100%;
+            }
+        }
+    }
+}

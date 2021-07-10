@@ -1,11 +1,15 @@
 import './selectbox.scss';
 
+import { useOnClickOutside } from 'hooks';
 import * as React from 'react';
 
-const Selectbox: React.FC<{ selectData: any; onClick?,placeHolder?:string }> = ({ selectData, onClick,placeHolder }) => {
+const Selectbox: React.FC<{
+    selectData: any;
+    onChange?: (id: number | string) => void;
+    placeHolder?: string;
+}> = ({ selectData, onChange, placeHolder }) => {
     const selectRef = React.useRef();
     const [selectTop, changeSelectTop] = React.useState<string>(null);
-    const [select, changeSelect] = React.useState();
     const onSelectOpen = () => {
         const target = selectRef.current as HTMLElement;
         const parentClasslist = target.classList;
@@ -21,19 +25,23 @@ const Selectbox: React.FC<{ selectData: any; onClick?,placeHolder?:string }> = (
             ? parentClasslist.remove('active')
             : parentClasslist.add('active');
         changeSelectTop(el.name);
+        onChange?.(el.id);
     };
+
+    useOnClickOutside(selectRef, () => {
+        const target = selectRef.current as HTMLElement;
+        const parentClasslist = target.classList;
+        parentClasslist.remove('active');
+    });
 
     return (
         <>
             <div className="selectbox-holder select-component">
                 <div className="selectbox" ref={selectRef}>
                     <div className="selectbox-top" onClick={onSelectOpen}>
-                        {
-                        selectTop?selectTop:placeHolder&&<div className="placeholder">
-                            {placeHolder}
-                        </div>
-                        
-                        }
+                        {selectTop
+                            ? selectTop
+                            : placeHolder && <div className="placeholder">{placeHolder}</div>}
                         <div className="icon">
                             <svg
                                 width="12"

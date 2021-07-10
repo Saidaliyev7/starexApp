@@ -1,4 +1,4 @@
-import { IPagination, IPaymentTransaction } from 'models';
+import { IInfoResponse, IPagination, IPaymentPayTR, IPaymentTransaction } from 'models';
 
 export const DPaymentTransactions: IPagination<IPaymentTransaction> = {
     count: 144,
@@ -107,4 +107,15 @@ export const DPaymentTransactions: IPagination<IPaymentTransaction> = {
             created_at: '29.11.2020 23:25',
         },
     ],
+};
+
+export const DPaymentPayTR: IPaymentPayTR = {
+    paytr_url:
+        'https://www.paytr.com/odeme/guvenli/ffde823cbd343889a0e05350375b101ea1c9d6ac274c0a93b0cb917fcafd56f7-175788445',
+    token: 'ffde823cbd343889a0e05350375b101ea1c9d6ac274c0a93b0cb917fcafd56f7-175788445',
+};
+
+export const DGiftCard: IInfoResponse = {
+    success: true,
+    message: 'Kartdakı məbləğ balansınıza yükləndi',
 };

@@ -26,17 +26,13 @@ const Table: React.FC<IProps> = ({
     return (
         <>
             <div className="table-with-all-components-holder">
-                {tableData.search && (
-                    <TableSearch
-                        tableSearch={tableData.search}
-                        onSearchAddClick={onSearchAddClick}
-                    />
-                )}
+                {onSearchAddClick && <TableSearch onSearchAddClick={onSearchAddClick} />}
                 <div className="table-component-holder">
                     {tableData?.selectboxData && (
                         <TableFilters
                             tableCheckData={tableCheckedData}
                             selectData={tableData?.selectboxData}
+                            handleSelectChange={tableData?.handleSelectChange}
                         />
                     )}
 
@@ -51,9 +47,7 @@ const Table: React.FC<IProps> = ({
                             {paginationComponent}
                         </>
                     ) : (
-                        <>
-                            {children}
-                        </>
+                        <>{children}</>
                     )}
                 </div>
             </div>

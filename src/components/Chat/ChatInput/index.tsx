@@ -1,14 +1,22 @@
-// import { ReactComponent as SearchIcon } from 'assets/images/icons/search.svg';
 import './chatInput.scss';
 
 import { ReactComponent as AttachIcon } from 'assets/images/icons/attach.svg';
 import { ReactComponent as RemoveIcon } from 'assets/images/icons/remove.svg';
 import { ReactComponent as SendIcon } from 'assets/images/icons/send.svg';
+import { useUserInfo } from 'hooks';
+import * as _ from 'lodash';
+import { IApplicationMessage } from 'models';
+import * as moment from 'moment';
 import * as React from 'react';
 
-const ChatInput: React.FC = React.memo(() => {
+const ChatInput: React.FC<{
+    messages: IApplicationMessage[];
+    canAnswer: boolean;
+    onChange: (data: FormData) => void;
+}> = React.memo(({ messages, onChange, canAnswer }) => {
     const fileInput = React.useRef();
-    const [inputFiles, changeFiles] = React.useState<FileList | File[]>(null);
+    const [inputFiles, changeFiles] = React.useState<FileList | File[]>([]);
+    const { user } = useUserInfo();
     const [textAreaOptions, changeTextAreaOptions] = React.useState<{
         name: string;
         rows: number;
@@ -47,6 +55,24 @@ const ChatInput: React.FC = React.memo(() => {
         }));
     };
 
+    const onClick = () => {
+        if (!textAreaOptions.value) {
+            return;
+        }
+
+        const formData = new FormData();
+
+        formData.append('body', textAreaOptions.value);
+
+        if (inputFiles.length) {
+            [...(inputFiles as Array<File>)].forEach((attachment) => {
+                formData.append('attachments', attachment);
+            });
+        }
+
+        onChange(formData);
+    };
+
     const onFileChange = (event) => {
         const input = event.target as HTMLInputElement;
         changeFiles(input.files);
@@ -65,79 +91,84 @@ const ChatInput: React.FC = React.memo(() => {
         <>
             <div className="chat-input-holder">
                 <div className="top">
-                    <div className="name">Telli İsrafilbayli</div>
+                    <div className="name">{user.full_name}</div>
                 </div>
                 <div className="bottom">
                     <div className="chat-content">
                         <ul>
-                            <li>
-                                <div className="date">17.07.2019</div>
-                                <div className="message">
-                                    <div className="text">Test</div>
-                                    <div className="time">11:53</div>
-                                </div>
-                                <div className="message income">
-                                    <div className="text">Lorem ipsum lorem ips</div>
-                                    <div className="time">11:53</div>
-                                </div>
-                                <div className="message">
-                                    <div className="text">Lorem ipsum lorem ips</div>
-                                    <div className="time">11:53</div>
-                                </div>
-                                <div className="message income">
-                                    <div className="text">Test</div>
-                                    <div className="time">11:53</div>
-                                </div>
-                            </li>
+                            {Object.entries(
+                                _.groupBy(messages, (i) =>
+                                    moment(i.created_at).format('DD.MM.YYYY'),
+                                ),
+                            ).map(([key, value], i) => (
+                                <li key={i}>
+                                    <div className="date">{key}</div>
+                                    {value.map((message, i) => (
+                                        <div className="message" key={i}>
+                                            <div className="text">{message.body}</div>
+                                            <div className="time">
+                                                {moment(message.created_at).format('HH:mm')}
+                                            </div>
+                                        </div>
+                                    ))}
+                                </li>
+                            ))}
                         </ul>
                     </div>
-                    <div className="input-content">
-                        <textarea
-                            placeholder={textAreaOptions.name}
-                            rows={textAreaOptions.rows}
-                            onChange={onTextAreValueChange}
-                            className={textAreaOptions?.files?.length > 0 ? 'file-added' : ''}
-                        ></textarea>
-                        <input
-                            type="file"
-                            ref={fileInput}
-                            onChange={onFileChange}
-                            multiple
-                            style={{ display: 'none' }}
-                        />
-                        {textAreaOptions.files && textAreaOptions.files.length > 0 && (
-                            <div className="files">
+                    {canAnswer && (
+                        <div className="input-content">
+                            <textarea
+                                placeholder={textAreaOptions.name}
+                                rows={textAreaOptions.rows}
+                                onChange={onTextAreValueChange}
+                                className={textAreaOptions?.files?.length > 0 ? 'file-added' : ''}
+                            ></textarea>
+                            <input
+                                type="file"
+                                ref={fileInput}
+                                onChange={onFileChange}
+                                multiple
+                                style={{ display: 'none' }}
+                            />
+                            {textAreaOptions.files && textAreaOptions.files.length > 0 && (
+                                <div className="files">
+                                    <ul>
+                                        {textAreaOptions.files.map((fileName, index) => (
+                                            <li key={index}>
+                                                {fileName}
+                                                <div
+                                                    className="remove-icon"
+                                                    onClick={() => onFileRemove(fileName)}
+                                                >
+                                                    <RemoveIcon />
+                                                </div>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
+
+                            <div className="icons">
                                 <ul>
-                                    {textAreaOptions.files.map((fileName, index) => (
-                                        <li key={index}>
-                                            {fileName}
-                                            <div
-                                                className="remove-icon"
-                                                onClick={() => onFileRemove(fileName)}
-                                            >
-                                                <RemoveIcon />
-                                            </div>
-                                        </li>
-                                    ))}
+                                    <li onClick={openFileInput}>
+                                        <AttachIcon />
+                                    </li>
+                                    <li
+                                        onClick={onClick}
+                                        className={textAreaOptions.value.length > 0 && 'active-add'}
+                                    >
+                                        <SendIcon />
+                                    </li>
                                 </ul>
                             </div>
-                        )}
-
-                        <div className="icons">
-                            <ul>
-                                <li onClick={openFileInput}>
-                                    <AttachIcon />
-                                </li>
-                                <li className={textAreaOptions.value.length > 0 && 'active-add'}>
-                                    <SendIcon />
-                                </li>
-                            </ul>
                         </div>
-                    </div>
+                    )}
                 </div>
             </div>
         </>
     );
 });
+
+ChatInput.displayName = 'Application Chat Form';
 
 export default ChatInput;

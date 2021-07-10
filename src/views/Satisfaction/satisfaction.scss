@@ -1,5 +1,6 @@
 .satisfaction-holder {
     margin-top: 60px;
+    margin-bottom: 98px;
     display: flex;
     justify-content: center;
     .content {
@@ -43,23 +44,23 @@
     }
 }
 
-
-@media screen and (max-width:1024px){
+@media screen and (max-width: 1024px) {
     .satisfaction-holder {
         margin-top: 30px;
-        .content{
+        margin-bottom: 22px;
+        .content {
             padding: 25px 12px;
-            .title{
+            .title {
                 text-align: center;
                 margin-bottom: 25px;
             }
-            .radio-holder{
+            .radio-holder {
                 margin-bottom: 20px;
             }
-            textarea{
+            textarea {
                 resize: none;
             }
-            button{
+            button {
                 width: 100%;
             }
         }

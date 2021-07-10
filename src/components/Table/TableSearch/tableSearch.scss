@@ -3,39 +3,7 @@
     margin-bottom: 20px;
     display: flex;
     width: 100%;
-    justify-content: space-between;
-    .left {
-        position: relative;
-        display: inline-block;
-        .icon {
-            position: absolute;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            right: 14px;
-            top: 0;
-            cursor: pointer;
-        }
-    }
-    .input {
-        input {
-            width: 312px;
-            height: 40px;
-            outline: none;
-            background: #ffffff;
-            box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.06);
-            border-radius: 4px;
-            border-color: transparent;
-            padding: 10px 20px;
-            padding-right: 40px;
-            font-size: 16px;
-            line-height: 19px;
-
-            &::placeholder {
-                color: #a9a9a9;
-            }
-        }
-    }
+    justify-content: flex-end;
 
     .right {
         button {
@@ -71,14 +39,13 @@
             .input {
                 position: relative;
                 input {
-              
-                    width: 100% ;
+                    width: 100%;
                 }
             }
         }
-        .new-add{
+        .new-add {
             margin-top: 20px;
-            button{
+            button {
                 max-width: 312px;
                 width: 100%;
             }

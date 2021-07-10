@@ -4,7 +4,13 @@ import FileSelect from 'components/FileSelect';
 import Selectbox from 'components/Selectbox';
 import * as React from 'react';
 
+import { useApplicationCategories } from './hooks';
+
 const ApplicationForm: React.FC = () => {
+    const { categories } = useApplicationCategories();
+    const [category, changeCategory] = React.useState<number | string>(categories.categories[0].id);
+    const [country, changeCountry] = React.useState<string>();
+
     return (
         <>
             <div className="add-holder application">
@@ -12,47 +18,38 @@ const ApplicationForm: React.FC = () => {
                     <div className="title">Müraciət Et</div>
 
                     <ul className="inputs">
-                        
-                        <li >
+                        <li>
                             <div className="radio-holder">
                                 <div className="radio-title">Kateqoriya</div>
                                 <div className="input">
                                     <Selectbox
-                                        placeHolder='Kateqoriya seçin'
+                                        placeHolder="Kateqoriya seçin"
                                         selectData={{
-                                            dropdownData: [
-                                                {
-                                                    name: 'tst',
-                                                    isActive: false,
-                                                },
-                                                {
-                                                    name: 'tstasd',
-                                                    isActive: false,
-                                                },
-                                            ],
+                                            dropdownData: categories.categories.map((x) => ({
+                                                isActive: category === x.id,
+                                                name: x.title,
+                                                id: x.id,
+                                            })),
                                         }}
+                                        onChange={changeCategory}
                                     />
                                 </div>
                             </div>
                         </li>
-                        <li >
+                        <li>
                             <div className="radio-holder">
                                 <div className="radio-title">Ölkə</div>
                                 <div className="input">
                                     <Selectbox
-                                     placeHolder='Ölkə seçin'
+                                        placeHolder="Ölkə seçin"
                                         selectData={{
-                                            dropdownData: [
-                                                {
-                                                    name: 'tst',
-                                                    isActive: false,
-                                                },
-                                                {
-                                                    name: 'tstasd',
-                                                    isActive: false,
-                                                },
-                                            ],
+                                            dropdownData: categories.countries.map((x) => ({
+                                                isActive: country === Object.keys(x)[0],
+                                                name: Object.values(x)[0],
+                                                id: Object.keys(x)[0],
+                                            })),
                                         }}
+                                        onChange={(id) => changeCountry(id.toString())}
                                     />
                                 </div>
                             </div>
@@ -65,22 +62,22 @@ const ApplicationForm: React.FC = () => {
                             <textarea cols={30} rows={8}></textarea>
                         </div>
                         <div className="message">
-                        Müraciətinizi tez bir zamanda araşdırmağımız üçün zəhmət olmasa aşağıdakı şəkilləri bizə göndərin:
+                            Müraciətinizi tez bir zamanda araşdırmağımız üçün zəhmət olmasa
+                            aşağıdakı şəkilləri bizə göndərin:
                         </div>
                     </div>
                     <div className="radio-holder">
                         <div className="radio-title">Teslimat məlumatları</div>
-                        <FileSelect message='*bağlamanın nə zaman, kimə təhvil verdiyi şəkildə görünməlidir' />
+                        <FileSelect message="*bağlamanın nə zaman, kimə təhvil verdiyi şəkildə görünməlidir" />
                     </div>
                     <div className="radio-holder">
                         <div className="radio-title">Alış məlumatları</div>
-                        <FileSelect message='*məhsulu alarkən qeyd etdiyiniz ünvan bölməsi şəkildə görünməlidir' />
+                        <FileSelect message="*məhsulu alarkən qeyd etdiyiniz ünvan bölməsi şəkildə görünməlidir" />
                     </div>
-                    
+
                     <div className="send-button">
                         <button>Göndər</button>
                     </div>
-                    
                 </div>
             </div>
         </>

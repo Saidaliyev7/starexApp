@@ -57,7 +57,7 @@ export const BalanceInfoHoverStyled = styled.div`
 export const BalanceCard: React.FC = React.memo(() => {
     const { push } = useHistory();
     return (
-        <BalanceCardStyled onClick={() => push(ROUTES.BALANCE)}>
+        <BalanceCardStyled onClick={() => push(ROUTES.BALANCE_INCREASE)}>
             <span>Balansı Artır</span>
             <PlusFilledIcon />
         </BalanceCardStyled>

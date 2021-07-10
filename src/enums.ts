@@ -10,3 +10,13 @@ export enum EAPIProcessStatus {
     SUCCESS = 'SUCCESS',
     ERROR = 'ERROR',
 }
+
+export enum EErrorMessages {
+    REQUIRED = 'Bu xana məcburidir.',
+}
+
+export enum ECountry {
+    TR = 'TR',
+    US = 'US',
+    CN = 'CN',
+}
