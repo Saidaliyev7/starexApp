@@ -55,9 +55,48 @@
     }
 }
 
-@media screen and (max-width:1024px){
-    .balance-holder{
+.card-data-upper-balance {
+    display: flex;
+    flex-wrap: wrap;
+    .card-data {
+        flex-basis: 50%;
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start  ;
+        color: #4A4A4A;
+        .text{
+            line-height: 126.5%;
+            font-size: 14px ;
+        }
+        .card-data-title {
+            font-size: 16px;
+            line-height: 126.5%;
+            margin-bottom: 6px;
+
+            color: #989898;
+        }
+        &.card-data-right{
+         
+            align-items: flex-end;
+            .text{
+                text-align: right;
+            }
+        }
+    }
+    .card-data-text-income{
+        position: relative;
+        padding-left: 15px;
         .is-coming{
+            left: 2px;
+            top: 4px;
+        }
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .balance-holder {
+        .is-coming {
             width: 8px;
             height: 8px;
             border-radius: 50%;
