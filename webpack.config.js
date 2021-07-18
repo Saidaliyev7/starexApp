@@ -19,7 +19,7 @@ const BRANCH = git.branch();
 const SRC_DIR = path.resolve(__dirname, 'src');
 const BUILD_DIR = path.resolve(__dirname, 'build');
 
-module.exports = {
+module.exports = (mode = 'development') => ( {
     entry: path.join(SRC_DIR, 'index'),
     output: {
         filename: '[name].[contenthash].js',
@@ -135,8 +135,8 @@ module.exports = {
             title: 'Client Dashboard',
         }),
         new webpack.DefinePlugin({
-            "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV || mode),
-            "process.env.INFRA_ENV": JSON.stringify((BRANCH === 'master' || BRANCH === 'stagging') ? BRANCH : 'local')
+            "process.env.APP_MODE": JSON.stringify(process.env.APP_MODE || mode),
+            "process.env.INFRA_ENV": JSON.stringify((BRANCH === 'production' || BRANCH === 'staging') ? BRANCH : 'local')
         }),
         new MiniCssExtractPlugin(),
         new CleanWebpackPlugin(),
@@ -149,4 +149,4 @@ module.exports = {
             ],
         }),
     ],
-};
+});

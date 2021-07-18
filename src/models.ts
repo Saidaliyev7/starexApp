@@ -198,3 +198,9 @@ export interface ICourierList {
     data: ICourier[];
     pages: number;
 }
+
+export interface IDeclarationProductType {
+    id: number;
+    name: string;
+    country: string;
+}

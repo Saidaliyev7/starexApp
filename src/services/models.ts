@@ -3,6 +3,7 @@ import {
     IApplicationCategories,
     IApplicationStatus,
     ICourierList,
+    IDeclarationProductType,
     IPagination,
     IPaymentPayTR,
     IPaymentTransaction,
@@ -30,6 +31,7 @@ export interface IApplicationService {
     getTicketStatuses: () => Promise<{ all: number; data: IApplicationStatus[] }>;
     getTicket: (id: string) => Promise<IApplication>;
     sendMessage: (id: string, message: FormData) => Promise<unknown>;
+    createTicket: (application: FormData) => Promise<{ id: string }>;
 }
 
 export interface IRebatesService {
@@ -47,4 +49,13 @@ export interface ICourierService {
         data: { name: string; id: number; count: number }[];
     }>;
     getCourierList: (page?: number, status?: number) => Promise<ICourierList>;
+}
+
+export interface IDeclarationService {
+    getProductTypes: (
+        country: string,
+        page?: number,
+    ) => Promise<IPagination<IDeclarationProductType>>;
+
+    createDeclaration: (declaration: FormData) => Promise<unknown>;
 }

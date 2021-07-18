@@ -39,6 +39,14 @@
         box-sizing: border-box;
         border-radius: 4px;
         position: relative;
+        .placeholder {
+            font-size: 16px;
+            line-height: 19px;
+            /* identical to box height */
+            font-weight: normal !important;
+
+            color: #a9a9a9 !important;
+        }
     }
     .selectbox {
         position: relative;
@@ -67,6 +75,9 @@
             .multi-select-list {
                 display: flex;
                 flex-wrap: wrap;
+                > li {
+                    margin-bottom: 12px;
+                }
                 .dropdown-top {
                     color: #ffffff;
                     background: #959595;
@@ -76,7 +87,8 @@
                     margin-right: 12px;
                     display: inline-flex;
                     position: relative;
-                    .remove-icon{
+                    font-size: 14px;
+                    .remove-icon {
                         position: absolute;
                         right: 10px;
                         height: 100%;
@@ -129,6 +141,8 @@
             transition: 0.3s ease;
             z-index: 1;
             width: 100%;
+            max-height: 300px;
+            overflow-y: scroll;
             ul {
                 display: flex;
                 flex-direction: column;

@@ -1,5 +1,6 @@
 import './selectbox.scss';
 
+import clsx from 'classnames';
 import { useOnClickOutside } from 'hooks';
 import * as React from 'react';
 
@@ -7,7 +8,8 @@ const Selectbox: React.FC<{
     selectData: any;
     onChange?: (id: number | string) => void;
     placeHolder?: string;
-}> = ({ selectData, onChange, placeHolder }) => {
+    error?: string;
+}> = ({ selectData, onChange, placeHolder, error }) => {
     const selectRef = React.useRef();
     const [selectTop, changeSelectTop] = React.useState<string>(null);
     const onSelectOpen = () => {
@@ -38,7 +40,10 @@ const Selectbox: React.FC<{
         <>
             <div className="selectbox-holder select-component">
                 <div className="selectbox" ref={selectRef}>
-                    <div className="selectbox-top" onClick={onSelectOpen}>
+                    <div
+                        className={clsx('selectbox-top', { 'selectbox-top--error': !!error })}
+                        onClick={onSelectOpen}
+                    >
                         {selectTop
                             ? selectTop
                             : placeHolder && <div className="placeholder">{placeHolder}</div>}

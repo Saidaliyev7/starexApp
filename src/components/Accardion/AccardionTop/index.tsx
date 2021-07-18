@@ -14,7 +14,7 @@ export interface ICountry {
     isActive: boolean;
 }
 
-const getIcon = (code: string) =>
+export const getIcon = (code: string) =>
     ({
         TR: TurkeyIcon,
         US: UsaIcon,
@@ -35,9 +35,9 @@ const AccardionTop: React.FC = React.memo(() => {
     );
     const isTabletOrMobile = useIsTabletOrMobileV2();
     const [selectActive, changeSelectActive] = React.useState<ICountry>({
-        id: 'TR',
-        name: 'TÜRKİYƏ',
-        icon: TurkeyIcon,
+        id: searchParams.ctry,
+        name: countries.find((x) => x.code === searchParams.ctry).display_name,
+        icon: getIcon(searchParams.ctry),
         isActive: true,
     });
 

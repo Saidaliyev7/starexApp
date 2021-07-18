@@ -39,6 +39,10 @@
         box-sizing: border-box;
         border-radius: 4px;
         position: relative;
+        &--error {
+            color: #d80027;
+            border-color: #d80027;
+        }
     }
     .selectbox {
         position: relative;

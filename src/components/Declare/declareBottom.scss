@@ -4,9 +4,8 @@
     border-radius: 4px;
     padding: 50px 84px;
     width: 100%;
-    
+
     .content {
-       
         .title {
             font-weight: 500;
             font-size: 24px;
@@ -33,6 +32,23 @@
             margin-top: 24px;
             color: #000000;
             margin-bottom: 12px;
+        }
+
+        &--error {
+            .radio-title {
+                color: #d80027 !important;
+            }
+
+            input,
+            textarea,
+            .selectbox-top,
+            .file-input {
+                border-color: #d80027 !important;
+
+                &::placeholder {
+                    color: #d80027 !important;
+                }
+            }
         }
     }
     .radio-title {

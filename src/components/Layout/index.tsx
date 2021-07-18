@@ -9,7 +9,7 @@ import { ReactComponent as SettingIcon } from 'assets/images/icons/setting.svg';
 import { ReactComponent as WritingIcon } from 'assets/images/icons/writing.svg';
 import Button, { EButtonSize, EButtonView } from 'components/Button';
 import { Sidebar } from 'components/Sidebar';
-import { useAPIData, useIsTabletOrMobile, useIsTabletOrMobileV2 } from 'hooks';
+import { useAPIData, useIsTabletOrMobileV2 } from 'hooks';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { notificationService } from 'services/notification';
@@ -100,11 +100,10 @@ export const Layout: React.FC = ({ children }) => {
     const [notificationBarVisible, changeNotificationBarVisibility] = React.useState<boolean>(
         false,
     );
-    const [notificationAllVisible, changeNotificationAllVisible] = React.useState<boolean>(
-        false,
-    );
+    const [notificationAllVisible, changeNotificationAllVisible] = React.useState<boolean>(false);
     const isTabletOrMobile = useIsTabletOrMobileV2();
-    const [allNotifications, changeNotifications] = React.useState<INotification[]>(notifications);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [allNotifications] = React.useState<INotification[]>(notifications);
     React.useEffect(() => {
         changeNotificationCount(notificationService.getNotificationsCount);
     }, []);
@@ -137,16 +136,15 @@ export const Layout: React.FC = ({ children }) => {
                                 >
                                     Sifariş Et
                                 </Button>
-                                <Link to={'/declare'} >
-                                <Button
-                                    style={{ width: 139 }}
-                                    view={EButtonView.SECONDARY}
-                                    size={EButtonSize.MEDIUM}
-                                >
-                                    Bəyan Et
-                                </Button>
+                                <Link to={'/declare'}>
+                                    <Button
+                                        style={{ width: 139 }}
+                                        view={EButtonView.SECONDARY}
+                                        size={EButtonSize.MEDIUM}
+                                    >
+                                        Bəyan Et
+                                    </Button>
                                 </Link>
-                               
                             </>
                         ) : (
                             <>
@@ -189,21 +187,27 @@ export const Layout: React.FC = ({ children }) => {
                                     <div className="name-holder">
                                         <div className="name">Bildirişlər</div>
                                         <div className="icon">
-                                            <div className="img" onClick={()=>changeNotificationAllVisible(!notificationAllVisible)}>
-                                            <SettingIcon  />
+                                            <div
+                                                className="img"
+                                                onClick={() =>
+                                                    changeNotificationAllVisible(
+                                                        !notificationAllVisible,
+                                                    )
+                                                }
+                                            >
+                                                <SettingIcon />
                                             </div>
-                                           
-                                            {
-                                                notificationAllVisible&& <div className="read-all">
-                                                <div className="check-icon">
-                                                    <CheckIcon />
+
+                                            {notificationAllVisible && (
+                                                <div className="read-all">
+                                                    <div className="check-icon">
+                                                        <CheckIcon />
+                                                    </div>
+                                                    <div className="text">
+                                                        Hamısını oxunmuş olaraq işarələ
+                                                    </div>
                                                 </div>
-                                                <div className="text">
-                                                    Hamısını oxunmuş olaraq işarələ
-                                                </div>
-                                            </div>
-                                            }
-                                           
+                                            )}
                                         </div>
                                     </div>
                                     <div className="notifications">

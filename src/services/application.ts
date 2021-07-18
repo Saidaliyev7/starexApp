@@ -12,4 +12,5 @@ export const applicationService: IApplicationService = {
     getTicket: (id: string) => httpClient.get(`${BASE_URL}/${id}`),
     sendMessage: (id: string, message: FormData) =>
         httpClient.post(`${BASE_URL}/${id}/messages/`, message),
+    createTicket: (application: FormData) => httpClient.post(`${BASE_URL}/first/`, application),
 };

@@ -1,15 +1,23 @@
-import { ReactComponent as TurkeyIcon } from 'assets/images/countries/turkey.svg';
-import { countries, ICountry } from 'components/Accardion/AccardionTop';
-import { useIsTabletOrMobileV2 } from 'hooks';
+import { getIcon, ICountry } from 'components/Accardion/AccardionTop';
+import { useCountries, useIsTabletOrMobileV2, useSearchParams } from 'hooks';
 import * as React from 'react';
 
 const DeclareTop: React.FC = () => {
     const selectTop = React.useRef();
-    const [allCountries, changeCountries] = React.useState<ICountry[]>(countries);
+    const { countries } = useCountries();
+    const [searchParams, changeSearchParams] = useSearchParams<{ ctry: string }>({ ctry: 'TR' });
+    const [allCountries, changeCountries] = React.useState<ICountry[]>(
+        countries.map((x) => ({
+            isActive: x.code === searchParams.ctry,
+            name: x.display_name,
+            icon: getIcon(x.code),
+            id: x.code,
+        })),
+    );
     const [selectActive, changeSelectActive] = React.useState<ICountry>({
-        id: 1,
-        name: 'TÜRKİYƏ',
-        icon: TurkeyIcon,
+        id: searchParams.ctry,
+        name: countries.find((x) => x.code === searchParams.ctry).display_name,
+        icon: getIcon(searchParams.ctry),
         isActive: true,
     });
 
@@ -20,6 +28,7 @@ const DeclareTop: React.FC = () => {
     };
 
     const changeCountryState = (country: ICountry) => {
+        changeSearchParams({ ctry: country.id });
         changeCountries((oldState) => {
             const newState = [...oldState].map((cntry) => {
                 cntry.name == country.name ? (cntry.isActive = true) : (cntry.isActive = false);
@@ -51,7 +60,7 @@ const DeclareTop: React.FC = () => {
             <div className="declare-top-holder">
                 <div className="title">Ölkəni Seçin</div>
                 {!isTabletOrMobile ? (
-                    <ul className='languages'>
+                    <ul className="languages">
                         {allCountries.map((country, index) => (
                             <li
                                 key={index}

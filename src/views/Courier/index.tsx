@@ -4,19 +4,22 @@ import TableCard from 'components/Table/TableCard';
 import TableBody from 'components/Table/TBody';
 import TableTd from 'components/Table/TBody/Td';
 import TableTr from 'components/Table/TBody/Tr';
-import { useAPIData, useIsTabletOrMobileV2 } from 'hooks';
-import { ICourierList } from 'models';
+import { useIsTabletOrMobileV2 } from 'hooks';
+// import { ICourierList } from 'models';
 import * as React from 'react';
 
 const Courier: React.FC = () => {
     const [tableData, changeTableData] = React.useState<ITableData<any>>(tableStaticDataCourier);
     const [tableCheckData, changeTableCheckData] = React.useState<any>([]);
-    const [courierMenu, changeCourierMenu] = useAPIData<{
-        all: number;
-        data: { id: number; name: string; count: number }[];
-    }>();
-    const [courierList, changeCourierList] = useAPIData<ICourierList>();
-    const [selectedStatus, changeSelectedStatus] = React.useState<number>();
+    // // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // const [courierMenu, changeCourierMenu] = useAPIData<{
+    //     all: number;
+    //     data: { id: number; name: string; count: number }[];
+    // }>();
+    // // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // const [courierList, changeCourierList] = useAPIData<ICourierList>();
+    // // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // const [selectedStatus, changeSelectedStatus] = React.useState<number>();
     const isTabletOrMobile = useIsTabletOrMobileV2();
     React.useEffect(() => {
         changeTableData(tableStaticDataCourier);
@@ -49,6 +52,7 @@ const Courier: React.FC = () => {
         <>
             <Table
                 tableCheckedData={tableCheckData}
+                // eslint-disable-next-line no-console
                 onSearchAddClick={() => console.log('')}
                 tableData={tableData}
             >
