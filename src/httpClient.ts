@@ -1,9 +1,9 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import Cookie from 'js-cookie';
-import { envService } from 'services/env';
+// import { envService } from 'services/env';
 
 class HttpClient {
-    baseUrl = 'http://localhost:8050/api';
+    baseUrl = '/api';
 
     constructor() {
         const token = Cookie.get('sessionid');
@@ -11,11 +11,11 @@ class HttpClient {
             axios.defaults.headers['Authorization'] = `Token ${token}`;
         }
 
-        if (envService.profile === 'dev') {
-            this.baseUrl = 'https://dev.starex.az/api';
-        } else if (envService.profile === 'prod') {
-            this.baseUrl = 'https://starex.az/api';
-        }
+        // if (envService.profile === 'dev') {
+        //     this.baseUrl = 'https://dev.starex.az/api';
+        // } else if (envService.profile === 'prod') {
+        //     this.baseUrl = 'https://starex.az/api';
+        // }
     }
 
     get(url: string, config?: AxiosRequestConfig) {
