@@ -40,7 +40,7 @@ module.exports = (mode = 'development') => ( {
         },
         proxy: [
             {
-                context: "/api/v1",
+                context: "/api",
                 target: "http://[::1]:9112"
             }
         ]

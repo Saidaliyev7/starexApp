@@ -6,7 +6,7 @@ import TableBody from 'components/Table/TBody';
 import TableTd from 'components/Table/TBody/Td';
 import TableTr from 'components/Table/TBody/Tr';
 import { useAPIData, useIsTabletOrMobileV2 } from 'hooks';
-import { IRebateList } from 'models';
+import { IRebate, IRebateList } from 'models';
 import * as React from 'react';
 import { rebatesService } from 'services/rebates';
 import { getRebatesTableData, isSuccess } from 'utils';
@@ -65,22 +65,26 @@ const Rebates: React.FC = () => {
                             {!isTabletOrMobile ? (
                                 <TableBody>
                                     {tableData?.tbodyData &&
-                                        tableData?.tbodyData.map((data) => (
-                                            <TableTr isChecked={data.checked} key={data.id}>
+                                        tableData?.tbodyData.map((data: IRebate) => (
+                                            <TableTr key={data.tracking_code}>
                                                 <TableTd>
-                                                    <div className="text">{data.code}</div>
+                                                    <div className="text">{data.tracking_code}</div>
                                                 </TableTd>
                                                 <TableTd>
-                                                    <div className="text">{data.priceAzn}</div>
+                                                    <div className="text">
+                                                        {data.delivery_cost_in_azn}
+                                                    </div>
                                                 </TableTd>
                                                 <TableTd>
-                                                    <div className="text">{data.where}</div>
+                                                    <div className="text">{data.seller}</div>
                                                 </TableTd>
                                                 <TableTd>
                                                     <div className="text">{data.weight}</div>
                                                 </TableTd>
                                                 <TableTd>
-                                                    <div className="text">{data.comingPrice}</div>
+                                                    <div className="text">
+                                                        {data.delivery_cost_in_azn}
+                                                    </div>
                                                 </TableTd>
                                                 <TableTd>
                                                     <div className="text">{data.status}</div>
@@ -90,17 +94,19 @@ const Rebates: React.FC = () => {
                                 </TableBody>
                             ) : (
                                 <>
-                                    {tableData?.tbodyData.map((data) => (
-                                        <TableCard key={data.id}>
+                                    {tableData?.tbodyData.map((data: IRebate) => (
+                                        <TableCard key={data.tracking_code}>
                                             <div className="card-data-upper">
                                                 <div className="card-data">
-                                                    <div className="text">{data.code}</div>
+                                                    <div className="text">{data.tracking_code}</div>
                                                 </div>
                                                 <div className="card-data">
-                                                    <div className="text">{data.priceAzn}</div>
+                                                    <div className="text">
+                                                        {data.delivery_cost_in_azn}
+                                                    </div>
                                                 </div>
                                                 <div className="card-data">
-                                                    <div className="text">{data.where}</div>
+                                                    <div className="text">{data.seller}</div>
                                                 </div>
                                                 <div className="card-data">
                                                     <div className="text">{data.status}</div>
@@ -118,7 +124,7 @@ const Rebates: React.FC = () => {
                                                             Çatdırılma qiyməti
                                                         </div>
                                                         <div className="text">
-                                                            <p>{data.comingPrice}</p>
+                                                            <p>{data.delivery_cost_in_azn}</p>
                                                         </div>
                                                     </div>
                                                 </div>
