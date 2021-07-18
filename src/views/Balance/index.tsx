@@ -146,7 +146,7 @@ const Balance: React.FC = () => {
                                                             <div
                                                                 className={
                                                                     transaction.entry_type ===
-                                                                    'debit'
+                                                                        'debit'
                                                                         ? 'is-coming active'
                                                                         : 'is-coming'
                                                                 }
@@ -168,21 +168,35 @@ const Balance: React.FC = () => {
                                             transactionsTableData?.tbodyData.map(
                                                 (transaction: IPaymentTransaction) => (
                                                     <TableCard key={transaction.created_at}>
-                                                        <div className="card-data-upper">
-                                                            <div className="card-data">
+                                                        <div className="card-data-upper card-data-upper-balance">
+                                                            <div className="card-data card-data-left">
+                                                                <div className="card-data-title">
+                                                                    Əməliyyat
+                                                                </div>
                                                                 <div className="text">
                                                                     {
                                                                         transaction.get_payment_purpose_display
                                                                     }
                                                                 </div>
                                                             </div>
-                                                            <div className="card-data">
+                                                            <div className="card-data card-data-right">
+                                                                <div className="card-data-title">
+                                                                    Tarix
+                                                                </div>
                                                                 <div className="text">
+                                                                    {transaction.created_at}
+                                                                </div>
+                                                            </div>
+                                                            <div className="card-data card-data-left">
+                                                                <div className="card-data-title">
+                                                                    Məbləğ
+                                                                </div>
+                                                                <div className="text card-data-text-income">
                                                                     {' '}
                                                                     <div
                                                                         className={
                                                                             transaction.entry_type ===
-                                                                            'debit'
+                                                                                'debit'
                                                                                 ? 'is-coming active'
                                                                                 : 'is-coming'
                                                                         }
@@ -190,11 +204,7 @@ const Balance: React.FC = () => {
                                                                     <div className="text">{`${transaction.amount} $`}</div>
                                                                 </div>
                                                             </div>
-                                                            <div className="card-data">
-                                                                <div className="text">
-                                                                    {transaction.created_at}
-                                                                </div>
-                                                            </div>
+
                                                         </div>
                                                     </TableCard>
                                                 ),
